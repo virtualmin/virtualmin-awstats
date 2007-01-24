@@ -1,0 +1,11 @@
+config_dir=AWstats configuration directory,0
+awstats=Full path to AWstats program,0
+icons=Full path to AWstats icons directory,0
+lang=Full path to AWstats lang directory,3,Same as awstats.pl
+lib=Full path to AWstats lib directory,3,Same as awstats.pl
+plugins=Full path to AWstats plugins directory,3,Same as awstats.pl
+format=Web server log format,1,-Automatic,1-Combined,4-Common
+nocron=Setup AWstats Cron job for each virtual server?,1,0-Yes,1-No
+noedit=Server owner permissions,1,1-View report only,0-Edit report schedule
+copyto=Copy AWstats CGI program to,10,-cgi&#45;bin directory,Other directory under home
+aliases=Extra host aliases,0

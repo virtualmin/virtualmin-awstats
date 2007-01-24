@@ -1,0 +1,7 @@
+---- Changes since 2.3 ----
+Old rotated log files are included in AWstats reports as well.
+---- Changes since 2.4 ----
+Added Apache script alias for /awstats so that the URL /awstats/awstats.pl works.
+Either awstats.conf or awstats.model.conf are supported as template config files.
+---- Changes since 2.5 ----
+Log files with % in their names are no longer checked for existance, as AWstats replaces these with dates/times.

@@ -1,0 +1,5 @@
+config_dir=/etc/awstats
+awstats=/usr/lib/cgi-bin/awstats.pl
+icons=/usr/share/awstats/icon
+nocron=0
+noedit=0

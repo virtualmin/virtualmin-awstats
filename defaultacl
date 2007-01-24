@@ -1,0 +1,5 @@
+domains=*
+create=1
+editlog=1
+user=*
+editsched=1
