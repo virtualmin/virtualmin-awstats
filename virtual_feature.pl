@@ -345,7 +345,9 @@ return ( { 'mod' => $module_name,
 					  : $text{'links_view'},
            'page' => $access{'editsched'} ?
 			'edit.cgi?dom='.&urlize($d->{'dom'}) :
-			'view.cgi?config='.&urlize($d->{'dom'}) } );
+			'view.cgi?config='.&urlize($d->{'dom'}),
+	   'cat' => 'logs',
+         } );
 }
 
 # feature_backup(&domain, file, &opts, &all-opts)

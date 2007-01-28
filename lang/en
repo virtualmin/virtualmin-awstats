@@ -81,5 +81,5 @@ feat_evalidatedir=AWstats data directory $1 does not exist
 feat_evalidatecron=AWstats Cron job was not found
 feat_evalidateprog=AWstats program copy $1 does not exist
 
-links_link=Edit AWstats Report
+links_link=AWstats Report
 links_view=View AWstats Report
