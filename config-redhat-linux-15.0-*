@@ -1,8 +1,8 @@
 config_dir=/etc/awstats
 awstats=/usr/share/awstats/wwwroot/cgi-bin/awstats.pl
 icons=/usr/share/awstats/wwwroot/icon
-lib=/usr/share/awstats/lib
-lang=/usr/share/awstats/lang
-plugins=/usr/share/awstats/plugins
+lib=/usr/share/awstats
+lang=/usr/share/awstats
+plugins=/usr/share/awstats
 nocron=0
 noedit=0
