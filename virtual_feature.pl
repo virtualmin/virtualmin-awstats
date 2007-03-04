@@ -164,7 +164,8 @@ foreach my $dir ("lib", "lang", "plugins") {
 		$config{'awstats'} =~ /^(.*)\//;
 		$src = $1;
 		}
-	&symlink_logged("$src/$dir", "$cgidir/$dir");
+	$src .= "/$dir" if ($dir !~ /\/\Q$dir\E$/);
+	&symlink_logged($src, "$cgidir/$dir");
 	}
 
 # Create symlink to icons directory
