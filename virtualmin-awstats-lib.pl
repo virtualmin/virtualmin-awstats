@@ -179,6 +179,18 @@ $runas{$_[0]} = $_[1];
 &write_file($run_as_file, \%runas);
 }
 
+# rename_run_domain(domain, olddomain)
+sub rename_run_domain
+{
+local %runas;
+&read_file_cached($run_as_file, \%runas);
+if ($runas{$_[1]}) {
+	$runas{$_[0]} = $runas{$_[1]};
+	delete($runas{$_[1]});
+	}
+&write_file($run_as_file, \%runas);
+}
+
 # generate_report(domain, handle, html-escape?)
 # Updates the AWstats report for a particular domain, from all of its
 # log files (or at least those that have changed since the last run)

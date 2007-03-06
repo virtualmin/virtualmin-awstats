@@ -237,6 +237,10 @@ if ($_[0]->{'dom'} ne $_[1]->{'dom'}) {
 		&cron::change_cron_job($job);
 		&unlock_file(&cron::cron_file($job));
 		}
+
+	# Change run-as domain
+	&rename_run_domain($_[0]->{'dom'}, $_[1]->{'dom'});
+
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
 	}
 if ($_[0]->{'user'} ne $_[1]->{'user'}) {
