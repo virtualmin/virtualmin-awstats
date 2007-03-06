@@ -191,6 +191,15 @@ if ($runas{$_[1]}) {
 &write_file($run_as_file, \%runas);
 }
 
+# delete_run_user(domain)
+sub delete_run_user
+{
+local %runas;
+&read_file_cached($run_as_file, \%runas);
+delete($runas{$_[0]});
+&write_file($run_as_file, \%runas);
+}
+
 # generate_report(domain, handle, html-escape?)
 # Updates the AWstats report for a particular domain, from all of its
 # log files (or at least those that have changed since the last run)

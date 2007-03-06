@@ -320,6 +320,9 @@ foreach my $port ($_[0]->{'web_port'},
 		}
 	}
 
+# Remove runas entry
+&delete_run_user($_[0]->{'dom'});
+
 &$virtual_server::second_print($virtual_server::text{'setup_done'});
 }
 
