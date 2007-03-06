@@ -71,9 +71,13 @@ local ($parentdom, $aliasdom, $subdom) = @_;
 return $aliasdom || $subdom ? 0 : 1;	# not for alias or sub domains
 }
 
+# feature_import(domain-name, user-name, db-name)
+# Returns 1 if this feature is already enabled for some domain being imported,
+# or 0 if not
 sub feature_import
 {
-return -r "$config{'config_dir'}/awstats.$_[0]->{'dom'}.conf" ? 1 : 0;
+local ($dname, $user, $db) = @_;
+return -r "$config{'config_dir'}/awstats.$dname.conf" ? 1 : 0;
 }
 
 # feature_setup(&domain)

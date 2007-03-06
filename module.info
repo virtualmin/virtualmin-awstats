@@ -1,4 +1,4 @@
 desc=AWstats Reporting
 category=servers
 depends=cron software
-version=2.8
+version=2.81
