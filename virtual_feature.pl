@@ -415,9 +415,11 @@ local ($d) = @_;
 local $cfile = "$config{'config_dir'}/awstats.$d->{'dom'}.conf";
 -r $cfile || return &text('feat_evalidate', "<tt>$cfile</tt>");
 -d "$d->{'home'}/awstats" || return &text('feat_evalidatedir', "<tt>$d->{'home'}/awstats</tt>");
-&foreign_require("cron", "cron-lib.pl");
-local $job = &find_cron_job($d->{'dom'});
-$job || return &text('feat_evalidatecron');
+if (!$config{'nocron'}) {
+	&foreign_require("cron", "cron-lib.pl");
+	local $job = &find_cron_job($d->{'dom'});
+	$job || return &text('feat_evalidatecron');
+	}
 local $cgidir = &get_cgidir($d);
 -r "$cgidir/awstats.pl" || return &text('feat_evalidateprog', "<tt>$cgidir/awstats.pl</tt>");
 return undef;
