@@ -166,7 +166,7 @@ if (!$config{'nocron'}) {
 # Create symlinks to other directories in source dir
 foreach my $dir ("lib", "lang", "plugins") {
 	local $src;
-	if ($config{$dir}) {
+	if ($config{$dir} && -d $config{'dir'}) {
 		$src = $config{$dir};
 		}
 	else {
