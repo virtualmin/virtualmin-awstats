@@ -16,7 +16,7 @@ $ENV{'GATEWAY_INTERFACE'} = "CGI";
 while(<AWSTATS>) {
 	# Replace references to awstats.pl with links to this CGI
 	s/$prog/view.cgi/g;
-	if (!/view.cgi?config=/) {
+	if (!/view.cgi\?config=/) {
 		s/view.cgi\?/view.cgi?config=$in{'config'}\&/g ||
 		  s/view.cgi/view.cgi?config=$in{'config'}/g;
 		}
