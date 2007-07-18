@@ -7,3 +7,6 @@ Either awstats.conf or awstats.model.conf are supported as template config files
 Log files with % in their names are no longer checked for existance, as AWstats replaces these with dates/times.
 ---- Changes since 2.7 ----
 Fixed lib, lang and plugin paths on FC6.
+---- Changes since 3.0 ----
+Fixed bug that prevented custom plugins, lang and lib directories from working.
+Added links for awstats-icon directory, for Debian.

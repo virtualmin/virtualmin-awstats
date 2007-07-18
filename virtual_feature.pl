@@ -101,7 +101,7 @@ if ($?) {
 # Copy awstats.pl to the cgi-bin directory
 local $cgidir = &get_cgidir($_[0]);
 if (defined(&virtual_server::run_as_domain_user)) {
-	&virtual_server::run_as_domain_user($_[0],
+	local $out = &virtual_server::run_as_domain_user($_[0],
 		"cp ".quotemeta($config{'awstats'})." ".quotemeta($cgidir));
 	if ($?) {
 		&$virtual_server::second_print(&text('save_ecopy2',
@@ -166,7 +166,7 @@ if (!$config{'nocron'}) {
 # Create symlinks to other directories in source dir
 foreach my $dir ("lib", "lang", "plugins") {
 	local $src;
-	if ($config{$dir} && -d $config{'dir'}) {
+	if ($config{$dir} && -d $config{$dir}) {
 		$src = $config{$dir};
 		}
 	else {
@@ -181,6 +181,7 @@ foreach my $dir ("lib", "lang", "plugins") {
 local $htmldir = &get_htmldir($_[0]);
 if (!-d "$htmldir/icon") {
 	&symlink_logged($config{'icons'}, "$htmldir/icon");
+	&symlink_logged($config{'icons'}, "$htmldir/awstats-icon");
 	}
 
 # Add script alias to make /awstats/awstats.pl work
@@ -300,6 +301,7 @@ foreach my $dir ("lib", "lang", "plugins") {
 local $htmldir = &get_htmldir($_[0]);
 if (-l "$htmldir/icon") {
 	&unlink_logged("$htmldir/icon");
+	&unlink_logged("$htmldir/awstats-icon");
 	}
 
 # Remove script alias for /awstats
