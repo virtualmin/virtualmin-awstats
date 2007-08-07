@@ -10,3 +10,5 @@ Fixed lib, lang and plugin paths on FC6.
 ---- Changes since 3.0 ----
 Fixed bug that prevented custom plugins, lang and lib directories from working.
 Added links for awstats-icon directory, for Debian.
+---- Changes since 3.1 ----
+AWstats data files containing the domain name are now linked to those with www. before the domain, so that the URL www.yourdomain.com/awstats/awstats.pl shows some data.

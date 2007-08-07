@@ -254,6 +254,21 @@ foreach $a (sort { $mtime{$a} <=> $mtime{$b} } @all) {
 	$anyok = 1 if (!$?);
 	&additional_log("exec", undef, $fullcmd);
 	}
+
+# Link all awstatsXXXX.domain.txt files to awstatsXXXX.www.domain.txt , so
+# that the URL www.domain.com/awstats/awstats.pl works
+local $dirdata = &find_value("DirData", $conf);
+opendir(DIRDATA, $dirdata);
+foreach my $f (readdir(DIRDATA)) {
+	if ($f =~ /^awstats(\d+)\.\Q$dom\E\.txt$/) {
+		local $wwwf = "awstats".$1.".www.".$dom.".txt";
+		if (!-r "$dirdata/$wwwf") {
+			symlink($f, "$dirdata/$wwwf");
+			}
+		}
+	}
+closedir(DIRDATA);
+
 return $anyok;
 }
 
