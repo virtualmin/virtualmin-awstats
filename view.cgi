@@ -17,8 +17,14 @@ while(<AWSTATS>) {
 	# Replace references to awstats.pl with links to this CGI
 	s/$prog/view.cgi/g;
 	if (!/view.cgi\?config=/) {
-		s/view.cgi\?/view.cgi?config=$in{'config'}\&/g ||
-		  s/view.cgi/view.cgi?config=$in{'config'}/g;
+                if (/\&amp;/) {
+                        s/view.cgi\?/view.cgi?config=$in{'config'}\&amp;/g ||
+                          s/view.cgi/view.cgi?config=$in{'config'}/g;
+                        }
+                else {
+                        s/view.cgi\?/view.cgi?config=$in{'config'}\&/g ||
+                          s/view.cgi/view.cgi?config=$in{'config'}/g;
+                        }
 		}
 
 	# Replace references to icons with icon getter CGI
