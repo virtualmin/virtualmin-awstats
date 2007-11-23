@@ -69,6 +69,7 @@ feat_edepunix=AWstats reporting cannot be enabled for a server without a Unix us
 feat_edepdir=AWstats reporting cannot be enabled for a server without a home directory
 feat_modify=Updating domain name in AWstats configuration ..
 feat_modifyuser=Updating user to run AWstats report as ..
+feat_modifypass=Updating password for AWstats ..
 feat_modifyhome=Updating home directory in AWstats configuration ..
 feat_delete=Deleting AWstats configuration file and Cron job ..
 feat_backup=Backing up AWstats configuration file ..
@@ -80,6 +81,12 @@ feat_evalidate=AWstats configuration file $1 does not exist
 feat_evalidatedir=AWstats data directory $1 does not exist
 feat_evalidatecron=AWstats Cron job was not found
 feat_evalidateprog=AWstats program copy $1 does not exist
+feat_passwd=Setting up password protection for AWstats ..
+feat_dpasswd=Removing password protection for AWstats ..
 
 links_link=AWstats Report
 links_view=View AWstats Report
+
+tmpl_passwd=Password-protect AWstats web page?
+
+

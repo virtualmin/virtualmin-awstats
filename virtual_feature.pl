@@ -1,6 +1,8 @@
 # Defines functions for this feature
 
 require 'virtualmin-awstats-lib.pl';
+$input_name = $module_name;
+$input_name =~ s/[^A-Za-z0-9]/_/g;
 
 # feature_name()
 # Returns a short name for this feature
@@ -185,8 +187,9 @@ if (!-d "$htmldir/icon") {
 	}
 
 # Add script alias to make /awstats/awstats.pl work
-foreach my $port ($_[0]->{'web_port'},
-		  $_[0]->{'ssl'} ? ( $_[0]->{'web_sslport'} ) : ( )) {
+local @ports = ( $_[0]->{'web_port'},
+		 $_[0]->{'ssl'} ? ( $_[0]->{'web_sslport'} ) : ( ) );
+foreach my $port (@ports) {
 	local ($virt, $vconf) = &virtual_server::get_apache_virtual(
 					$_[0]->{'dom'}, $port);
 	if ($virt) {
@@ -199,15 +202,51 @@ foreach my $port ($_[0]->{'web_port'},
 			push(@sa, "/awstats $cgidir");
 			&apache::save_directive("ScriptAlias", \@sa,
 						$vconf, $conf);
-			&flush_file_lines();
+			&flush_file_lines($virt->{'file'});
 			&unlock_file($virt->{'file'});
 			&virtual_server::register_post_action(
 				\&virtual_server::restart_apache);
 			}
 		}
 	}
-
 &$virtual_server::second_print($virtual_server::text{'setup_done'});
+
+# Setup password protection for /awstats/awstats.pl
+local $tmpl = &virtual_server::get_template($_[0]->{'template'});
+if ($tmpl->{$module_name.'passwd'}) {
+	&$virtual_server::first_print($text{'feat_passwd'});
+	local $conf = &apache::get_config();
+	local $added = 0;
+	local $passwd_file = "$_[0]->{'home'}/.awstats-htpasswd";
+	foreach my $p (@ports) {
+                local ($virt, $vconf) = &virtual_server::get_apache_virtual(
+                        $_[0]->{'dom'}, $p);
+                next if (!$virt);
+		&lock_file($virt->{'file'});
+		local $lref = &read_file_lines($virt->{'file'});
+		splice(@$lref, $virt->{'eline'}, 0,
+		       "<Location /awstats>",
+		       "AuthName \"$_[0]->{'dom'} statistics\"",
+		       "AuthType Basic",
+		       "AuthUserFile $passwd_file",
+		       "require valid-user",
+		       "</Location>");
+		$added++;
+		&flush_file_lines($virt->{'file'});
+		&unlock_file($virt->{'file'});
+		}
+	if ($added) {
+                &virtual_server::register_post_action(
+                    defined(&main::restart_apache) ? \&main::restart_apache
+                                           : \&virtual_server::restart_apache);
+		undef(@apache::get_config_cache);
+		}
+	&virtual_server::update_create_htpasswd($_[0], $passwd_file,
+						$_[0]->{'user'});
+        $_[0]->{'awstats_pass'} = $passwd_file;
+	&$virtual_server::second_print($virtual_server::text{'setup_done'});
+	}
+
 return 1;
 }
 
@@ -250,9 +289,13 @@ if ($_[0]->{'dom'} ne $_[1]->{'dom'}) {
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
 	}
 if ($_[0]->{'user'} ne $_[1]->{'user'}) {
-	# Username has changed .. update run-as user
+	# Username has changed .. update run-as user and possibly password
 	&$virtual_server::first_print($text{'feat_modifyuser'});
 	&save_run_user($_[0]->{'dom'}, $_[0]->{'user'});
+	if ($_[0]->{'awstats_pass'}) {
+		&virtual_server::update_create_htpasswd(
+			$_[0], $_[0]->{'awstats_pass'}, $_[1]->{'user'});
+		}
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
 	}
 if ($_[0]->{'home'} ne $_[1]->{'home'}) {
@@ -267,7 +310,19 @@ if ($_[0]->{'home'} ne $_[1]->{'home'}) {
 					        $_[0]->{'web_port'}));
 	&flush_file_lines();
 	&unlock_file(&get_config_file($_[0]->{'dom'}));
+
+	# XXX also update password file too
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
+	}
+if ($_[0]->{'pass'} ne $_[1]->{'pass'}) {
+	# Password has changed .. update web password
+	if ($_[0]->{'awstats_pass'}) {
+		&$virtual_server::first_print($text{'feat_modifypass'});
+		&virtual_server::update_create_htpasswd(
+			$_[0], $_[0]->{'awstats_pass'}, $_[0]->{'user'});
+		&$virtual_server::second_print(
+			$virtual_server::text{'setup_done'});
+		}
 	}
 return 1;
 }
@@ -305,8 +360,9 @@ if (-l "$htmldir/icon") {
 	}
 
 # Remove script alias for /awstats
-foreach my $port ($_[0]->{'web_port'},
-		  $_[0]->{'ssl'} ? ( $_[0]->{'web_sslport'} ) : ( )) {
+local @ports = ( $_[0]->{'web_port'},
+		 $_[0]->{'ssl'} ? ( $_[0]->{'web_sslport'} ) : ( ) );
+foreach my $port (@ports) {
 	local ($virt, $vconf) = &virtual_server::get_apache_virtual(
 					$_[0]->{'dom'}, $port);
 	if ($virt) {
@@ -319,7 +375,7 @@ foreach my $port ($_[0]->{'web_port'},
 			@sa = grep { $_ ne $aw } @sa;
 			&apache::save_directive("ScriptAlias", \@sa,
 						$vconf, $conf);
-			&flush_file_lines();
+			&flush_file_lines($virt->{'file'});
 			&unlock_file($virt->{'file'});
 			&virtual_server::register_post_action(
 				\&virtual_server::restart_apache);
@@ -329,8 +385,38 @@ foreach my $port ($_[0]->{'web_port'},
 
 # Remove runas entry
 &delete_run_user($_[0]->{'dom'});
-
 &$virtual_server::second_print($virtual_server::text{'setup_done'});
+
+# Remove password protection for /awstats/awstats.pl
+if ($_[0]->{'awstats_pass'}) {
+	&$virtual_server::first_print($text{'feat_dpasswd'});
+	local $conf = &apache::get_config();
+	local $deleted = 0;
+	foreach my $p (@ports) {
+                local ($virt, $vconf) = &virtual_server::get_apache_virtual(
+                        $_[0]->{'dom'}, $p);
+		next if (!$virt);
+		local ($loc) = grep { $_->{'words'}->[0] eq '/awstats' }
+			    &apache::find_directive_struct("Location", $vconf);
+		next if (!$loc);
+		local $lref = &read_file_lines($virt->{'file'});
+		splice(@$lref, $loc->{'line'},
+		       $loc->{'eline'}-$loc->{'line'}+1);
+		&flush_file_lines($virt->{'file'});
+		&unlock_file($virt->{'file'});
+		$deleted++;
+		}
+	if ($deleted) {
+                &virtual_server::register_post_action(
+                    defined(&main::restart_apache) ? \&main::restart_apache
+                                           : \&virtual_server::restart_apache);
+		undef(@apache::get_config_cache);
+		}
+	delete($_[0]->{'awstats_pass'});
+	&$virtual_server::second_print($virtual_server::text{'setup_done'});
+	}
+
+return 1;
 }
 
 # feature_webmin(&domain, &other)
@@ -443,6 +529,29 @@ sub get_htmldir
 return defined(&virtual_server::public_html_dir) ?
 	&virtual_server::public_html_dir($_[0]) :
 	"$_[0]->{'home'}/public_html";
+}
+
+# template_input(&template)
+# Returns HTML for editing per-template options for this plugin
+sub template_input
+{
+local ($tmpl) = @_;
+local $v = $tmpl->{$module_name."passwd"};
+$v = 0 if (!defined($v) && $tmpl->{'default'});
+return &ui_table_row($text{'tmpl_passwd'},
+	&ui_radio($input_name."_passwd", $v,
+		  [ $tmpl->{'default'} ? ( ) : ( [ '', $text{'default'} ] ),
+		    [ 1, $text{'yes'} ],
+		    [ 0, $text{'no'} ] ]));
+}
+
+# template_parse(&template, &in)
+# Updates the given template object by parsing the inputs generated by
+# template_input. All template fields must start with the module name.
+sub template_parse
+{
+local ($tmpl, $in) = @_;
+$tmpl->{$module_name.'passwd'} = $in->{$input_name.'_passwd'};
 }
 
 1;
