@@ -175,7 +175,7 @@ foreach my $dir ("lib", "lang", "plugins") {
 		$config{'awstats'} =~ /^(.*)\//;
 		$src = $1;
 		}
-	$src .= "/$dir" if ($dir !~ /\/\Q$dir\E$/);
+	$src .= "/$dir" if ($src !~ /\/\Q$dir\E$/);
 	&symlink_logged($src, "$cgidir/$dir");
 	}
 
