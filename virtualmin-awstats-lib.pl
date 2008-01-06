@@ -264,6 +264,8 @@ foreach my $f (readdir(DIRDATA)) {
 		local $wwwf = "awstats".$1.".www.".$dom.".txt";
 		if (!-r "$dirdata/$wwwf") {
 			symlink($f, "$dirdata/$wwwf");
+			&set_ownership_permissions($user, undef, undef,
+						   "$dirdata/$wwwf");
 			}
 		}
 	}
