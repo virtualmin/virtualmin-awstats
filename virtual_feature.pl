@@ -423,6 +423,69 @@ if ($_[0]->{'awstats_pass'}) {
 return 1;
 }
 
+# feature_setup_alias(&domain, &alias)
+# Called when an alias of this domain is created, to perform any required
+# configuration changes. Only useful when the plugin itself does not implement
+# an alias feature.
+sub feature_setup_alias
+{
+local ($d, $alias) = @_;
+
+# Add the alias to the .conf files
+&$virtual_server::first_print(&text('feat_setupalias', $d->{'dom'}));
+&symlink_logged(&get_config_file($d->{'dom'}),
+		&get_config_file($alias->{'dom'}));
+&symlink_logged(&get_config_file($d->{'dom'}),
+		&get_config_file("www.".$alias->{'dom'}));
+
+# Add to HostAliases
+&lock_file(&get_config_file($d->{'dom'}));
+local $conf = &get_config($d->{'dom'});
+local $ha = &find_value("HostAliases", $conf);
+$ha .= " REGEX[".quotemeta($alias->{'dom'})."\$]";
+&save_directive($conf, $d->{'dom'}, "HostAliases", $ha);
+&flush_file_lines(&get_config_file($d->{'dom'}));
+&unlock_file(&get_config_file($d->{'dom'}));
+
+# Link up existing data files
+local $dirdata = &find_value("DirData", $conf);
+&link_domain_alias_data($d->{'dom'}, $dirdata, $d->{'user'});
+&$virtual_server::second_print($virtual_server::text{'setup_done'});
+
+return 1;
+}
+
+# feature_delete_alias(&domain, &alias)
+# Called when an alias of this domain is deleted, to perform any required
+# configuration changes. Only useful when the plugin itself does not implement
+# an alias feature.
+sub feature_delete_alias
+{
+local ($d, $alias) = @_;
+
+# Remove the alias's .conf file
+&$virtual_server::first_print(&text('feat_deletealias', $d->{'dom'}));
+&unlink_logged(&get_config_file($alias->{'dom'}));
+&unlink_logged(&get_config_file("www.".$alias->{'dom'}));
+
+# Remove alias from HostAliases
+&lock_file(&get_config_file($d->{'dom'}));
+local $conf = &get_config($d->{'dom'});
+local $ha = &find_value("HostAliases", $conf);
+local $qd = quotemeta($alias->{'dom'});
+$ha =~ s/\s*REGEX\[\Q$qd\E\$\]//;
+&save_directive($conf, $d->{'dom'}, "HostAliases", $ha);
+&flush_file_lines(&get_config_file($d->{'dom'}));
+&unlock_file(&get_config_file($d->{'dom'}));
+
+# Remove data symlinks
+local $dirdata = &find_value("DirData", $conf);
+&unlink_domain_alias_data($alias->{'dom'}, $dirdata);
+&$virtual_server::second_print($virtual_server::text{'setup_done'});
+
+return 1;
+}
+
 # feature_webmin(&domain, &other)
 # Returns a list of webmin module names and ACL hash references to be set for
 # the Webmin user when this feature is enabled

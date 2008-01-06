@@ -14,3 +14,6 @@ Added links for awstats-icon directory, for Debian.
 AWstats data files containing the domain name are now linked to those with www. before the domain, so that the URL www.yourdomain.com/awstats/awstats.pl shows some data.
 ---- Changes since 3.2 ----
 Added a template pages option to have the /awstats web directory password protected.
+---- Changes since 3.3 ----
+Fixed password protection of awstats.pl via different paths.
+Alias domains whose target has AWstats enabled are now added to the configuration of the target, so that AWstats can be correctly accessed via the alias domain name.

@@ -258,20 +258,58 @@ foreach $a (sort { $mtime{$a} <=> $mtime{$b} } @all) {
 # Link all awstatsXXXX.domain.txt files to awstatsXXXX.www.domain.txt , so
 # that the URL www.domain.com/awstats/awstats.pl works
 local $dirdata = &find_value("DirData", $conf);
+&link_domain_alias_data($dom, $dirdata, $user);
+
+return $anyok;
+}
+
+# link_domain_alias_data(domain, data-dir, user)
+# Create symlinks from all awstatsXXXX.domain.txt files to
+# awstatsXXXX.www.domain.txt , so that the URL
+# www.domain.com/awstats/awstats.pl works. If the domain is used by Virtualmin,
+# alias link up any aliases of this domain
+sub link_domain_alias_data
+{
+local ($dom, $dirdata, $user) = @_;
+local @otherdoms = ( "www.".$dom );
+if (&foreign_check("virtual-server")) {
+	&foreign_require("virtual-server", "virtual-server-lib.pl");
+	local $d = &virtual_server::get_domain_by("dom", $dom);
+	if ($d) {
+		foreach my $ad (&virtual_server::get_domain_by(
+				"alias", $d->{'id'})) {
+			push(@otherdoms, $ad->{'dom'}, "www.".$ad->{'dom'});
+			}
+		}
+	}
 opendir(DIRDATA, $dirdata);
 foreach my $f (readdir(DIRDATA)) {
 	if ($f =~ /^awstats(\d+)\.\Q$dom\E\.txt$/) {
-		local $wwwf = "awstats".$1.".www.".$dom.".txt";
-		if (!-r "$dirdata/$wwwf") {
-			symlink($f, "$dirdata/$wwwf");
-			&set_ownership_permissions($user, undef, undef,
-						   "$dirdata/$wwwf");
+		foreach my $other (@otherdoms) {
+			local $wwwf = "awstats".$1.".".$other.".txt";
+			if (!-r "$dirdata/$wwwf") {
+				&symlink_logged($f, "$dirdata/$wwwf");
+				&set_ownership_permissions($user, undef, undef,
+							   "$dirdata/$wwwf");
+				}
 			}
 		}
 	}
 closedir(DIRDATA);
+}
 
-return $anyok;
+# unlink_domain_alias_data(domain-name, directory)
+# Remove any symbolic links for AWstats data files for some domain
+sub unlink_domain_alias_data
+{
+local ($aliasdom, $dirdata) = @_;
+opendir(DIRDATA, $dirdata);
+foreach my $f (readdir(DIRDATA)) {
+	if ($f =~ /^awstats(\d+)\.(www\.)?\Q$aliasdom\E\.txt$/) {
+		&unlink_logged("$dirdata/$f");
+		}
+	}
+closedir(DIRDATA);
 }
 
 # all_log_files(file)

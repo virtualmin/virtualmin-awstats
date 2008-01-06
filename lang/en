@@ -83,6 +83,8 @@ feat_evalidatecron=AWstats Cron job was not found
 feat_evalidateprog=AWstats program copy $1 does not exist
 feat_passwd=Setting up password protection for AWstats ..
 feat_dpasswd=Removing password protection for AWstats ..
+feat_setupalias=Configuring AWstats in $1 ..
+feat_deletealias=Removing configuration for AWstats in $1 ..
 
 links_link=AWstats Report
 links_view=View AWstats Report
