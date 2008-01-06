@@ -225,12 +225,12 @@ if ($tmpl->{$module_name.'passwd'}) {
 		&lock_file($virt->{'file'});
 		local $lref = &read_file_lines($virt->{'file'});
 		splice(@$lref, $virt->{'eline'}, 0,
-		       "<Location /awstats>",
+		       "<Files awstats.pl>",
 		       "AuthName \"$_[0]->{'dom'} statistics\"",
 		       "AuthType Basic",
 		       "AuthUserFile $passwd_file",
 		       "require valid-user",
-		       "</Location>");
+		       "</Files>");
 		$added++;
 		&flush_file_lines($virt->{'file'});
 		&unlock_file($virt->{'file'});
@@ -398,6 +398,10 @@ if ($_[0]->{'awstats_pass'}) {
 		next if (!$virt);
 		local ($loc) = grep { $_->{'words'}->[0] eq '/awstats' }
 			    &apache::find_directive_struct("Location", $vconf);
+		if (!$loc) {
+			($loc) = grep { $_->{'words'}->[0] eq 'awstats.pl' }
+			    &apache::find_directive_struct("Files", $vconf);
+			}
 		next if (!$loc);
 		local $lref = &read_file_lines($virt->{'file'});
 		splice(@$lref, $loc->{'line'},
