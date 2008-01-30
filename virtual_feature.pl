@@ -148,6 +148,8 @@ local $aliases = &virtual_server::substitute_template($config{'aliases'},$_[0]);
 		&get_config_file("www.".$_[0]->{'dom'}));
 
 # Set up cron job
+&virtual_server::obtain_lock_cron($_[0])
+	if (defined(&virtual_server::obtain_lock_cron));
 &foreign_require("cron", "cron-lib.pl");
 &save_run_user($_[0]->{'dom'}, $_[0]->{'user'});
 if (!$config{'nocron'}) {
@@ -159,11 +161,11 @@ if (!$config{'nocron'}) {
 		       'days' => '*',
 		       'months' => '*',
 		       'weekdays' => '*' };
-	&lock_file(&cron::cron_file($job));
 	&cron::create_cron_job($job);
-	&unlock_file(&cron::cron_file($job));
 	}
 &cron::create_wrapper($cron_cmd, $module_name, "awstats.pl");
+&virtual_server::release_lock_cron($_[0])
+	if (defined(&virtual_server::release_lock_cron));
 
 # Create symlinks to other directories in source dir
 foreach my $dir ("lib", "lang", "plugins") {
@@ -187,6 +189,8 @@ if (!-d "$htmldir/icon") {
 	}
 
 # Add script alias to make /awstats/awstats.pl work
+&virtual_server::obtain_lock_web($_[0])
+	if (defined(&virtual_server::obtain_lock_web));
 local @ports = ( $_[0]->{'web_port'},
 		 $_[0]->{'ssl'} ? ( $_[0]->{'web_sslport'} ) : ( ) );
 foreach my $port (@ports) {
@@ -198,12 +202,10 @@ foreach my $port (@ports) {
 		local ($aw) = grep { $_ =~ /^\/awstats/ } @sa;
 		if (!$aw) {
 			# Need to add
-			&lock_file($virt->{'file'});
 			push(@sa, "/awstats $cgidir");
 			&apache::save_directive("ScriptAlias", \@sa,
 						$vconf, $conf);
 			&flush_file_lines($virt->{'file'});
-			&unlock_file($virt->{'file'});
 			&virtual_server::register_post_action(
 				\&virtual_server::restart_apache);
 			}
@@ -222,7 +224,6 @@ if ($tmpl->{$module_name.'passwd'}) {
                 local ($virt, $vconf) = &virtual_server::get_apache_virtual(
                         $_[0]->{'dom'}, $p);
                 next if (!$virt);
-		&lock_file($virt->{'file'});
 		local $lref = &read_file_lines($virt->{'file'});
 		splice(@$lref, $virt->{'eline'}, 0,
 		       "<Files awstats.pl>",
@@ -233,7 +234,6 @@ if ($tmpl->{$module_name.'passwd'}) {
 		       "</Files>");
 		$added++;
 		&flush_file_lines($virt->{'file'});
-		&unlock_file($virt->{'file'});
 		}
 	if ($added) {
                 &virtual_server::register_post_action(
@@ -247,6 +247,8 @@ if ($tmpl->{$module_name.'passwd'}) {
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
 	}
 
+&virtual_server::release_lock_web($_[0])
+	if (defined(&virtual_server::release_lock_web));
 return 1;
 }
 
@@ -274,14 +276,18 @@ if ($_[0]->{'dom'} ne $_[1]->{'dom'}) {
 		}
 	&flush_file_lines();
 	&unlock_file($newfile);
+
+	# Fix up domain in cron job
+	&virtual_server::obtain_lock_cron($_[0])
+		if (defined(&virtual_server::obtain_lock_cron));
 	&foreign_require("cron", "cron-lib.pl");
 	local $job = &find_cron_job($_[1]->{'dom'});
 	if ($job) {
-		&lock_file(&cron::cron_file($job));
 		$job->{'command'} = "$cron_cmd $_[0]->{'dom'}";
 		&cron::change_cron_job($job);
-		&unlock_file(&cron::cron_file($job));
 		}
+	&virtual_server::release_lock_cron($_[0])
+		if (defined(&virtual_server::release_lock_cron));
 
 	# Change run-as domain
 	&rename_run_domain($_[0]->{'dom'}, $_[1]->{'dom'});
@@ -333,13 +339,15 @@ sub feature_delete
 {
 # Delete config and cron job
 &$virtual_server::first_print($text{'feat_delete'});
+&virtual_server::obtain_lock_cron($_[0])
+	if (defined(&virtual_server::obtain_lock_cron));
 &foreign_require("cron", "cron-lib.pl");
 local $job = &find_cron_job($_[0]->{'dom'});
 if ($job) {
-	&lock_file(&cron::cron_file($job));
 	&cron::delete_cron_job($job);
-	&unlock_file(&cron::cron_file($job));
 	}
+&virtual_server::release_lock_cron($_[0])
+	if (defined(&virtual_server::release_lock_cron));
 &delete_config($_[0]->{'dom'});
 
 # Delete awstats.pl from the cgi-bin directory
@@ -360,6 +368,8 @@ if (-l "$htmldir/icon") {
 	}
 
 # Remove script alias for /awstats
+&virtual_server::obtain_lock_web($_[0])
+	if (defined(&virtual_server::obtain_lock_web));
 local @ports = ( $_[0]->{'web_port'},
 		 $_[0]->{'ssl'} ? ( $_[0]->{'web_sslport'} ) : ( ) );
 foreach my $port (@ports) {
@@ -371,12 +381,10 @@ foreach my $port (@ports) {
 		local ($aw) = grep { $_ =~ /^\/awstats/ } @sa;
 		if ($aw) {
 			# Need to remove
-			&lock_file($virt->{'file'});
 			@sa = grep { $_ ne $aw } @sa;
 			&apache::save_directive("ScriptAlias", \@sa,
 						$vconf, $conf);
 			&flush_file_lines($virt->{'file'});
-			&unlock_file($virt->{'file'});
 			&virtual_server::register_post_action(
 				\&virtual_server::restart_apache);
 			}
@@ -407,7 +415,6 @@ if ($_[0]->{'awstats_pass'}) {
 		splice(@$lref, $loc->{'line'},
 		       $loc->{'eline'}-$loc->{'line'}+1);
 		&flush_file_lines($virt->{'file'});
-		&unlock_file($virt->{'file'});
 		$deleted++;
 		}
 	if ($deleted) {
@@ -420,6 +427,8 @@ if ($_[0]->{'awstats_pass'}) {
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
 	}
 
+&virtual_server::release_lock_web($_[0])
+	if (defined(&virtual_server::release_lock_web));
 return 1;
 }
 
