@@ -215,7 +215,8 @@ foreach my $port (@ports) {
 
 # Setup password protection for /awstats/awstats.pl
 local $tmpl = &virtual_server::get_template($_[0]->{'template'});
-if ($tmpl->{$module_name.'passwd'}) {
+if ($tmpl->{$module_name.'passwd'} ||
+    $tmpl->{$module_name.'passwd'} eq '') {
 	&$virtual_server::first_print($text{'feat_passwd'});
 	local $conf = &apache::get_config();
 	local $added = 0;
@@ -613,7 +614,7 @@ sub template_input
 {
 local ($tmpl) = @_;
 local $v = $tmpl->{$module_name."passwd"};
-$v = 0 if (!defined($v) && $tmpl->{'default'});
+$v = 1 if (!defined($v) && $tmpl->{'default'});
 return &ui_table_row($text{'tmpl_passwd'},
 	&ui_radio($input_name."_passwd", $v,
 		  [ $tmpl->{'default'} ? ( ) : ( [ '', $text{'default'} ] ),
