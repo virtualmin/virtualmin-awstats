@@ -241,7 +241,6 @@ if ($tmpl->{$module_name.'passwd'} ||
                 &virtual_server::register_post_action(
                     defined(&main::restart_apache) ? \&main::restart_apache
                                            : \&virtual_server::restart_apache);
-		undef(@apache::get_config_cache);
 		}
 	&virtual_server::update_create_htpasswd($_[0], $passwd_file,
 						$_[0]->{'user'});
@@ -424,7 +423,6 @@ if ($_[0]->{'awstats_pass'}) {
                 &virtual_server::register_post_action(
                     defined(&main::restart_apache) ? \&main::restart_apache
                                            : \&virtual_server::restart_apache);
-		undef(@apache::get_config_cache);
 		}
 	delete($_[0]->{'awstats_pass'});
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
