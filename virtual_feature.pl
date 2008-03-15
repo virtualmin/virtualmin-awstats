@@ -218,10 +218,10 @@ local $tmpl = &virtual_server::get_template($_[0]->{'template'});
 if ($tmpl->{$module_name.'passwd'} ||
     $tmpl->{$module_name.'passwd'} eq '') {
 	&$virtual_server::first_print($text{'feat_passwd'});
-	local $conf = &apache::get_config();
 	local $added = 0;
 	local $passwd_file = "$_[0]->{'home'}/.awstats-htpasswd";
 	foreach my $p (@ports) {
+		local $conf = &apache::get_config();
                 local ($virt, $vconf) = &virtual_server::get_apache_virtual(
                         $_[0]->{'dom'}, $p);
                 next if (!$virt);
@@ -235,6 +235,7 @@ if ($tmpl->{$module_name.'passwd'} ||
 		       "</Files>");
 		$added++;
 		&flush_file_lines($virt->{'file'});
+		undef(@apache::get_config_cache);
 		}
 	if ($added) {
                 &virtual_server::register_post_action(
@@ -399,9 +400,9 @@ foreach my $port (@ports) {
 # Remove password protection for /awstats/awstats.pl
 if ($_[0]->{'awstats_pass'}) {
 	&$virtual_server::first_print($text{'feat_dpasswd'});
-	local $conf = &apache::get_config();
 	local $deleted = 0;
 	foreach my $p (@ports) {
+		local $conf = &apache::get_config();
                 local ($virt, $vconf) = &virtual_server::get_apache_virtual(
                         $_[0]->{'dom'}, $p);
 		next if (!$virt);
@@ -416,6 +417,7 @@ if ($_[0]->{'awstats_pass'}) {
 		splice(@$lref, $loc->{'line'},
 		       $loc->{'eline'}-$loc->{'line'}+1);
 		&flush_file_lines($virt->{'file'});
+		undef(@apache::get_config_cache);
 		$deleted++;
 		}
 	if ($deleted) {
