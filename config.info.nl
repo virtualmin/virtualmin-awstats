@@ -1,0 +1,9 @@
+config_dir=AWstats configuratie directory&#44;0
+awstats=Volledig pad naar AWstats programma&#44;0
+icons=Volledig pad naar AWstats iconen directory&#44;0
+lang=Volledig pad naar AWstats lang directory&#44;3&#44;Zelfde als awstats.pl
+lib=Volledig pad naar AWstats lib directory&#44;3&#44;Zelfde als awstats.pl
+format=Web server log formaat&#44;1&#44;&#45;Automatisch&#44;1&#45;Gecombineerd&#44;4&#45;Algemeen
+nocron=Setup van AWstats Cron job voor iedere virtuele server?&#44;1&#44;0&#45;Ja&#44;1&#45;Nee
+copyto=Kopieer AWstats CGI programma naar&#44;10&#44;&#45;cgi&#45;bin directory&#44; Andere directory onder home
+aliases=Extra host aliassen&#44;0
