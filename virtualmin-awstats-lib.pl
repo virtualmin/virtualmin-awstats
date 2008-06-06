@@ -13,9 +13,10 @@ $run_as_file = "$module_config_directory/runas";
 sub list_configs
 {
 local @rv;
-opendir(DIR, &translate_filename($config{'config_dir'}));
+local $dir = &translate_filename($config{'config_dir'});
+opendir(DIR, $dir);
 foreach my $f (readdir(DIR)) {
-	if ($f =~ /^awstats\.(\S+)\.conf$/) {
+	if ($f =~ /^awstats\.(\S+)\.conf$/ && !-l "$dir/$f") {
 		push(@rv, $1);
 		}
 	}
