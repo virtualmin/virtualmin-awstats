@@ -242,6 +242,7 @@ foreach $a (sort { $mtime{$a} <=> $mtime{$b} } @all) {
 	if ($user ne "root") {
 		$fullcmd = &command_as_user($user, 0, $fullcmd);
 		}
+	$fullcmd .= "2>&1";
 	&open_execute_command(OUT, $fullcmd, 1, 0);
 	while(<OUT>) {
 		if ($esc) {
