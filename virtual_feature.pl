@@ -102,19 +102,12 @@ if ($?) {
 
 # Copy awstats.pl to the cgi-bin directory
 local $cgidir = &get_cgidir($_[0]);
-if (defined(&virtual_server::run_as_domain_user)) {
-	local $out = &virtual_server::run_as_domain_user($_[0],
-		"cp ".quotemeta($config{'awstats'})." ".quotemeta($cgidir));
-	if ($?) {
-		&$virtual_server::second_print(&text('save_ecopy2',
-						     "<tt>$out</tt>"));
-		return 0;
-		}
-	}
-else {
-	&system_logged("cp ".quotemeta($config{'awstats'})." ".quotemeta($cgidir));
-	&system_logged("chown $_[0]->{'uid'}:$_[0]->{'ugid'} ".
-	       quotemeta("$cgidir/awstats.pl"));
+local $out = &virtual_server::run_as_domain_user($_[0],
+	"cp ".quotemeta($config{'awstats'})." ".quotemeta($cgidir));
+if ($?) {
+	&$virtual_server::second_print(&text('save_ecopy2',
+					     "<tt>$out</tt>"));
+	return 0;
 	}
 
 # Create report directory
@@ -148,8 +141,7 @@ local $aliases = &virtual_server::substitute_template($config{'aliases'},$_[0]);
 		&get_config_file("www.".$_[0]->{'dom'}));
 
 # Set up cron job
-&virtual_server::obtain_lock_cron($_[0])
-	if (defined(&virtual_server::obtain_lock_cron));
+&virtual_server::obtain_lock_cron($_[0]);
 &foreign_require("cron", "cron-lib.pl");
 &save_run_user($_[0]->{'dom'}, $_[0]->{'user'});
 if (!$config{'nocron'}) {
@@ -164,8 +156,7 @@ if (!$config{'nocron'}) {
 	&cron::create_cron_job($job);
 	}
 &cron::create_wrapper($cron_cmd, $module_name, "awstats.pl");
-&virtual_server::release_lock_cron($_[0])
-	if (defined(&virtual_server::release_lock_cron));
+&virtual_server::release_lock_cron($_[0]);
 
 # Create symlinks to other directories in source dir
 foreach my $dir ("lib", "lang", "plugins") {
@@ -189,8 +180,7 @@ if (!-d "$htmldir/icon") {
 	}
 
 # Add script alias to make /awstats/awstats.pl work
-&virtual_server::obtain_lock_web($_[0])
-	if (defined(&virtual_server::obtain_lock_web));
+&virtual_server::obtain_lock_web($_[0]);
 local @ports = ( $_[0]->{'web_port'},
 		 $_[0]->{'ssl'} ? ( $_[0]->{'web_sslport'} ) : ( ) );
 foreach my $port (@ports) {
@@ -248,8 +238,7 @@ if ($tmpl->{$module_name.'passwd'} ||
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
 	}
 
-&virtual_server::release_lock_web($_[0])
-	if (defined(&virtual_server::release_lock_web));
+&virtual_server::release_lock_web($_[0]);
 return 1;
 }
 
@@ -279,16 +268,14 @@ if ($_[0]->{'dom'} ne $_[1]->{'dom'}) {
 	&unlock_file($newfile);
 
 	# Fix up domain in cron job
-	&virtual_server::obtain_lock_cron($_[0])
-		if (defined(&virtual_server::obtain_lock_cron));
+	&virtual_server::obtain_lock_cron($_[0]);
 	&foreign_require("cron", "cron-lib.pl");
 	local $job = &find_cron_job($_[1]->{'dom'});
 	if ($job) {
 		$job->{'command'} = "$cron_cmd $_[0]->{'dom'}";
 		&cron::change_cron_job($job);
 		}
-	&virtual_server::release_lock_cron($_[0])
-		if (defined(&virtual_server::release_lock_cron));
+	&virtual_server::release_lock_cron($_[0]);
 
 	# Change run-as domain
 	&rename_run_domain($_[0]->{'dom'}, $_[1]->{'dom'});
@@ -340,15 +327,13 @@ sub feature_delete
 {
 # Delete config and cron job
 &$virtual_server::first_print($text{'feat_delete'});
-&virtual_server::obtain_lock_cron($_[0])
-	if (defined(&virtual_server::obtain_lock_cron));
+&virtual_server::obtain_lock_cron($_[0]);
 &foreign_require("cron", "cron-lib.pl");
 local $job = &find_cron_job($_[0]->{'dom'});
 if ($job) {
 	&cron::delete_cron_job($job);
 	}
-&virtual_server::release_lock_cron($_[0])
-	if (defined(&virtual_server::release_lock_cron));
+&virtual_server::release_lock_cron($_[0]);
 &delete_config($_[0]->{'dom'});
 
 # Delete awstats.pl from the cgi-bin directory
@@ -369,8 +354,7 @@ if (-l "$htmldir/icon") {
 	}
 
 # Remove script alias for /awstats
-&virtual_server::obtain_lock_web($_[0])
-	if (defined(&virtual_server::obtain_lock_web));
+&virtual_server::obtain_lock_web($_[0]);
 local @ports = ( $_[0]->{'web_port'},
 		 $_[0]->{'ssl'} ? ( $_[0]->{'web_sslport'} ) : ( ) );
 foreach my $port (@ports) {
@@ -428,8 +412,7 @@ if ($_[0]->{'awstats_pass'}) {
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
 	}
 
-&virtual_server::release_lock_web($_[0])
-	if (defined(&virtual_server::release_lock_web));
+&virtual_server::release_lock_web($_[0]);
 return 1;
 }
 
@@ -595,17 +578,13 @@ sub get_cgidir
 {
 local $cgidir = $config{'copyto'} ?
 			"$_[0]->{'home'}/$config{'copyto'}" :
-		defined(&virtual_server::cgi_bin_dir) ?
-			&virtual_server::cgi_bin_dir($_[0]) :
-			"$_[0]->{'home'}/cgi-bin";
+			&virtual_server::cgi_bin_dir($_[0]);
 return $cgidir;
 }
 
 sub get_htmldir
 {
-return defined(&virtual_server::public_html_dir) ?
-	&virtual_server::public_html_dir($_[0]) :
-	"$_[0]->{'home'}/public_html";
+return &virtual_server::public_html_dir($_[0]);
 }
 
 # template_input(&template)
