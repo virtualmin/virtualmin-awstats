@@ -295,15 +295,16 @@ if ($_[0]->{'user'} ne $_[1]->{'user'}) {
 if ($_[0]->{'home'} ne $_[1]->{'home'}) {
 	# Home directory has changed .. update log and data dirs
 	&$virtual_server::first_print($text{'feat_modifyhome'});
-	&lock_file(&get_config_file($_[0]->{'dom'}));
+	local $cfile = &get_config_file($_[0]->{'dom'});
+	&lock_file($cfile);
 	local $conf = &get_config($_[0]->{'dom'});
 	local $dir = "$_[0]->{'home'}/awstats";
 	&save_directive($conf, $_[0]->{'dom'}, "DirData", $dir);
 	&save_directive($conf, $_[0]->{'dom'}, "LogFile",
 		&virtual_server::get_apache_log($_[0]->{'dom'},
 					        $_[0]->{'web_port'}));
-	&flush_file_lines();
-	&unlock_file(&get_config_file($_[0]->{'dom'}));
+	&flush_file_lines($cfile);
+	&unlock_file($cfile);
 
 	# XXX also update password file too
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
