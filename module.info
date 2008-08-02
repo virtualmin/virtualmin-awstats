@@ -3,3 +3,4 @@ category=servers
 depends=cron software
 version=3.6
 desc_nl=AWstats Rapportage
+feedback=jcameron@webmin.com
