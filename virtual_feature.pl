@@ -162,14 +162,19 @@ if (!$config{'nocron'}) {
 foreach my $dir ("lib", "lang", "plugins") {
 	local $src;
 	if ($config{$dir} && -d $config{$dir}) {
+		# Specific directory is in config .. use it
 		$src = $config{$dir};
+		$src .= "/$dir" if ($src !~ /\/\Q$dir\E$/);
 		}
-	else {
+	if (!$src || !-d $src) {
+		# Use same directory as awstats.pl
 		$config{'awstats'} =~ /^(.*)\//;
 		$src = $1;
+		$src .= "/$dir" if ($src !~ /\/\Q$dir\E$/);
 		}
-	$src .= "/$dir" if ($src !~ /\/\Q$dir\E$/);
-	&symlink_logged($src, "$cgidir/$dir");
+	if ($src && -d $src) {
+		&symlink_logged($src, "$cgidir/$dir");
+		}
 	}
 
 # Create symlink to icons directory
