@@ -17,3 +17,5 @@ Added a template pages option to have the /awstats web directory password protec
 ---- Changes since 3.3 ----
 Fixed password protection of awstats.pl via different paths.
 Alias domains whose target has AWstats enabled are now added to the configuration of the target, so that AWstats can be correctly accessed via the alias domain name.
+---- Changes since 3.8 ----
+The AWstats library and plugin directories are copied into domains when the AWstats feature is enable, to avoid possible in-compatability issues if the global awstats.pl is upgraded.

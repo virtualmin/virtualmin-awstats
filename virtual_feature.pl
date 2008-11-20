@@ -100,7 +100,8 @@ if ($?) {
 	return 0;
 	}
 
-# Copy awstats.pl to the cgi-bin directory
+# Copy awstats.pl to the cgi-bin directory. Links are not possible, as the
+# file needs to be owned by the domain owner for suexec to work.
 local $cgidir = &get_cgidir($_[0]);
 local $out = &virtual_server::run_as_domain_user($_[0],
 	"cp ".quotemeta($config{'awstats'})." ".quotemeta($cgidir));
@@ -158,7 +159,7 @@ if (!$config{'nocron'}) {
 &cron::create_wrapper($cron_cmd, $module_name, "awstats.pl");
 &virtual_server::release_lock_cron($_[0]);
 
-# Create symlinks to other directories in source dir
+# Copy other directories from source dir
 foreach my $dir ("lib", "lang", "plugins") {
 	local $src;
 	if ($config{$dir} && -d $config{$dir}) {
@@ -173,7 +174,8 @@ foreach my $dir ("lib", "lang", "plugins") {
 		$src .= "/$dir" if ($src !~ /\/\Q$dir\E$/);
 		}
 	if ($src && -d $src) {
-		&symlink_logged($src, "$cgidir/$dir");
+		&unlink_file("$cgidir/$dir");
+		&copy_source_dest($src, "$cgidir/$dir");
 		}
 	}
 
@@ -210,7 +212,7 @@ foreach my $port (@ports) {
 	}
 &$virtual_server::second_print($virtual_server::text{'setup_done'});
 
-# Setup password protection for /awstats/awstats.pl
+# Setup password protection for awstats.pl
 local $tmpl = &virtual_server::get_template($_[0]->{'template'});
 if ($tmpl->{$module_name.'passwd'} ||
     $tmpl->{$module_name.'passwd'} eq '') {
@@ -570,16 +572,30 @@ return $text{'feat_backup_name'};
 sub feature_validate
 {
 local ($d) = @_;
+
+# Make sure config file exists
 local $cfile = "$config{'config_dir'}/awstats.$d->{'dom'}.conf";
 -r $cfile || return &text('feat_evalidate', "<tt>$cfile</tt>");
+
+# Check for logs directory
 -d "$d->{'home'}/awstats" || return &text('feat_evalidatedir', "<tt>$d->{'home'}/awstats</tt>");
+
+# Check for cron job
 if (!$config{'nocron'}) {
 	&foreign_require("cron", "cron-lib.pl");
 	local $job = &find_cron_job($d->{'dom'});
 	$job || return &text('feat_evalidatecron');
 	}
+
+# Make sure awstats.pl exists, and is the same as the installed version
 local $cgidir = &get_cgidir($d);
 -r "$cgidir/awstats.pl" || return &text('feat_evalidateprog', "<tt>$cgidir/awstats.pl</tt>");
+local @cst = stat($config{'awstats'});
+local @dst = stat("$cgidir/awstats.pl");
+if (@cst && $cst[7] != $dst[7]) {
+	return &text('feat_evalidatever', "<tt>$config{'awstats'}</tt>", "<tt>$cgidir/awstats.pl</tt>");
+	}
+
 return undef;
 }
 

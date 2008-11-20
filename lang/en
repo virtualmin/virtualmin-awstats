@@ -81,6 +81,7 @@ feat_evalidate=AWstats configuration file $1 does not exist
 feat_evalidatedir=AWstats data directory $1 does not exist
 feat_evalidatecron=AWstats Cron job was not found
 feat_evalidateprog=AWstats program copy $1 does not exist
+feat_evalidatever=The system's AWstats program at $1 is not the same as the domain's copy at $2. You will need to disable and re-enable the AWstats feature to synchronize them
 feat_passwd=Setting up password protection for AWstats ..
 feat_dpasswd=Removing password protection for AWstats ..
 feat_setupalias=Configuring AWstats in $1 ..
