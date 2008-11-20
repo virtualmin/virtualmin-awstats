@@ -333,5 +333,51 @@ closedir(DIR);
 return @rv;
 }
 
+# setup_awstats_commands(&domain)
+# Copy awstats.pl and associated lib and data files into a domain's directory
+sub setup_awstats_commands
+{
+local ($d) = @_;
+
+# Copy awstats.pl to the cgi-bin directory. Links are not possible, as the
+# file needs to be owned by the domain owner for suexec to work.
+local $cgidir = &get_cgidir($d);
+local $out = &virtual_server::run_as_domain_user($d,
+	"cp ".quotemeta($config{'awstats'})." ".quotemeta($cgidir));
+if ($?) {
+	return &text('save_ecopy2', "<tt>$out</tt>");
+	}
+
+# Copy other directories from source dir
+foreach my $dir ("lib", "lang", "plugins") {
+	local $src;
+	if ($config{$dir} && -d $config{$dir}) {
+		# Specific directory is in config .. use it
+		$src = $config{$dir};
+		$src .= "/$dir" if ($src !~ /\/\Q$dir\E$/);
+		}
+	if (!$src || !-d $src) {
+		# Use same directory as awstats.pl
+		$config{'awstats'} =~ /^(.*)\//;
+		$src = $1;
+		$src .= "/$dir" if ($src !~ /\/\Q$dir\E$/);
+		}
+	if ($src && -d $src) {
+		&unlink_file("$cgidir/$dir");
+		&copy_source_dest($src, "$cgidir/$dir");
+		}
+	}
+
+# Create symlink to icons directory
+local $htmldir = &get_htmldir($d);
+if (!-d "$htmldir/icon") {
+	&unlink_file("$htmldir/icon", "$htmldir/awstats-icon");
+	&symlink_logged($config{'icons'}, "$htmldir/icon");
+	&symlink_logged($config{'icons'}, "$htmldir/awstats-icon");
+	}
+
+return undef;
+}
+
 1;
 

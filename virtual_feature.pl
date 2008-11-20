@@ -100,14 +100,10 @@ if ($?) {
 	return 0;
 	}
 
-# Copy awstats.pl to the cgi-bin directory. Links are not possible, as the
-# file needs to be owned by the domain owner for suexec to work.
-local $cgidir = &get_cgidir($_[0]);
-local $out = &virtual_server::run_as_domain_user($_[0],
-	"cp ".quotemeta($config{'awstats'})." ".quotemeta($cgidir));
-if ($?) {
-	&$virtual_server::second_print(&text('save_ecopy2',
-					     "<tt>$out</tt>"));
+# Copy awstats.pl and associated files into the domain
+local $err = &setup_awstats_commands($_[0]);
+if ($err) {
+	&$virtual_server::second_print($err);
 	return 0;
 	}
 
@@ -159,37 +155,11 @@ if (!$config{'nocron'}) {
 &cron::create_wrapper($cron_cmd, $module_name, "awstats.pl");
 &virtual_server::release_lock_cron($_[0]);
 
-# Copy other directories from source dir
-foreach my $dir ("lib", "lang", "plugins") {
-	local $src;
-	if ($config{$dir} && -d $config{$dir}) {
-		# Specific directory is in config .. use it
-		$src = $config{$dir};
-		$src .= "/$dir" if ($src !~ /\/\Q$dir\E$/);
-		}
-	if (!$src || !-d $src) {
-		# Use same directory as awstats.pl
-		$config{'awstats'} =~ /^(.*)\//;
-		$src = $1;
-		$src .= "/$dir" if ($src !~ /\/\Q$dir\E$/);
-		}
-	if ($src && -d $src) {
-		&unlink_file("$cgidir/$dir");
-		&copy_source_dest($src, "$cgidir/$dir");
-		}
-	}
-
-# Create symlink to icons directory
-local $htmldir = &get_htmldir($_[0]);
-if (!-d "$htmldir/icon") {
-	&symlink_logged($config{'icons'}, "$htmldir/icon");
-	&symlink_logged($config{'icons'}, "$htmldir/awstats-icon");
-	}
-
 # Add script alias to make /awstats/awstats.pl work
 &virtual_server::obtain_lock_web($_[0]);
 local @ports = ( $_[0]->{'web_port'},
 		 $_[0]->{'ssl'} ? ( $_[0]->{'web_sslport'} ) : ( ) );
+local $cgidir = &get_cgidir($_[0]);
 foreach my $port (@ports) {
 	local ($virt, $vconf) = &virtual_server::get_apache_virtual(
 					$_[0]->{'dom'}, $port);
@@ -550,18 +520,26 @@ else {
 sub feature_restore
 {
 local ($d, $file, $opts) = @_;
+local $ok = 1;
+
+# Restore the config file
 &$virtual_server::first_print($text{'feat_restore'});
 local $cfile = "$config{'config_dir'}/awstats.$d->{'dom'}.conf";
 &lock_file($cfile);
 if (&copy_source_dest($file, $cfile)) {
 	&unlock_file($cfile);
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
-	return 1;
 	}
 else {
 	&$virtual_server::second_print($text{'feat_nocopy'});
-	return 0;
+	$ok = 0;
 	}
+
+# Re-setup awstats.pl, lib, plugins and icons, as the old paths in the backup
+# probably don't match this system
+&setup_awstats_commands($d);
+
+return $ok;
 }
 
 sub feature_backup_name
