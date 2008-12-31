@@ -37,6 +37,7 @@ feat_evalidate=AWstats configuratie file $1 bestaat niet
 feat_evalidatecron=AWstats Cron job is niet gevonden
 feat_evalidatedir=AWstats data directory $1 bestaat niet
 feat_evalidateprog=AWstats programma kopie $1 bestaat niet
+feat_evalidatever=Het systeem AWstats programma op $1 is niet dezelfde als het domein kopie op $2. U moet AWstats uitschakelen en weer opnieuw starten.
 feat_label=Aanzetten AWstats rapportage?
 feat_losing=Geplande AWstats rapportage zal worden uitgeschakeld en de configuratie word verwijdert
 feat_modify=Updaten van domein naam in de AWstats configuratie ..
