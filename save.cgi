@@ -97,6 +97,17 @@ else {
 		# Remove cron job
 		&cron::delete_cron_job($job);
 		}
-	&redirect("");
+
+	# Redirect appropriately
+	if (&foreign_check("virtual-server")) {
+		&foreign_require("virtual-server", "virtual-server-lib.pl");
+		$d = &virtual_server::get_domain_by("dom", $in{'dom'});
+		}
+	if ($d) {
+		&virtual_server::domain_redirect($d);
+		}
+	else {
+		&redirect("");
+		}
 	}
 

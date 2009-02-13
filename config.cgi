@@ -5,7 +5,12 @@ require './virtualmin-awstats-lib.pl';
 &ReadParse();
 $conf = &get_config($in{'dom'});
 &can_domain($in{'dom'}) || &error($text{'edit_ecannot'});
-&ui_print_header("<tt>$in{'dom'}</tt>", $text{'config_title'}, "");
+if (&foreign_check("virtual-server")) {
+	&foreign_require("virtual-server", "virtual-server-lib.pl");
+	$d = &virtual_server::get_domain_by("dom", $in{'dom'});
+	}
+&ui_print_header($d ? &virtual_server::domain_in($d) : undef,
+		 $text{'config_title'}, "");
 
 print &ui_form_start("config_save.cgi", "post");
 print &ui_hidden("dom", $in{'dom'});
@@ -46,21 +51,38 @@ print &ui_table_row($text{'config_skipfiles'},
 	&ui_opt_textbox("skipfiles", $skipfiles, 40, $text{'config_none'}));
 
 # File types to exclude
-# NotPageList
+$notpage = &find_value("NotPageList", $conf);
+print &ui_table_row($text{'config_notpage'},
+	&ui_opt_textbox("notpage", $notpage, 40,
+		$text{'default'}." (css js class gif jpg jpeg png bmp ico)"));
 
 # HTTP codes to include
-# ValidHTTPCodes
+$httpcodes = &find_value("ValidHTTPCodes", $conf);
+print &ui_table_row($text{'config_httpcodes'},
+	&ui_opt_textbox("httpcodes", $httpcodes, 40,
+		$text{'default'}." (200 304)"));
 
 # Framed report UI
-# UseFramesWhenCGI
+$frames = &find_value("UseFramesWhenCGI", $conf);
+print &ui_table_row($text{'config_frames'},
+	&ui_select("frames", $frames,
+		   [ [ undef, $text{'default'} ],
+		     [ 0, $text{'no'} ],
+		     [ 1, $text{'yes'} ] ]));
 
 print &ui_table_hr();
 
 # Detection levels
-# LevelForRobotsDetection
-# LevelForBrowsersDetection
-# LevelForOSDetection
-# LevelForRefererAnalyze
+foreach $dt ("LevelForRobotsDetection", "LevelForBrowsersDetection",
+	     "LevelForOSDetection", "LevelForRefererAnalyze") {
+	$v = &find_value($dt, $conf);
+	$n = lc($dt); $n =~ s/^LevelFor//i;
+	print &ui_table_row($text{'config_'.$n},
+		&ui_select($n, $v, [ [ '', $text{'default'} ],
+				     [ 0, $text{'config_level0'} ],
+				     [ 1, $text{'config_level1'} ],
+				     [ 2, $text{'config_level2'} ] ]));
+	}
 
 print &ui_table_hr();
 

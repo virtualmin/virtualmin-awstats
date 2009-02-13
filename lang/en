@@ -91,7 +91,7 @@ feat_deletealias=Removing configuration for AWstats in $1 ..
 
 links_link=AWstats Report
 links_view=View AWstats Report
-links_config=Configure AWstats
+links_config=AWstats Configuration
 
 tmpl_passwd=Password-protect AWstats web page?
 
@@ -109,3 +109,13 @@ config_year3=Always
 config_skiphosts=Client hosts to exclude
 config_skipagents=Client user agents to exclude
 config_skipfiles=URL paths to exclude
+config_notpage=File extensions to exclude
+config_httpcodes=HTTP codes to include
+config_frames=Use framed reports UI?
+config_robotsdetection=Robots detection level
+config_browsersdetection=Browser detection level
+config_osdetection=OS detection level
+config_refereranalyze=Referer analysis level
+config_level0=No detection
+config_level1=Medium detection
+config_level2=Full detection

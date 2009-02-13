@@ -11,7 +11,12 @@ if ($in{'new'}) {
 else {
 	$conf = &get_config($in{'dom'});
 	&can_domain($in{'dom'}) || &error($text{'edit_ecannot'});
-	&ui_print_header(undef, $text{'edit_title2'}, "");
+	if (&foreign_check("virtual-server")) {
+		&foreign_require("virtual-server", "virtual-server-lib.pl");
+		$d = &virtual_server::get_domain_by("dom", $in{'dom'});
+		}
+	&ui_print_header($d ? &virtual_server::domain_in($d) : undef,
+			 $text{'edit_title2'}, "");
 	}
 $access{'editsched'} || &error($text{'edit_ecannot'});
 
