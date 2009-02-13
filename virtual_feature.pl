@@ -94,7 +94,12 @@ sub feature_setup
 &$virtual_server::first_print($text{'feat_setup'});
 
 # Copy the template config file
-local $out = &backquote_logged("cp ".quotemeta(&awstats_model_file())." ".quotemeta("$config{'config_dir'}/awstats.$_[0]->{'dom'}.conf"));
+local $model = &awstats_model_file();
+if (!$model) {
+	&$virtual_server::second_print($text{'save_emodel'});
+	return 0;
+	}
+local $out = &backquote_logged("cp ".quotemeta($model)." ".quotemeta("$config{'config_dir'}/awstats.$_[0]->{'dom'}.conf")." 2>&1");
 if ($?) {
 	&$virtual_server::second_print(&text('save_ecopy', "<tt>$out</tt>"));
 	return 0;

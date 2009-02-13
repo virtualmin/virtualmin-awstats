@@ -53,6 +53,7 @@ save_euser=Missing or invalid user to run report as
 save_euser2=You are not allowed to run reports as the entered user
 save_ecopy=Failed to copy template configuration : $1
 save_ecopy2=Failed to copy AWstats program : $1
+save_emodel=.. template AWstats configuration file was not found
 
 gen_title=Generate Report
 gen_doing=Now updating the report for $1 from log file $2 ..
