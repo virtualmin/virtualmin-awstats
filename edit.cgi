@@ -101,6 +101,7 @@ else {
 	print &ui_form_end([ [ "save", $text{'save'} ],
 			     [ "delete", $text{'delete'} ],
 			     [ "view", $text{'edit_view'} ],
+			     [ "config", $text{'edit_config'} ],
 			     [ "gen", $text{'edit_gen'} ] ]);
 	}
 

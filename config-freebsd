@@ -2,4 +2,4 @@ config_dir=/usr/local/etc/awstats
 awstats=/usr/local/www/awstats/cgi-bin/awstats.pl
 icons=/usr/local/www/awstats/icons
 nocron=0
-noedit=0
+noedit=1

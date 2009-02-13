@@ -29,6 +29,10 @@ elsif ($in{'view'}) {
 	# Redirect to report viewer
 	&redirect("view.cgi?config=$in{'dom'}");
 	}
+elsif ($in{'config'}) {
+	# Redirect to awstats.conf page
+	&redirect("config.cgi?dom=$in{'dom'}");
+	}
 else {
 	# Validate inputs
 	if ($in{'new'}) {

@@ -2,4 +2,4 @@ awstats=/srv/www/cgi-bin/awstats.pl
 icons=/usr/share/apache2/icons/awstats
 config_dir=/etc/awstats
 format=
-noedit=0
+noedit=1

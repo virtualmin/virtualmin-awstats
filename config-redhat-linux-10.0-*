@@ -5,4 +5,4 @@ lib=/usr/share/awstats
 lang=/usr/share/awstats
 plugins=/usr/share/awstats
 nocron=0
-noedit=0
+noedit=1

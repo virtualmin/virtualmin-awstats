@@ -487,14 +487,22 @@ else {
 sub feature_links
 {
 local ($d) = @_;
-return ( { 'mod' => $module_name,
+return ( # Link to either view a report, or edit settings
+	 { 'mod' => $module_name,
            'desc' => $access{'editsched'} ? $text{'links_link'}
 					  : $text{'links_view'},
            'page' => $access{'editsched'} ?
 			'edit.cgi?dom='.&urlize($d->{'dom'}) :
 			'view.cgi?config='.&urlize($d->{'dom'}),
 	   'cat' => 'logs',
-         } );
+         },
+	 # Link to edit AWstats config for this domain
+	 { 'mod' => $module_name,
+           'desc' => $text{'links_config'},
+           'page' => 'config.cgi?dom='.&urlize($d->{'dom'}),
+	   'cat' => 'logs',
+         },
+       );
 }
 
 # feature_backup(&domain, file, &opts, &all-opts)

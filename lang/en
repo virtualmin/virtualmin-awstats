@@ -40,6 +40,7 @@ edit_sched0=No
 edit_sched1=Yes, at times selected below ..
 edit_gen=Generate Report Now
 edit_view=View Report
+edit_config=Configure Report
 edit_emodel=The <tt>model</tt> domain is used as a template for new virtual servers, and cannot be deleted
 
 save_err=Failed to save AWstats report
@@ -89,7 +90,21 @@ feat_deletealias=Removing configuration for AWstats in $1 ..
 
 links_link=AWstats Report
 links_view=View AWstats Report
+links_config=Configure AWstats
 
 tmpl_passwd=Password-protect AWstats web page?
 
-
+config_title=Configure AWstats
+config_header=AWstats configuration options
+config_dnslookup=Lookup IP addresses in logs?
+config_dnslookup0=Never
+config_dnslookup1=Always
+config_dnslookup2=Only use cache
+config_year=Allow full year view?
+config_year0=Never
+config_year1=Only from CLI
+config_year2=Only from CLI, but selector is visible
+config_year3=Always
+config_skiphosts=Client hosts to exclude
+config_skipagents=Client user agents to exclude
+config_skipfiles=URL paths to exclude
