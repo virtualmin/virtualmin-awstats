@@ -46,6 +46,13 @@ foreach $dt ("LevelForRobotsDetection", "LevelForBrowsersDetection",
 	&save_directive($conf, $in{'dom'}, $dt, $in{$n});
 	}
 
+# Save plugins, if any
+@allplugins = &list_all_plugins();
+if (@allplugins) {
+	&save_directives($conf, $in{'dom'}, "LoadPlugin",
+			 [ split(/\0/, $in{'p'}) ]);
+	}
+
 &flush_file_lines($cfile);
 &unlock_file($cfile);
 &webmin_log("config", "dom", $in{'dom'});

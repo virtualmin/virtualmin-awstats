@@ -1,0 +1,5 @@
+desc=AWstats configuration page
+html=Added the AWstats Configuration page, for setting various options for the appearance and generation of each domains' report.
+master=1
+reseller=1
+owner=1

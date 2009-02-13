@@ -70,6 +70,15 @@ local ($dir) = grep { lc($_->{'name'}) eq lc($name) } @$conf;
 return $dir ? $dir->{'value'} : undef;
 }
 
+# find_values(name, &conf)
+# Returns all values for some directive
+sub find_values
+{
+local ($name, $conf) = @_;
+local @dirs = grep { lc($_->{'name'}) eq lc($name) } @$conf;
+return map { $_->{'value'} } @dirs;
+}
+
 # save_directive(&config, domain, name, value)
 # Updates some value in the AWstats config
 sub save_directive
@@ -102,6 +111,48 @@ elsif (!$dir && defined($value)) {
 	push(@$conf, { 'name' => $name,
 		       'value' => $value,
 		       'line' => scalar(@$lref) });
+	push(@$lref, $line);
+	}
+}
+
+# save_directives(&config, domain, name, &values)
+# Updates all values for some named directive in the config file
+sub save_directives
+{
+local ($conf, $dom, $name, $values) = @_;
+local @values = @$values;
+local $file = &get_config_file($dom);
+local $lref = &read_file_lines($file);
+
+foreach my $l (@$lref) {
+	if ($l =~ /^(#*)\s*\Q$name\E\s*=\s*(.*)/i) {
+		# Found an existing line, perhaps commented
+		local ($cmt, $oldv) = ($1, $2);
+		$oldv = $oldv =~ /^"(.*)"/ ? $1 :
+			$oldv =~ /^'(.*)'/ ? $1 : $oldv;
+		local $idx = &indexof($oldv, @values);
+		if ($idx >= 0 && !$cmt) {
+			# Already enabled, so do nothing
+			}
+		elsif ($idx >= 0 && $cmt) {
+			# Commented out .. fix up
+			$l =~ s/^#+\s*//;
+			}
+		elsif ($idx < 0 && !$cmt) {
+			# No longer needed .. comment out
+			$l = "#$l";
+			}
+		if ($idx >= 0) {
+			splice(@values, $idx, 1);
+			}
+		}
+	}
+
+# Append any values not in the file at all yet
+foreach my $v (@values) {
+	$line = $v =~ /\s/ && $v =~ /"/ ?
+		"$name='$v'" :
+		$v =~ /\s/ ? "$name=\"$v\"" : "$name=$v";
 	push(@$lref, $line);
 	}
 }
@@ -378,6 +429,61 @@ if (!-d "$htmldir/icon") {
 
 return undef;
 }
+
+# get_plugins_dir()
+# Returns the directory in which plugins are stored
+sub get_plugins_dir
+{
+local $pdir = $config{'plugins'};
+if ($pdir && -d "$pdir/plugins") {
+	$pdir .= "/plugins";
+	}
+if (!$pdir) {
+	# In same dir as awstats.pl
+	$config{'awstats'} =~ /^(.*)\//;
+	$pdir = "$1/plugins";
+	}
+return $pdir;
+}
+
+# list_all_plugins()
+# Returns a list of all available plugins, without the .pm extensions
+sub list_all_plugins
+{
+local $pdir = &get_plugins_dir();
+local @rv;
+opendir(PLUGINS, $pdir);
+foreach my $f (readdir(PLUGINS)) {
+	if ($f =~ /^(\S+)\.pm$/) {
+		push(@rv, $1);
+		}
+	}
+closedir(PLUGINS);
+return @rv;
+}
+
+# get_plugin_desc()
+# Returns a human-readable description for some plugin
+sub get_plugin_desc
+{
+local ($name) = @_;
+local $file = &get_plugins_dir()."/".$name.".pm";
+local $lref = &read_file_lines($file, 1);
+local @cmts;
+foreach my $l (@$lref) {
+	if ($l =~ /^\#+\s*(.*)/ &&
+	    $l !~ /^#!/ &&
+	    $l !~ /^#+\s*\-\-/ &&
+	    $l !~ /^#+\s*\$/ &&
+	    $l !~ /^#+\s*\Q$name\E\s+AWStats\s+plugin/i &&
+	    $l !~ /Required\s+Modules/i) {
+		push(@cmts, $1);
+		}
+	last if ($l !~ /^#/);
+	}
+return join(" ", @cmts);
+}
+
 
 1;
 

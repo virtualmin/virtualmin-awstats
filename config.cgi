@@ -14,7 +14,8 @@ if (&foreign_check("virtual-server")) {
 
 print &ui_form_start("config_save.cgi", "post");
 print &ui_hidden("dom", $in{'dom'});
-print &ui_table_start($text{'config_header'}, "100%", 2);
+print &ui_hidden_table_start($text{'config_header'}, "width=100%", 2,
+			     "main", 1);
 
 # Do DNS lookups?
 $dnslookup = &find_value("DNSLookup", $conf);
@@ -84,12 +85,32 @@ foreach $dt ("LevelForRobotsDetection", "LevelForBrowsersDetection",
 				     [ 2, $text{'config_level2'} ] ]));
 	}
 
-print &ui_table_hr();
+print &ui_hidden_table_end();
 
 # Enabled plugins
-# XXX
+@plugins = &find_values("LoadPlugin", $conf);
+@allplugins = &list_all_plugins();
+if (@allplugins) {
+	print &ui_hidden_table_start($text{'config_plugins'}, "width=100%",
+				     2, "plugins", 0);
+	@table = ( );
+	foreach my $p (@allplugins) {
+		push(@table, [
+			{ 'type' => 'checkbox', 'name' => 'p',
+			  'value' => $p,
+			  'checked' => &indexof($p, @plugins) >= 0 },
+			$p,
+			&get_plugin_desc($p),
+			]);
+		}
+	print &ui_table_row(undef, 
+		&ui_columns_table([ $text{'config_penabled'},
+				    $text{'config_pname'},
+                                    $text{'config_pdesc'} ],
+				  "50%", \@table), 2);
+	print &ui_hidden_table_end();
+	}
 
-print &ui_table_end();
 print &ui_form_end([ [ undef, $text{'save'} ] ]);
 
 &ui_print_footer("", $text{'index_return'});

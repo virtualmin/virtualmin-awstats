@@ -119,3 +119,7 @@ config_refereranalyze=Referer analysis level
 config_level0=No detection
 config_level1=Medium detection
 config_level2=Full detection
+config_plugins=Enabled plugins
+config_penabled=Enabled?
+config_pname=Plugin name
+config_pdesc=Description
