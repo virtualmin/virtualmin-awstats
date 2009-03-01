@@ -1,8 +1,12 @@
 # Functions for configuring AWstats
 
-do '../web-lib.pl';
+BEGIN { push(@INC, ".."); };
+eval "use WebminCore;";
+if ($@) {
+	do '../web-lib.pl';
+	do '../ui-lib.pl';
+	}
 &init_config();
-do '../ui-lib.pl';
 %access = &get_module_acl();
 
 $cron_cmd = "$module_config_directory/awstats.pl";
