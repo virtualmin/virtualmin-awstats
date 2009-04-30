@@ -325,12 +325,10 @@ if ($job) {
 local $cgidir = &get_cgidir($_[0]);
 &unlink_logged("$cgidir/awstats.pl");
 
-# Delete symlinks
+# Delete links or directory copies
 local $cgidir = &get_cgidir($_[0]);
 foreach my $dir ("lib", "lang", "plugins") {
-	if (-l "$cgidir/$dir") {
-		&unlink_logged("$cgidir/$dir");
-		}
+	&unlink_logged("$cgidir/$dir");
 	}
 local $htmldir = &get_htmldir($_[0]);
 if (-l "$htmldir/icon") {

@@ -420,6 +420,8 @@ foreach my $dir ("lib", "lang", "plugins") {
 	if ($src && -d $src) {
 		&unlink_file("$cgidir/$dir");
 		&copy_source_dest($src, "$cgidir/$dir");
+		&execute_command("chown -R ".$d->{'uid'}.":".$d->{'gid'}.
+				 " ".quotemeta("$cgidir/$dir"));
 		}
 	}
 
