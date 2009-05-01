@@ -394,16 +394,17 @@ sub setup_awstats_commands
 {
 local ($d) = @_;
 
-# Copy awstats.pl to the cgi-bin directory. Links are not possible, as the
-# file needs to be owned by the domain owner for suexec to work.
+# Create an awstats.pl wrapper in the cgi-bin directory. Linking doesn't work,
+# due to suexec restrictions
 local $cgidir = &get_cgidir($d);
-local $out = &virtual_server::run_as_domain_user($d,
-	"cp ".quotemeta($config{'awstats'})." ".quotemeta($cgidir));
-if ($?) {
-	return &text('save_ecopy2', "<tt>$out</tt>");
-	}
+local $wrapper = "$cgidir/awstats.pl";
+&open_tempfile(WRAPPER, ">$wrapper");
+&print_tempfile(WRAPPER, "#!/bin/sh\n");
+&print_tempfile(WRAPPER, "exec $config{'awstats'}\n");
+&close_tempfile(WRAPPER);
+&set_ownership_permissions($d->{'uid'}, $d->{'gid'}, 0755, $wrapper);
 
-# Copy other directories from source dir
+# Link other directories from source dir
 foreach my $dir ("lib", "lang", "plugins") {
 	local $src;
 	if ($config{$dir} && -d $config{$dir}) {
@@ -419,9 +420,10 @@ foreach my $dir ("lib", "lang", "plugins") {
 		}
 	if ($src && -d $src) {
 		&unlink_file("$cgidir/$dir");
-		&copy_source_dest($src, "$cgidir/$dir");
-		&execute_command("chown -R ".$d->{'uid'}.":".$d->{'gid'}.
-				 " ".quotemeta("$cgidir/$dir"));
+		#&copy_source_dest($src, "$cgidir/$dir");
+		#&execute_command("chown -R ".$d->{'uid'}.":".$d->{'gid'}.
+		#		 " ".quotemeta("$cgidir/$dir"));
+		&symlink_logged($src, "$cgidir/$dir");
 		}
 	}
 

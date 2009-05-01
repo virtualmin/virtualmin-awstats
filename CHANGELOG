@@ -21,3 +21,5 @@ Alias domains whose target has AWstats enabled are now added to the configuratio
 The AWstats library and plugin directories are copied into domains when the AWstats feature is enable, to avoid possible in-compatability issues if the global awstats.pl is upgraded.
 ---- Changes since 3.9 ----
 Added the AWstats Configuration page, for setting various useful options in a domain's awstats.conf file.
+---- Changes since 4.0 ----
+Instead of copying awstats.pl and the lib, plugins and lang directories into the domain's cgi-bin directory, a wrapper to call awstats.pl is created and the directories are symlinked.

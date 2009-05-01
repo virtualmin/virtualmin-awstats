@@ -576,13 +576,20 @@ if (!$config{'nocron'}) {
 	$job || return &text('feat_evalidatecron');
 	}
 
-# Make sure awstats.pl exists, and is the same as the installed version
+# Make sure awstats.pl exists, and is the same as the installed version, unless
+# it is a link or wrapper
 local $cgidir = &get_cgidir($d);
--r "$cgidir/awstats.pl" || return &text('feat_evalidateprog', "<tt>$cgidir/awstats.pl</tt>");
+local $wrapper = "$cgidir/awstats.pl";
+-r $wrapper || return &text('feat_evalidateprog', "<tt>$wrapper</tt>");
 local @cst = stat($config{'awstats'});
-local @dst = stat("$cgidir/awstats.pl");
-if (@cst && $cst[7] != $dst[7]) {
-	return &text('feat_evalidatever', "<tt>$config{'awstats'}</tt>", "<tt>$cgidir/awstats.pl</tt>");
+local @dst = stat($wrapper);
+if (@cst && $cst[7] != $dst[7] && !-l $wrapper) {
+	open(WRAPPER, $wrapper);
+	local $sh = <WRAPPER>;
+	close(WRAPPER);
+	if ($sh !~ /^#\!\/bin\/sh/) {
+		return &text('feat_evalidatever', "<tt>$config{'awstats'}</tt>", "<tt>$cgidir/awstats.pl</tt>");
+		}
 	}
 
 return undef;
