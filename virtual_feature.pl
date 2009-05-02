@@ -492,11 +492,8 @@ sub feature_links
 local ($d) = @_;
 return ( # Link to either view a report, or edit settings
 	 { 'mod' => $module_name,
-           'desc' => $access{'editsched'} ? $text{'links_link'}
-					  : $text{'links_view'},
-           'page' => $access{'editsched'} ?
-			'edit.cgi?dom='.&urlize($d->{'dom'}) :
-			'view.cgi?config='.&urlize($d->{'dom'}),
+           'desc' => $text{'links_view'},
+           'page' => 'view.cgi?config='.&urlize($d->{'dom'}),
 	   'cat' => 'logs',
          },
 	 # Link to edit AWstats config for this domain
