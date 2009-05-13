@@ -1,6 +1,6 @@
 desc=AWstats Reporting
 category=servers
 depends=cron software
-version=4.0
+version=4.1
 desc_nl=AWstats Rapportage
 feedback=jcameron@webmin.com
