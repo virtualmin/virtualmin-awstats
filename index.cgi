@@ -34,7 +34,10 @@ foreach $d (sort { $a cmp $b } @doms) {
 		$log,
 		$job ? &text('index_yes', &cron::when_text($job))
 		     : $text{'index_no'},
-		"<a href='view.cgi?config=$d'>$text{'index_view'}</a>"
+		&ui_links_row([
+			"<a href='view.cgi?config=$d'>$text{'index_view'}</a>",
+			"<a href='config.cgi?dom=$d'>$text{'index_conf'}</a>",
+			]),
 		]);
 	}
 

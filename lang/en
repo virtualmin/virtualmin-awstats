@@ -6,6 +6,7 @@ index_log=Log file
 index_sched=Scheduled?
 index_report=Report
 index_view=View..
+index_conf=Config..
 index_yes=Yes, $1
 index_no=No
 index_none=No domains have been set up for AWstats reporting yet.
