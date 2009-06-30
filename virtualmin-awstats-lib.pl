@@ -398,11 +398,13 @@ local ($d) = @_;
 # due to suexec restrictions
 local $cgidir = &get_cgidir($d);
 local $wrapper = "$cgidir/awstats.pl";
-&open_tempfile(WRAPPER, ">$wrapper");
+&lock_file($wrapper);
+&virtual_server::open_tempfile_as_domain_user($d, WRAPPER, ">$wrapper");
 &print_tempfile(WRAPPER, "#!/bin/sh\n");
 &print_tempfile(WRAPPER, "exec $config{'awstats'}\n");
-&close_tempfile(WRAPPER);
-&set_ownership_permissions($d->{'uid'}, $d->{'gid'}, 0755, $wrapper);
+&virtual_server::close_tempfile_as_domain_user($d, WRAPPER);
+&virtual_server::set_permissions_as_domain_user($d, 0755, $wrapper);
+&unlock_file($wrapper);
 
 # Link other directories from source dir
 foreach my $dir ("lib", "lang", "plugins") {
@@ -419,20 +421,22 @@ foreach my $dir ("lib", "lang", "plugins") {
 		$src .= "/$dir" if ($src !~ /\/\Q$dir\E$/);
 		}
 	if ($src && -d $src) {
-		&unlink_file("$cgidir/$dir");
-		#&copy_source_dest($src, "$cgidir/$dir");
-		#&execute_command("chown -R ".$d->{'uid'}.":".$d->{'gid'}.
-		#		 " ".quotemeta("$cgidir/$dir"));
-		&symlink_logged($src, "$cgidir/$dir");
+		&virtual_server::unlink_logged_as_domain_user(
+			$d, "$cgidir/$dir");
+		&virtual_server::symlink_logged_as_domain_user(
+			$d, $src, "$cgidir/$dir");
 		}
 	}
 
 # Create symlink to icons directory
 local $htmldir = &get_htmldir($d);
 if (!-d "$htmldir/icon") {
-	&unlink_file("$htmldir/icon", "$htmldir/awstats-icon");
-	&symlink_logged($config{'icons'}, "$htmldir/icon");
-	&symlink_logged($config{'icons'}, "$htmldir/awstats-icon");
+	&virtual_server::unlink_logged_as_domain_user(
+		$d, "$htmldir/icon", "$htmldir/awstats-icon");
+	&virtual_server::symlink_logged_as_domain_user(
+		$d, $config{'icons'}, "$htmldir/icon");
+	&virtual_server::symlink_logged_as_domain_user(
+		$d, $config{'icons'}, "$htmldir/awstats-icon");
 	}
 
 return undef;

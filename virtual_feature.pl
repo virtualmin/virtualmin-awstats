@@ -114,8 +114,7 @@ if ($err) {
 
 # Create report directory
 local $dir = "$_[0]->{'home'}/awstats";
-&make_dir($dir, 0755);
-&set_ownership_permissions($_[0]->{'uid'}, $_[0]->{'ugid'}, 0755, $dir);
+&virtual_server::make_dir_as_domain_user($_[0], $dir, 0755);
 
 # Work out the log format
 local ($virt, $vconf) = &virtual_server::get_apache_virtual($_[0]->{'dom'}, $_[0]->{'web_port'});
@@ -213,8 +212,7 @@ if ($tmpl->{$module_name.'passwd'} ||
 		}
 	if ($added) {
                 &virtual_server::register_post_action(
-                    defined(&main::restart_apache) ? \&main::restart_apache
-                                           : \&virtual_server::restart_apache);
+			\&virtual_server::restart_apache);
 		}
 	&virtual_server::update_create_htpasswd($_[0], $passwd_file,
 						$_[0]->{'user'});
@@ -323,17 +321,17 @@ if ($job) {
 
 # Delete awstats.pl from the cgi-bin directory
 local $cgidir = &get_cgidir($_[0]);
-&unlink_logged("$cgidir/awstats.pl");
+&virtual_server::unlink_logged_as_domain_user($_[0], "$cgidir/awstats.pl");
 
 # Delete links or directory copies
 local $cgidir = &get_cgidir($_[0]);
 foreach my $dir ("lib", "lang", "plugins") {
-	&unlink_logged("$cgidir/$dir");
+	&virtual_server::unlink_logged_as_domain_user($_[0], "$cgidir/$dir");
 	}
 local $htmldir = &get_htmldir($_[0]);
 if (-l "$htmldir/icon") {
-	&unlink_logged("$htmldir/icon");
-	&unlink_logged("$htmldir/awstats-icon");
+	&virtual_server::unlink_logged_as_domain_user($_[0], "$htmldir/icon");
+	&virtual_server::unlink_logged_as_domain_user($_[0], "$htmldir/awstats-icon");
 	}
 
 # Remove script alias for /awstats
