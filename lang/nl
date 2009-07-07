@@ -86,6 +86,7 @@ gen_failed=.. mislukt! Bekijk het fouten bericht hierboven waarom.
 gen_title=Genereer Rapport
 index_add=Toevoegen van een nieuwe log file voor rapportage.
 index_awstats=AWstats
+index_conf=Config..
 index_dom=Domein naam
 index_econfig=Controleer de <a href='$1'>module configuratie</a> om er zeker van te zijn dat het juiste pad gebruikt word.
 index_log=Log file
