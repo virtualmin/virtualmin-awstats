@@ -2,10 +2,6 @@
 
 BEGIN { push(@INC, ".."); };
 eval "use WebminCore;";
-if ($@) {
-	do '../web-lib.pl';
-	do '../ui-lib.pl';
-	}
 &init_config();
 %access = &get_module_acl();
 
