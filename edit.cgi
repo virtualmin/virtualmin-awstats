@@ -52,7 +52,7 @@ $formatnum = $in{'new'} ? 4 : $format =~ /^\d+$/ ? $format : 0;
 print &ui_table_row($text{'edit_format'},
 	    &ui_select("format", $formatnum,
 		[ map { [ $_, $text{'edit_format'.$_} ] } (1..4, 0) ])."<br>".
-	    &ui_textbox("custom", $formatnum == 0 ? $format : undef, 50));
+	    &ui_textbox("other", $formatnum == 0 ? $format : undef, 50));
 
 # Destination directory
 $data = &find_value("DirData", $conf);

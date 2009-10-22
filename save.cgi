@@ -78,7 +78,7 @@ else {
 		&save_directive($conf, $in{'dom'}, "LogFile", $in{'log'});
 		}
 	&save_directive($conf, $in{'dom'}, "LogFormat",
-			$in{'format'} == 0 ? $in{'custom'} : $in{'format'});
+			$in{'format'} == 0 ? $in{'other'} : $in{'format'});
 	&save_directive($conf, $in{'dom'}, "DirData", $in{'data'});
 	&flush_file_lines();
 
