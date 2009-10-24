@@ -228,6 +228,7 @@ return 1;
 # Called when a domain with this feature is modified
 sub feature_modify
 {
+local $changed;
 if ($_[0]->{'dom'} ne $_[1]->{'dom'}) {
 	# Domain has been re-named .. rename awstats config
 	&$virtual_server::first_print($text{'feat_modify'});
@@ -262,6 +263,7 @@ if ($_[0]->{'dom'} ne $_[1]->{'dom'}) {
 	# Change run-as domain
 	&rename_run_domain($_[0]->{'dom'}, $_[1]->{'dom'});
 
+	$changed++;
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
 	}
 if ($_[0]->{'user'} ne $_[1]->{'user'}) {
@@ -272,6 +274,7 @@ if ($_[0]->{'user'} ne $_[1]->{'user'}) {
 		&virtual_server::update_create_htpasswd(
 			$_[0], $_[0]->{'awstats_pass'}, $_[1]->{'user'});
 		}
+	$changed++;
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
 	}
 if ($_[0]->{'home'} ne $_[1]->{'home'}) {
@@ -289,6 +292,7 @@ if ($_[0]->{'home'} ne $_[1]->{'home'}) {
 	&unlock_file($cfile);
 
 	# XXX also update password file too
+	$changed++;
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
 	}
 if ($_[0]->{'pass'} ne $_[1]->{'pass'}) {
@@ -300,6 +304,10 @@ if ($_[0]->{'pass'} ne $_[1]->{'pass'}) {
 		&$virtual_server::second_print(
 			$virtual_server::text{'setup_done'});
 		}
+	}
+if ($changed) {
+	# Fix links
+	&setup_awstats_commands($_[0]);
 	}
 return 1;
 }
