@@ -42,7 +42,7 @@ else {
 		$clash && &error($text{'save_eclash'});
 		}
 	if ($in{'new'} || $access{'editlog'}) {
-		-r $in{'log'} || $in{'log'} =~ /\%/ ||
+		-r $in{'log'} || $in{'log'} =~ /\%/ || $in{'log'} =~ /\|\s*$/ ||
 			&error($text{'save_elog'});
 		}
 	if ($in{'format'} == 0) {

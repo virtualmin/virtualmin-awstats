@@ -265,7 +265,7 @@ $ENV{'GATEWAY_INTERFACE'} = undef;
 # Find all the log files
 local $conf = &get_config($dom);
 local $baselog = &find_value("LogFile", $conf);
-local @all = $baselog =~ /\|$/ ? ( undef ) : &all_log_files($baselog);
+local @all = $baselog =~ /\|\s*$/ ? ( undef ) : &all_log_files($baselog);
 
 # Find last modified time for each log file
 local ($a, %mtime);
