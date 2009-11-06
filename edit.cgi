@@ -38,9 +38,16 @@ else {
 # Show log file (if editable)
 $log = &find_value("LogFile", $conf);
 if ($in{'new'} || $access{'editlog'}) {
-	print &ui_table_row($text{'edit_log'}, 
-			    &ui_textbox("log", $log, 50)." ".
-			    &file_chooser_button("log", 0));
+	if ($log =~ s/\s*\|\s*$//) {
+		$logcmd = 1;
+		}
+	print &ui_table_row($text{'edit_logsrc'}, 
+		&ui_radio_table("logsrc", $logcmd ? 1 : 0,
+		    [ [ 0, $text{'edit_log0'},
+			&ui_filebox("log", $logcmd ? "" : $log, 50) ],
+		      [ 1, $text{'edit_log1'},
+			&ui_textbox("cmd", $logcmd ? $log : "", 50) ],
+		    ]));
 	}
 else {
 	print &ui_table_row($text{'edit_log'}, "<tt>$log</tt>");

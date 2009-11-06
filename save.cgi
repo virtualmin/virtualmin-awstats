@@ -42,8 +42,16 @@ else {
 		$clash && &error($text{'save_eclash'});
 		}
 	if ($in{'new'} || $access{'editlog'}) {
-		-r $in{'log'} || $in{'log'} =~ /\%/ || $in{'log'} =~ /\|\s*$/ ||
-			&error($text{'save_elog'});
+		if ($in{'logsrc'} == 0) {
+			-r $in{'log'} || $in{'log'} =~ /\%/ ||
+				&error($text{'save_elog'});
+			}
+		else {
+			@w = &split_quoted_string($in{'cmd'});
+			&has_command($w[0]) ||
+				&error($text{'save_ecmd'});
+			$in{'log'} = $in{'cmd'}.' |';
+			}
 		}
 	if ($in{'format'} == 0) {
 		$in{'other'} =~ /\%/ || &error($text{'save_eformat'});
