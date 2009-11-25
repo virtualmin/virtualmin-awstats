@@ -150,7 +150,7 @@ if (!$config{'nocron'}) {
 		       'command' => "$cron_cmd $_[0]->{'dom'}",
 		       'active' => 1,
 		       'mins' => int(rand()*60),
-		       'hours' => int(rand()*6),
+		       'hours' => int(rand()*24),
 		       'days' => '*',
 		       'months' => '*',
 		       'weekdays' => '*' };
