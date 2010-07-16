@@ -428,11 +428,14 @@ foreach my $dir ("lib", "lang", "plugins") {
 local $htmldir = &get_htmldir($d);
 if (!-d "$htmldir/icon") {
 	&virtual_server::unlink_logged_as_domain_user(
-		$d, "$htmldir/icon", "$htmldir/awstats-icon");
+		$d, "$htmldir/icon", "$htmldir/awstats-icon",
+		    "$htmldir/awstatsicons");
 	&virtual_server::symlink_logged_as_domain_user(
 		$d, $config{'icons'}, "$htmldir/icon");
 	&virtual_server::symlink_logged_as_domain_user(
 		$d, $config{'icons'}, "$htmldir/awstats-icon");
+	&virtual_server::symlink_logged_as_domain_user(
+		$d, $config{'icons'}, "$htmldir/awstatsicons");
 	}
 
 return undef;

@@ -173,7 +173,7 @@ foreach my $port (@ports) {
 		local ($aw) = grep { $_ =~ /^\/awstats/ } @sa;
 		if (!$aw) {
 			# Need to add
-			push(@sa, "/awstats $cgidir");
+			push(@sa, "/awstats/ $cgidir/");
 			&apache::save_directive("ScriptAlias", \@sa,
 						$vconf, $conf);
 			&flush_file_lines($virt->{'file'});
@@ -340,6 +340,7 @@ local $htmldir = &get_htmldir($_[0]);
 if (-l "$htmldir/icon") {
 	&virtual_server::unlink_logged_as_domain_user($_[0], "$htmldir/icon");
 	&virtual_server::unlink_logged_as_domain_user($_[0], "$htmldir/awstats-icon");
+	&virtual_server::unlink_logged_as_domain_user($_[0], "$htmldir/awstatsicons");
 	}
 
 # Remove script alias for /awstats
