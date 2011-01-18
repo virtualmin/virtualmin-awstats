@@ -25,3 +25,5 @@ Added the AWstats Configuration page, for setting various useful options in a do
 Instead of copying awstats.pl and the lib, plugins and lang directories into the domain's cgi-bin directory, a wrapper to call awstats.pl is created and the directories are symlinked.
 ---- Changes since 4.2 ----
 Logs can now be generated from the output of a command, instead of a file.
+---- Changes since 4.4 ----
+Access to a password-protected AWstats report can now be granted to individual users on the Mail and FTP Users page.

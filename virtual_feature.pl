@@ -217,6 +217,25 @@ if ($tmpl->{$module_name.'passwd'} ||
 	&virtual_server::update_create_htpasswd($_[0], $passwd_file,
 						$_[0]->{'user'});
         $_[0]->{'awstats_pass'} = $passwd_file;
+
+	# Create bogus .htaccess file in ~/awstats , for protected directories
+	# module to see
+	&virtual_server::open_tempfile_as_domain_user($_[0], HTACCESS,
+		">$dir/.htaccess");
+	&print_tempfile(HTACCESS, "AuthName \"$_[0]->{'dom'} statistics\"\n");
+	&print_tempfile(HTACCESS, "AuthType Basic\n");
+	&print_tempfile(HTACCESS, "AuthUserFile $passwd_file\n");
+	&print_tempfile(HTACCESS, "require valid-user\n");
+	&virtual_server::close_tempfile_as_domain_user($_[0], HTACCESS);
+
+	# Add to list of protected dirs
+	&foreign_require("htaccess-htpasswd", "htaccess-lib.pl");
+        &lock_file($htaccess_htpasswd::directories_file);
+        local @dirs = &htaccess_htpasswd::list_directories();
+        push(@dirs, [ $dir, $passwd_file, 0, 0, undef ]);
+        &htaccess_htpasswd::save_directories(\@dirs);
+        &unlock_file($htaccess_htpasswd::directories_file);
+
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
 	}
 
@@ -401,6 +420,17 @@ if ($_[0]->{'awstats_pass'}) {
                                            : \&virtual_server::restart_apache);
 		}
 	delete($_[0]->{'awstats_pass'});
+
+	# Remove from list of protected dirs
+	local $dir = "$_[0]->{'home'}/awstats";
+	&foreign_require("htaccess-htpasswd", "htaccess-lib.pl");
+	&unlink_file("$dir/.htaccess");
+	&lock_file($htaccess_htpasswd::directories_file);
+	local @dirs = &htaccess_htpasswd::list_directories();
+	@dirs = grep { $_->[0] ne $dir } @dirs;
+	&htaccess_htpasswd::save_directories(\@dirs);
+	&unlock_file($htaccess_htpasswd::directories_file);
+
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
 	}
 
