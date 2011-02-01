@@ -1,7 +1,7 @@
 desc=AWstats Reporting
 category=servers
 depends=cron software virtual-server/3.70
-version=4.4
+version=4.5
 desc_nl=AWstats Rapportage
 feedback=jcameron@webmin.com
 desc_de=AWstats Reports    
