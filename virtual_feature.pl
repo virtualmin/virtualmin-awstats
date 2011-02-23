@@ -269,6 +269,24 @@ if ($_[0]->{'dom'} ne $_[1]->{'dom'}) {
 	&flush_file_lines();
 	&unlock_file($newfile);
 
+	# Change domain name in Apache config
+	local ($virt, $vconf, $conf) = &virtual_server::get_apache_virtual(
+					$_[0]->{'dom'}, $_[0]->{'web_port'});
+	local @files;
+	@files = &apache::find_directive_struct("Files", $vconf) if ($virt);
+	foreach my $file (@files) {
+		local $an = &apache::find_directive(
+			"AuthName", $file->{'members'});
+		$an =~ s/$_[1]->{'dom'}/$_[0]->{'dom'}/g;
+		&apache::save_directive("AuthName", [ $an ],
+					$file->{'members'}, $conf);
+		}
+	if (@files) {
+		&flush_file_lines($virt->{'file'});
+                &virtual_server::register_post_action(
+			\&virtual_server::restart_apache);
+		}
+
 	# Fix up domain in cron job
 	&virtual_server::obtain_lock_cron($_[0]);
 	&foreign_require("cron", "cron-lib.pl");
