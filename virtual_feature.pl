@@ -62,8 +62,10 @@ return undef;
 # an error message if so
 sub feature_clash
 {
-if (!$_[1] || $_[1] eq 'dom') {
-	return -r "$config{'config_dir'}/awstats.$_[0]->{'dom'}.conf" ?
+local ($d, $field) = @_;
+if ((!$field || $field eq 'dom') &&
+    $d->{'dom'} ne &get_system_hostname()) {
+	return -r "$config{'config_dir'}/awstats.$field->{'dom'}.conf" ?
 		$text{'feat_clash'} : undef;
 	}
 return undef;
