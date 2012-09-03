@@ -68,6 +68,7 @@ feat_name=AWstats reporting
 feat_losing=Scheduled AWstats reporting will be disabled, and its configuration deleted
 feat_disname=AWstats reporting
 feat_label=Enable AWstats reporting?
+feat_label2=AWstats reporting
 feat_edepweb=AWstats reporting cannot be enabled for a server without a website
 feat_clash=AWstats reporting is already enabled for this domain
 feat_setup=Setting up AWstats reporting ..
