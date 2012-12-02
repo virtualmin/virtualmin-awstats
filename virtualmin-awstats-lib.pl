@@ -424,18 +424,29 @@ foreach my $dir ("lib", "lang", "plugins") {
 		}
 	}
 
-# Create symlink to icons directory
+# Copy over icons directory
 local $htmldir = &get_htmldir($d);
-if (!-d "$htmldir/icon") {
-	&virtual_server::unlink_logged_as_domain_user(
-		$d, "$htmldir/icon", "$htmldir/awstats-icon",
-		    "$htmldir/awstatsicons");
-	&virtual_server::symlink_logged_as_domain_user(
-		$d, $config{'icons'}, "$htmldir/icon");
-	&virtual_server::symlink_logged_as_domain_user(
-		$d, $config{'icons'}, "$htmldir/awstats-icon");
-	&virtual_server::symlink_logged_as_domain_user(
-		$d, $config{'icons'}, "$htmldir/awstatsicons");
+local @dirs = ( "icon", "awstats-icon", "awstatsicons" );
+if (!-d "$htmldir/$dirs[0]") {
+	&virtual_server::unlink_logged_as_domain_user($d,
+		map { "$htmldir/$_" } @dirs);
+	if ($virtual_server::config{'allow_symlinks'} eq '1') {
+		# Can still use links
+		foreach my $dir (@dirs) {
+			&virtual_server::symlink_logged_as_domain_user(
+				$d, $config{'icons'}, "$htmldir/$dir");
+			}
+		}
+	else {
+		# Need to copy and chown
+		&copy_source_dest($config{'icons'}, "$htmldir/$dirs[0]");
+		&system_logged("chown -R $d->{'uid'}:$d->{'gid'} ".
+			       quotemeta("$htmldir/$dirs[0]"));
+		foreach my $dir (@dirs[1..$#dirs]) {
+			&virtual_server::symlink_logged_as_domain_user(
+				$d, $dirs[0], "$htmldir/$dir");
+			}
+		}
 	}
 
 return undef;
