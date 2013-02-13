@@ -93,6 +93,7 @@ feat_passwd=Setting up password protection for AWstats ..
 feat_dpasswd=Removing password protection for AWstats ..
 feat_setupalias=Configuring AWstats in $1 ..
 feat_deletealias=Removing configuration for AWstats in $1 ..
+feat_module=AWstats Reporting (for viewing reports)
 
 links_link=AWstats Report
 links_view=View AWstats Report
