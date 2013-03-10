@@ -96,7 +96,7 @@ feat_deletealias=Removing configuration for AWstats in $1 ..
 feat_module=AWstats Reporting (for viewing reports)
 
 links_link=AWstats Report
-links_view=View AWstats Report
+links_view=AWstats Report
 links_config=AWstats Configuration
 
 tmpl_passwd=Password-protect AWstats web page?
