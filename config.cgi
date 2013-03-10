@@ -111,6 +111,7 @@ if (@allplugins) {
 	print &ui_hidden_table_end();
 	}
 
-print &ui_form_end([ [ undef, $text{'save'} ] ]);
+print &ui_form_end([ [ undef, $text{'save'} ],
+		     [ 'gen', $text{'config_regen'} ] ]);
 
 &ui_print_footer("", $text{'index_return'});

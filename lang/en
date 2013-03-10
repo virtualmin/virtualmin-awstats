@@ -129,4 +129,6 @@ config_plugins=Enabled plugins
 config_penabled=Enabled?
 config_pname=Plugin name
 config_pdesc=Description
+config_regen=Save and Re-Generate Report
+
 __norefs=1
