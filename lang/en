@@ -78,6 +78,7 @@ feat_modify=Updating domain name in AWstats configuration ..
 feat_modifyuser=Updating user to run AWstats report as ..
 feat_modifypass=Updating password for AWstats ..
 feat_modifyhome=Updating home directory in AWstats configuration ..
+feat_modifylog=Updating log file in AWstats configuration ..
 feat_delete=Deleting AWstats configuration file and Cron job ..
 feat_backup=Backing up AWstats configuration file ..
 feat_nofile=.. no configuration file found!

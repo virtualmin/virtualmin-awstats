@@ -345,6 +345,20 @@ if ($_[0]->{'pass'} ne $_[1]->{'pass'}) {
 			$virtual_server::text{'setup_done'});
 		}
 	}
+local $alog = &virtual_server::get_website_log($_[0]);
+local $oldalog = &virtual_server::get_old_website_log($alog, $_[0], $_[1]);
+if ($alog ne $oldalog) {
+	# Log file has been renamed - update AWstats config
+	&$virtual_server::first_print($text{'feat_modifylog'});
+	local $cfile = &get_config_file($_[0]->{'dom'});
+	&lock_file($cfile);
+	local $conf = &get_config($_[0]->{'dom'});
+	&save_directive($conf, $_[0]->{'dom'}, "LogFile", $alog);
+	&flush_file_lines($cfile);
+	&unlock_file($cfile);
+	$changed++;
+	&$virtual_server::second_print($virtual_server::text{'setup_done'});
+	}
 if ($changed) {
 	# Fix links
 	&setup_awstats_commands($_[0]);
