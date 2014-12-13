@@ -593,7 +593,7 @@ local ($d, $file, $opts) = @_;
 &$virtual_server::first_print($text{'feat_backup'});
 local $cfile = "$config{'config_dir'}/awstats.$d->{'dom'}.conf";
 if (-r $cfile) {
-	&copy_source_dest($cfile, $file);
+	&virtual_server::copy_write_as_domain_user($d, $cfile, $file);
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
 	return 1;
 	}
