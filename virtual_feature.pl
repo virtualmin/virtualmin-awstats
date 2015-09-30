@@ -140,9 +140,13 @@ local $aliases = &virtual_server::substitute_template($config{'aliases'},$_[0]);
 &flush_file_lines();
 &unlock_file(&get_config_file($_[0]->{'dom'}));
 
-# Symlink www.domain file to domain
+# Symlink www.domain and IP file to domain
 &symlink_logged(&get_config_file($_[0]->{'dom'}),
 		&get_config_file("www.".$_[0]->{'dom'}));
+if ($_[0]->{'virt'}) {
+	&symlink_logged(&get_config_file($_[0]->{'dom'}),
+			&get_config_file($_[0]->{'ip'}));
+	}
 
 # Set up cron job
 &virtual_server::obtain_lock_cron($_[0]);
@@ -260,6 +264,11 @@ if ($_[0]->{'dom'} ne $_[1]->{'dom'}) {
 	&unlink_logged(&get_config_file("www.".$_[1]->{'dom'}));
 	&symlink_logged(&get_config_file($_[0]->{'dom'}),
 			&get_config_file("www.".$_[0]->{'dom'}));
+	if ($_[0]->{'virt'}) {
+		&unlink_logged(&get_config_file($_[1]->{'ip'}));
+		&symlink_logged(&get_config_file($_[0]->{'dom'}),
+				&get_config_file($_[0]->{'ip'}));
+		}
 
 	# Update hostname in file
 	&lock_file($newfile);
@@ -380,6 +389,9 @@ if ($job) {
 	}
 &virtual_server::release_lock_cron($_[0]);
 &delete_config($_[0]->{'dom'});
+if ($_[0]->{'virt'}) {
+	&delete_config($_[0]->{'ip'});
+	}
 
 # Delete awstats.pl from the cgi-bin directory
 local $cgidir = &get_cgidir($_[0]);
