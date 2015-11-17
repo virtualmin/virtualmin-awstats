@@ -107,7 +107,7 @@ if (@allplugins) {
 		&ui_columns_table([ $text{'config_penabled'},
 				    $text{'config_pname'},
                                     $text{'config_pdesc'} ],
-				  "50%", \@table), 2);
+				  "100%", \@table), 2);
 	print &ui_hidden_table_end();
 	}
 

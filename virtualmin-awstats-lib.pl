@@ -503,7 +503,11 @@ foreach my $l (@$lref) {
 		}
 	last if ($l !~ /^#/);
 	}
-return join(" ", @cmts);
+my $rv = join(" ", @cmts);
+if ($name =~ /^geoip/ && $name ne "geoipfree") {
+	$rv .= " <b>Requires commercial GeoIP data files</b>";
+	}
+return $rv;
 }
 
 
