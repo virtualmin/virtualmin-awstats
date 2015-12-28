@@ -325,9 +325,10 @@ sub link_domain_alias_data
 {
 local ($dom, $dirdata, $user) = @_;
 local @otherdoms = ( "www.".$dom );
+local $d;
 if (&foreign_check("virtual-server")) {
 	&foreign_require("virtual-server", "virtual-server-lib.pl");
-	local $d = &virtual_server::get_domain_by("dom", $dom);
+	$d = &virtual_server::get_domain_by("dom", $dom);
 	if ($d) {
 		foreach my $ad (&virtual_server::get_domain_by(
 				"alias", $d->{'id'})) {
@@ -340,7 +341,12 @@ foreach my $f (readdir(DIRDATA)) {
 	if ($f =~ /^awstats(\d+)\.\Q$dom\E\.txt$/) {
 		foreach my $other (@otherdoms) {
 			local $wwwf = "awstats".$1.".".$other.".txt";
-			if (!-r "$dirdata/$wwwf") {
+			next if (-r "$dirdata/$wwwf");
+			if ($d) {
+				&virtual_server::symlink_file_as_domain_user(
+					$d, $f, "$dirdata/$wwwf");
+				}
+			else {
 				&symlink_logged($f, "$dirdata/$wwwf");
 				&set_ownership_permissions($user, undef, undef,
 							   "$dirdata/$wwwf");
