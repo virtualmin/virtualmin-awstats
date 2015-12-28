@@ -49,13 +49,17 @@ print &ui_table_row($text{'config_skipagents'},
 # Files to skip
 $skipfiles = &find_value("SkipFiles", $conf);
 print &ui_table_row($text{'config_skipfiles'},
-	&ui_opt_textbox("skipfiles", $skipfiles, 40, $text{'config_none'}));
+	&ui_radio("skipfiles_def", $skipfiles ? 0 : 1,
+		  [ [ 1, $text{'config_none'} ],
+		    [ 0, $text{'config_below'} ] ])."<br>\n".
+	&ui_textarea("skipfiles", join("\n", split(/\s+/, $skipfiles)),
+		     5, 60));
 
 # File types to exclude
 $notpage = &find_value("NotPageList", $conf);
 print &ui_table_row($text{'config_notpage'},
-	&ui_opt_textbox("notpage", $notpage, 40,
-		$text{'default'}." (css js class gif jpg jpeg png bmp ico)"));
+	&ui_opt_textbox("notpage", $notpage, 60,
+	    $text{'default'}." (css js class gif jpg jpeg png bmp ico)<br>"));
 
 # HTTP codes to include
 $httpcodes = &find_value("ValidHTTPCodes", $conf);

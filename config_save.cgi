@@ -25,6 +25,7 @@ $cfile = &get_config_file($in{'dom'});
 		$in{'skipagents_def'} ? undef : $in{'skipagents'});
 
 # Files to skip
+$in{'skipfiles'} =~ s/\r?\n/ /g;
 &save_directive($conf, $in{'dom'}, "SkipFiles",
 		$in{'skipfiles_def'} ? undef : $in{'skipfiles'});
 
