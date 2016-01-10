@@ -64,7 +64,8 @@ if (&foreign_check("virtual-server")) {
 	$d = &virtual_server::get_domain_by("dom", $in{'dom'});
 	}
 if ($in{'gen'}) {	
-	&redirect("generate.cgi?dom=$in{'dom'}");
+	&redirect("generate.cgi?dom=".&urlize($in{'dom'}).
+			      "&wipe=".&urlize($in{'wipe'}));
 	}
 elsif ($d) {
 	&virtual_server::domain_redirect($d);

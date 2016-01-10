@@ -316,6 +316,21 @@ local $dirdata = &find_value("DirData", $conf);
 return $anyok;
 }
 
+# clear_data_directory(dir)
+# Remove all .txt files in some data directory
+sub clear_data_directory
+{
+my ($dom, $dir) = @_;
+my $user = &get_run_user($dom);
+my $count = 0;
+foreach my $f (glob("$dir/*.txt")) {
+	my $cmd = &command_as_user($user, 0, "rm -f ".quotemeta($f));
+	&system_logged("$cmd >/dev/null 2>&1");
+	$count++;
+	}
+return $count;
+}
+
 # link_domain_alias_data(domain, data-dir, user)
 # Create symlinks from all awstatsXXXX.domain.txt files to
 # awstatsXXXX.www.domain.txt , so that the URL

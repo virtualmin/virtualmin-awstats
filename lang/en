@@ -63,6 +63,8 @@ gen_title=Generate Report
 gen_doing=Now updating the report for $1 from log file $2 ..
 gen_done=.. done! <a href='$1'>View the resulting report</a>.
 gen_failed=.. failed! See the error message above for the reason why.
+gen_wiping=Deleting old data files in $1 ..
+gen_wipingdone=.. deleted $1 files
 
 feat_name=AWstats reporting
 feat_losing=Scheduled AWstats reporting will be disabled, and its configuration deleted
@@ -131,6 +133,7 @@ config_penabled=Enabled?
 config_pname=Plugin name
 config_pdesc=Description
 config_regen=Save and Re-Generate Report
+config_wipe=Delete all data files and re-generate from original logs?
 config_below=Listed below ..
 
 __norefs=1

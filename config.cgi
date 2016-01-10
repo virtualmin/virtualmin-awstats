@@ -115,7 +115,9 @@ if (@allplugins) {
 	print &ui_hidden_table_end();
 	}
 
-print &ui_form_end([ [ undef, $text{'save'} ],
-		     [ 'gen', $text{'config_regen'} ] ]);
+print &ui_submit($text{'save'});
+print &ui_submit($text{'config_regen'}, 'gen');
+print &ui_checkbox('wipe', 1, $text{'config_wipe'}, 0);
+print &ui_form_end();
 
 &ui_print_footer("", $text{'index_return'});

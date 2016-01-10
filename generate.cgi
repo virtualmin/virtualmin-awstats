@@ -10,6 +10,13 @@ require './virtualmin-awstats-lib.pl';
 
 $conf = &get_config($in{'dom'});
 $log = &find_value("LogFile", $conf);
+$data = &find_value("DirData", $conf);
+if ($in{'wipe'} && $data) {
+	print &text('gen_wiping', "<tt>".&html_escape($data)."</tt>"),"<br>\n";
+	$c = &clear_data_directory($in{'dom'}, $data);
+	print &text('gen_wipedone', $c),"<p>\n";
+	}
+
 print &text('gen_doing', "<tt>$in{'dom'}</tt>", "<tt>$log</tt>"),"<br>\n";
 print "<pre>";
 $ok = &generate_report($in{'dom'}, STDOUT, 1);
