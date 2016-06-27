@@ -1,10 +1,16 @@
 #!/usr/local/bin/perl
 # Save options for one AWstats domain
+use strict;
+use warnings;
+our (%access, %text, %in, %config);
+our $module_name;
+our $cron_cmd;
 
 require './virtualmin-awstats-lib.pl';
 &foreign_require("cron", "cron-lib.pl");
 &ReadParse();
 &error_setup($text{'save_err'});
+my ($oldjob, $job);
 if ($in{'new'}) {
 	$access{'create'} || &error($text{'edit_ecannot2'});
 	}
@@ -38,7 +44,7 @@ else {
 	if ($in{'new'}) {
 		$in{'dom'} =~ /^[a-z0-9\.\-\_]+$/i ||
 			&error($text{'save_edom'});
-		($clash) = grep { $_ eq $in{'dom'} } &list_configs();
+		my ($clash) = grep { $_ eq $in{'dom'} } &list_configs();
 		$clash && &error($text{'save_eclash'});
 		}
 	if ($in{'new'} || $access{'editlog'}) {
@@ -47,7 +53,7 @@ else {
 				&error($text{'save_elog'});
 			}
 		else {
-			@w = &split_quoted_string($in{'cmd'});
+			my @w = &split_quoted_string($in{'cmd'});
 			&has_command($w[0]) ||
 				&error($text{'save_ecmd'});
 			$in{'log'} = $in{'cmd'}.' |';
@@ -65,19 +71,19 @@ else {
 		}
 	defined(getpwnam($in{'user'})) || &error($text{'save_euser'});
 	if ($access{'user'} ne '*') {
-		@users = split(/\s+/, $access{'user'});
+		my @users = split(/\s+/, $access{'user'});
 		&indexof($in{'user'}, @users) >= 0 ||
 			&error($text{'save_euser2'});
 		}
 
 	if ($in{'new'}) {
 		# Copy template conf file to new one
-		$out = &backquote_logged("cp ".quotemeta(&awstats_model_file())." ".quotemeta("$config{'config_dir'}/awstats.$in{'dom'}.conf"));
+		my $out = &backquote_logged("cp ".quotemeta(&awstats_model_file())." ".quotemeta("$config{'config_dir'}/awstats.$in{'dom'}.conf"));
 		$? && &error(&text('save_ecopy', "<tt>$out</tt>"));
 		}
 
 	# Update the config file
-	$conf = &get_config($in{'dom'});
+	my $conf = &get_config($in{'dom'});
 	if ($in{'new'}) {
 		&save_directive($conf, $in{'dom'}, "SiteDomain", $in{'dom'});
 		&save_directive($conf, $in{'dom'}, "HostAliases", "www.$in{'dom'}");
@@ -109,11 +115,11 @@ else {
 	# Redirect appropriately
 	if (&foreign_check("virtual-server")) {
 		&foreign_require("virtual-server", "virtual-server-lib.pl");
-		$d = &virtual_server::get_domain_by("dom", $in{'dom'});
+		my $d = &virtual_server::get_domain_by("dom", $in{'dom'});
+		if ($d) {
+			&virtual_server::domain_redirect($d);
 		}
-	if ($d) {
-		&virtual_server::domain_redirect($d);
-		}
+	}
 	else {
 		&redirect("");
 		}

@@ -1,3 +1,6 @@
+use strict;
+use warnings;
+our $module_name;
 
 do 'virtualmin-awstats-lib.pl';
 

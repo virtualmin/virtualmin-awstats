@@ -1,7 +1,12 @@
 # Defines functions for this feature
+use strict;
+use warnings;
+our (%text, %config);
+our $module_name;
+our $cron_cmd;
 
 require 'virtualmin-awstats-lib.pl';
-$input_name = $module_name;
+my $input_name = $module_name;
 $input_name =~ s/[^A-Za-z0-9]/_/g;
 
 # feature_name()
@@ -30,7 +35,7 @@ return $text{'feat_disname'};
 # editing form
 sub feature_label
 {
-local ($edit) = @_;
+my ($edit) = @_;
 return $edit ? $text{'feat_label2'} : $text{'feat_label'};
 }
 
@@ -63,7 +68,7 @@ return undef;
 # an error message if so
 sub feature_clash
 {
-local ($d, $field) = @_;
+my ($d, $field) = @_;
 if ((!$field || $field eq 'dom') &&
     $d->{'dom'} ne &get_system_hostname()) {
 	return -r "$config{'config_dir'}/awstats.$field->{'dom'}.conf" ?
@@ -77,7 +82,7 @@ return undef;
 # parent domains
 sub feature_suitable
 {
-local ($parentdom, $aliasdom, $subdom) = @_;
+my ($parentdom, $aliasdom, $subdom) = @_;
 return $aliasdom || $subdom ? 0 : 1;	# not for alias or sub domains
 }
 
@@ -86,7 +91,7 @@ return $aliasdom || $subdom ? 0 : 1;	# not for alias or sub domains
 # or 0 if not
 sub feature_import
 {
-local ($dname, $user, $db) = @_;
+my ($dname, $user, $db) = @_;
 return -r "$config{'config_dir'}/awstats.$dname.conf" ? 1 : 0;
 }
 
@@ -97,40 +102,40 @@ sub feature_setup
 &$virtual_server::first_print($text{'feat_setup'});
 
 # Copy the template config file
-local $model = &awstats_model_file();
+my $model = &awstats_model_file();
 if (!$model) {
 	&$virtual_server::second_print($text{'save_emodel'});
 	return 0;
 	}
-local $out = &backquote_logged("cp ".quotemeta($model)." ".quotemeta("$config{'config_dir'}/awstats.$_[0]->{'dom'}.conf")." 2>&1");
+my $out = &backquote_logged("cp ".quotemeta($model)." ".quotemeta("$config{'config_dir'}/awstats.$_[0]->{'dom'}.conf")." 2>&1");
 if ($?) {
 	&$virtual_server::second_print(&text('save_ecopy', "<tt>$out</tt>"));
 	return 0;
 	}
 
 # Copy awstats.pl and associated files into the domain
-local $err = &setup_awstats_commands($_[0]);
+my $err = &setup_awstats_commands($_[0]);
 if ($err) {
 	&$virtual_server::second_print($err);
 	return 0;
 	}
 
 # Create report directory
-local $dir = "$_[0]->{'home'}/awstats";
+my $dir = "$_[0]->{'home'}/awstats";
 &virtual_server::make_dir_as_domain_user($_[0], $dir, 0755);
 
 # Work out the log format
-local ($virt, $vconf) = &virtual_server::get_apache_virtual($_[0]->{'dom'}, $_[0]->{'web_port'});
-local $clog = &apache::find_directive("CustomLog", $vconf);
-local $fmt = $config{'format'} ? $config{'format'}
-			       : $clog =~ /combined$/i ? 1 : 4;
+my ($virt, $vconf) = &virtual_server::get_apache_virtual($_[0]->{'dom'}, $_[0]->{'web_port'});
+my $clog = &apache::find_directive("CustomLog", $vconf);
+my $fmt = $config{'format'} ? $config{'format'}
+		            : $clog =~ /combined$/i ? 1 : 4;
 
 # Update settings to match server
 &lock_file(&get_config_file($_[0]->{'dom'}));
-local $conf = &get_config($_[0]->{'dom'});
+my $conf = &get_config($_[0]->{'dom'});
 &save_directive($conf, $_[0]->{'dom'}, "SiteDomain", "\"$_[0]->{'dom'}\"");
-local $qd = quotemeta($_[0]->{'dom'});
-local $aliases = &virtual_server::substitute_template($config{'aliases'},$_[0]);
+my $qd = quotemeta($_[0]->{'dom'});
+my $aliases = &virtual_server::substitute_template($config{'aliases'},$_[0]);
 &save_directive($conf, $_[0]->{'dom'}, "HostAliases",
 		"REGEX[$qd\$] $aliases");
 &save_directive($conf, $_[0]->{'dom'}, "LogFile",
@@ -153,14 +158,14 @@ if ($_[0]->{'virt'}) {
 &foreign_require("cron", "cron-lib.pl");
 &save_run_user($_[0]->{'dom'}, $_[0]->{'user'});
 if (!$config{'nocron'}) {
-	local $job = { 'user' => 'root',
-		       'command' => "$cron_cmd $_[0]->{'dom'}",
-		       'active' => 1,
-		       'mins' => int(rand()*60),
-		       'hours' => int(rand()*24),
-		       'days' => '*',
-		       'months' => '*',
-		       'weekdays' => '*' };
+	my $job = { 'user' => 'root',
+		    'command' => "$cron_cmd $_[0]->{'dom'}",
+		    'active' => 1,
+		    'mins' => int(rand()*60),
+		    'hours' => int(rand()*24),
+		    'days' => '*',
+		    'months' => '*',
+		    'weekdays' => '*' };
 	&cron::create_cron_job($job);
 	}
 &cron::create_wrapper($cron_cmd, $module_name, "awstats.pl");
@@ -168,16 +173,16 @@ if (!$config{'nocron'}) {
 
 # Add script alias to make /awstats/awstats.pl work
 &virtual_server::obtain_lock_web($_[0]);
-local @ports = ( $_[0]->{'web_port'},
+my @ports = ( $_[0]->{'web_port'},
 		 $_[0]->{'ssl'} ? ( $_[0]->{'web_sslport'} ) : ( ) );
-local $cgidir = &get_cgidir($_[0]);
+my $cgidir = &get_cgidir($_[0]);
 foreach my $port (@ports) {
-	local ($virt, $vconf) = &virtual_server::get_apache_virtual(
+	my ($virt, $vconf) = &virtual_server::get_apache_virtual(
 					$_[0]->{'dom'}, $port);
 	if ($virt) {
-		local $conf = &apache::get_config();
-		local @sa = &apache::find_directive("ScriptAlias", $vconf);
-		local ($aw) = grep { $_ =~ /^\/awstats/ } @sa;
+		my $conf = &apache::get_config();
+		my @sa = &apache::find_directive("ScriptAlias", $vconf);
+		my ($aw) = grep { $_ =~ /^\/awstats/ } @sa;
 		if (!$aw) {
 			# Need to add
 			push(@sa, "/awstats/ $cgidir/");
@@ -194,18 +199,18 @@ foreach my $port (@ports) {
 &$virtual_server::second_print($virtual_server::text{'setup_done'});
 
 # Setup password protection for awstats.pl
-local $tmpl = &virtual_server::get_template($_[0]->{'template'});
+my $tmpl = &virtual_server::get_template($_[0]->{'template'});
 if ($tmpl->{$module_name.'passwd'} ||
     $tmpl->{$module_name.'passwd'} eq '') {
 	&$virtual_server::first_print($text{'feat_passwd'});
-	local $added = 0;
-	local $passwd_file = "$_[0]->{'home'}/.awstats-htpasswd";
+	my $added = 0;
+	my $passwd_file = "$_[0]->{'home'}/.awstats-htpasswd";
 	foreach my $p (@ports) {
-		local $conf = &apache::get_config();
-                local ($virt, $vconf) = &virtual_server::get_apache_virtual(
+		my $conf = &apache::get_config();
+                my ($virt, $vconf) = &virtual_server::get_apache_virtual(
                         $_[0]->{'dom'}, $p);
                 next if (!$virt);
-		local $lref = &read_file_lines($virt->{'file'});
+		my $lref = &read_file_lines($virt->{'file'});
 		splice(@$lref, $virt->{'eline'}, 0,
 		       "<Files awstats.pl>",
 		       "AuthName \"$_[0]->{'dom'} statistics\"",
@@ -227,6 +232,7 @@ if ($tmpl->{$module_name.'passwd'} ||
 
 	# Create bogus .htaccess file in ~/awstats , for protected directories
 	# module to see
+	no strict "subs"; # XXX Lexical?
 	&virtual_server::open_tempfile_as_domain_user($_[0], HTACCESS,
 		">$dir/.htaccess");
 	&print_tempfile(HTACCESS, "AuthName \"$_[0]->{'dom'} statistics\"\n");
@@ -234,11 +240,12 @@ if ($tmpl->{$module_name.'passwd'} ||
 	&print_tempfile(HTACCESS, "AuthUserFile $passwd_file\n");
 	&print_tempfile(HTACCESS, "require valid-user\n");
 	&virtual_server::close_tempfile_as_domain_user($_[0], HTACCESS);
+	use strict "subs";
 
 	# Add to list of protected dirs
 	&foreign_require("htaccess-htpasswd", "htaccess-lib.pl");
         &lock_file($htaccess_htpasswd::directories_file);
-        local @dirs = &htaccess_htpasswd::list_directories();
+        my @dirs = &htaccess_htpasswd::list_directories();
         push(@dirs, [ $dir, $passwd_file, 0, 0, undef ]);
         &htaccess_htpasswd::save_directories(\@dirs);
         &unlock_file($htaccess_htpasswd::directories_file);
@@ -254,12 +261,12 @@ return 1;
 # Called when a domain with this feature is modified
 sub feature_modify
 {
-local $changed;
+my $changed;
 if ($_[0]->{'dom'} ne $_[1]->{'dom'}) {
 	# Domain has been re-named .. rename awstats config
 	&$virtual_server::first_print($text{'feat_modify'});
-	local $oldfile = &get_config_file($_[1]->{'dom'});
-	local $newfile = &get_config_file($_[0]->{'dom'});
+	my $oldfile = &get_config_file($_[1]->{'dom'});
+	my $newfile = &get_config_file($_[0]->{'dom'});
 	&rename_logged($oldfile, $newfile);
 	&unlink_logged(&get_config_file("www.".$_[1]->{'dom'}));
 	&symlink_logged(&get_config_file($_[0]->{'dom'}),
@@ -272,22 +279,22 @@ if ($_[0]->{'dom'} ne $_[1]->{'dom'}) {
 
 	# Update hostname in file
 	&lock_file($newfile);
-	local $conf = &get_config($_[0]->{'dom'});
+	my $aconf = &get_config($_[0]->{'dom'});
 	foreach my $d ("SiteDomain", "HostAliases") {
-		local $v = &find_value($d, $conf);
+		my $v = &find_value($d, $aconf);
 		$v =~ s/$_[1]->{'dom'}/$_[0]->{'dom'}/g;
-		&save_directive($conf, $_[0]->{'dom'}, $d, $v);
+		&save_directive($aconf, $_[0]->{'dom'}, $d, $v);
 		}
 	&flush_file_lines();
 	&unlock_file($newfile);
 
 	# Change domain name in Apache config
-	local ($virt, $vconf, $conf) = &virtual_server::get_apache_virtual(
+	my ($virt, $vconf, $conf) = &virtual_server::get_apache_virtual(
 					$_[0]->{'dom'}, $_[0]->{'web_port'});
-	local @files;
+	my @files;
 	@files = &apache::find_directive_struct("Files", $vconf) if ($virt);
 	foreach my $file (@files) {
-		local $an = &apache::find_directive(
+		my $an = &apache::find_directive(
 			"AuthName", $file->{'members'});
 		$an =~ s/$_[1]->{'dom'}/$_[0]->{'dom'}/g;
 		&apache::save_directive("AuthName", [ $an ],
@@ -302,7 +309,7 @@ if ($_[0]->{'dom'} ne $_[1]->{'dom'}) {
 	# Fix up domain in cron job
 	&virtual_server::obtain_lock_cron($_[0]);
 	&foreign_require("cron", "cron-lib.pl");
-	local $job = &find_cron_job($_[1]->{'dom'});
+	my $job = &find_cron_job($_[1]->{'dom'});
 	if ($job) {
 		$job->{'command'} = "$cron_cmd $_[0]->{'dom'}";
 		&cron::change_cron_job($job);
@@ -329,10 +336,10 @@ if ($_[0]->{'user'} ne $_[1]->{'user'}) {
 if ($_[0]->{'home'} ne $_[1]->{'home'}) {
 	# Home directory has changed .. update log and data dirs
 	&$virtual_server::first_print($text{'feat_modifyhome'});
-	local $cfile = &get_config_file($_[0]->{'dom'});
+	my $cfile = &get_config_file($_[0]->{'dom'});
 	&lock_file($cfile);
-	local $conf = &get_config($_[0]->{'dom'});
-	local $dir = "$_[0]->{'home'}/awstats";
+	my $conf = &get_config($_[0]->{'dom'});
+	my $dir = "$_[0]->{'home'}/awstats";
 	&save_directive($conf, $_[0]->{'dom'}, "DirData", $dir);
 	&save_directive($conf, $_[0]->{'dom'}, "LogFile",
 		&virtual_server::get_apache_log($_[0]->{'dom'},
@@ -354,14 +361,14 @@ if ($_[0]->{'pass'} ne $_[1]->{'pass'}) {
 			$virtual_server::text{'setup_done'});
 		}
 	}
-local $alog = &virtual_server::get_website_log($_[0]);
-local $oldalog = &virtual_server::get_old_website_log($alog, $_[0], $_[1]);
+my $alog = &virtual_server::get_website_log($_[0]);
+my $oldalog = &virtual_server::get_old_website_log($alog, $_[0], $_[1]);
 if ($alog ne $oldalog) {
 	# Log file has been renamed - update AWstats config
 	&$virtual_server::first_print($text{'feat_modifylog'});
-	local $cfile = &get_config_file($_[0]->{'dom'});
+	my $cfile = &get_config_file($_[0]->{'dom'});
 	&lock_file($cfile);
-	local $conf = &get_config($_[0]->{'dom'});
+	my $conf = &get_config($_[0]->{'dom'});
 	&save_directive($conf, $_[0]->{'dom'}, "LogFile", $alog);
 	&flush_file_lines($cfile);
 	&unlock_file($cfile);
@@ -383,7 +390,7 @@ sub feature_delete
 &$virtual_server::first_print($text{'feat_delete'});
 &virtual_server::obtain_lock_cron($_[0]);
 &foreign_require("cron", "cron-lib.pl");
-local $job = &find_cron_job($_[0]->{'dom'});
+my $job = &find_cron_job($_[0]->{'dom'});
 if ($job) {
 	&cron::delete_cron_job($job);
 	}
@@ -394,15 +401,15 @@ if ($_[0]->{'virt'}) {
 	}
 
 # Delete awstats.pl from the cgi-bin directory
-local $cgidir = &get_cgidir($_[0]);
+my $cgidir = &get_cgidir($_[0]);
 &virtual_server::unlink_logged_as_domain_user($_[0], "$cgidir/awstats.pl");
 
 # Delete links or directory copies
-local $cgidir = &get_cgidir($_[0]);
+$cgidir = &get_cgidir($_[0]);
 foreach my $dir ("lib", "lang", "plugins") {
 	&virtual_server::unlink_logged_as_domain_user($_[0], "$cgidir/$dir");
 	}
-local $htmldir = &get_htmldir($_[0]);
+my $htmldir = &get_htmldir($_[0]);
 if (-l "$htmldir/icon") {
 	&virtual_server::unlink_logged_as_domain_user($_[0], "$htmldir/icon");
 	&virtual_server::unlink_logged_as_domain_user($_[0], "$htmldir/awstats-icon");
@@ -411,15 +418,15 @@ if (-l "$htmldir/icon") {
 
 # Remove script alias for /awstats
 &virtual_server::obtain_lock_web($_[0]);
-local @ports = ( $_[0]->{'web_port'},
+my @ports = ( $_[0]->{'web_port'},
 		 $_[0]->{'ssl'} ? ( $_[0]->{'web_sslport'} ) : ( ) );
 foreach my $port (@ports) {
-	local ($virt, $vconf) = &virtual_server::get_apache_virtual(
+	my ($virt, $vconf) = &virtual_server::get_apache_virtual(
 					$_[0]->{'dom'}, $port);
 	if ($virt) {
-		local $conf = &apache::get_config();
-		local @sa = &apache::find_directive("ScriptAlias", $vconf);
-		local ($aw) = grep { $_ =~ /^\/awstats/ } @sa;
+		my $conf = &apache::get_config();
+		my @sa = &apache::find_directive("ScriptAlias", $vconf);
+		my ($aw) = grep { $_ =~ /^\/awstats/ } @sa;
 		if ($aw) {
 			# Need to remove
 			@sa = grep { $_ ne $aw } @sa;
@@ -441,20 +448,20 @@ foreach my $port (@ports) {
 # Remove password protection for /awstats/awstats.pl
 if ($_[0]->{'awstats_pass'}) {
 	&$virtual_server::first_print($text{'feat_dpasswd'});
-	local $deleted = 0;
+	my $deleted = 0;
 	foreach my $p (@ports) {
-		local $conf = &apache::get_config();
-                local ($virt, $vconf) = &virtual_server::get_apache_virtual(
+		my $conf = &apache::get_config();
+                my ($virt, $vconf) = &virtual_server::get_apache_virtual(
                         $_[0]->{'dom'}, $p);
 		next if (!$virt);
-		local ($loc) = grep { $_->{'words'}->[0] eq '/awstats' }
+		my ($loc) = grep { $_->{'words'}->[0] eq '/awstats' }
 			    &apache::find_directive_struct("Location", $vconf);
 		if (!$loc) {
 			($loc) = grep { $_->{'words'}->[0] eq 'awstats.pl' }
 			    &apache::find_directive_struct("Files", $vconf);
 			}
 		next if (!$loc);
-		local $lref = &read_file_lines($virt->{'file'});
+		my $lref = &read_file_lines($virt->{'file'});
 		splice(@$lref, $loc->{'line'},
 		       $loc->{'eline'}-$loc->{'line'}+1);
 		&flush_file_lines($virt->{'file'});
@@ -469,11 +476,11 @@ if ($_[0]->{'awstats_pass'}) {
 	delete($_[0]->{'awstats_pass'});
 
 	# Remove from list of protected dirs
-	local $dir = "$_[0]->{'home'}/awstats";
+	my $dir = "$_[0]->{'home'}/awstats";
 	&foreign_require("htaccess-htpasswd", "htaccess-lib.pl");
 	&unlink_file("$dir/.htaccess");
 	&lock_file($htaccess_htpasswd::directories_file);
-	local @dirs = &htaccess_htpasswd::list_directories();
+	my @dirs = &htaccess_htpasswd::list_directories();
 	@dirs = grep { $_->[0] ne $dir } @dirs;
 	&htaccess_htpasswd::save_directories(\@dirs);
 	&unlock_file($htaccess_htpasswd::directories_file);
@@ -491,7 +498,7 @@ return 1;
 # an alias feature.
 sub feature_setup_alias
 {
-local ($d, $alias) = @_;
+my ($d, $alias) = @_;
 
 # Add the alias to the .conf files
 &$virtual_server::first_print(&text('feat_setupalias', $d->{'dom'}));
@@ -502,15 +509,15 @@ local ($d, $alias) = @_;
 
 # Add to HostAliases
 &lock_file(&get_config_file($d->{'dom'}));
-local $conf = &get_config($d->{'dom'});
-local $ha = &find_value("HostAliases", $conf);
+my $conf = &get_config($d->{'dom'});
+my $ha = &find_value("HostAliases", $conf);
 $ha .= " REGEX[".quotemeta($alias->{'dom'})."\$]";
 &save_directive($conf, $d->{'dom'}, "HostAliases", $ha);
 &flush_file_lines(&get_config_file($d->{'dom'}));
 &unlock_file(&get_config_file($d->{'dom'}));
 
 # Link up existing data files
-local $dirdata = &find_value("DirData", $conf);
+my $dirdata = &find_value("DirData", $conf);
 &link_domain_alias_data($d->{'dom'}, $dirdata, $d->{'user'});
 &$virtual_server::second_print($virtual_server::text{'setup_done'});
 
@@ -523,7 +530,7 @@ return 1;
 # an alias feature.
 sub feature_delete_alias
 {
-local ($d, $alias) = @_;
+my ($d, $alias) = @_;
 
 # Remove the alias's .conf file
 &$virtual_server::first_print(&text('feat_deletealias', $d->{'dom'}));
@@ -532,16 +539,16 @@ local ($d, $alias) = @_;
 
 # Remove alias from HostAliases
 &lock_file(&get_config_file($d->{'dom'}));
-local $conf = &get_config($d->{'dom'});
-local $ha = &find_value("HostAliases", $conf);
-local $qd = quotemeta($alias->{'dom'});
+my $conf = &get_config($d->{'dom'});
+my $ha = &find_value("HostAliases", $conf);
+my $qd = quotemeta($alias->{'dom'});
 $ha =~ s/\s*REGEX\[\Q$qd\E\$\]//;
 &save_directive($conf, $d->{'dom'}, "HostAliases", $ha);
 &flush_file_lines(&get_config_file($d->{'dom'}));
 &unlock_file(&get_config_file($d->{'dom'}));
 
 # Remove data symlinks
-local $dirdata = &find_value("DirData", $conf);
+my $dirdata = &find_value("DirData", $conf);
 &unlink_domain_alias_data($alias->{'dom'}, $dirdata);
 &$virtual_server::second_print($virtual_server::text{'setup_done'});
 
@@ -553,7 +560,7 @@ return 1;
 # the Webmin user when this feature is enabled
 sub feature_webmin
 {
-local @doms = map { $_->{'dom'} } grep { $_->{$module_name} } @{$_[1]};
+my @doms = map { $_->{'dom'} } grep { $_->{$module_name} } @{$_[1]};
 if (@doms) {
 	return ( [ $module_name,
 		   { 'create' => 0,
@@ -581,7 +588,7 @@ return ( [ $module_name, $text{'feat_module'} ] );
 # Returns an array of link objects for webmin modules for this feature
 sub feature_links
 {
-local ($d) = @_;
+my ($d) = @_;
 return ( # Link to either view a report, or edit settings
 	 { 'mod' => $module_name,
            'desc' => $text{'links_view'},
@@ -601,9 +608,9 @@ return ( # Link to either view a report, or edit settings
 # Copy the awstats config file for the domain
 sub feature_backup
 {
-local ($d, $file, $opts) = @_;
+my ($d, $file, $opts) = @_;
 &$virtual_server::first_print($text{'feat_backup'});
-local $cfile = "$config{'config_dir'}/awstats.$d->{'dom'}.conf";
+my $cfile = "$config{'config_dir'}/awstats.$d->{'dom'}.conf";
 if (-r $cfile) {
 	&virtual_server::copy_write_as_domain_user($d, $cfile, $file);
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
@@ -619,12 +626,12 @@ else {
 # Called to restore this feature for the domain from the given file
 sub feature_restore
 {
-local ($d, $file, $opts) = @_;
-local $ok = 1;
+my ($d, $file, $opts) = @_;
+my $ok = 1;
 
 # Restore the config file
 &$virtual_server::first_print($text{'feat_restore'});
-local $cfile = "$config{'config_dir'}/awstats.$d->{'dom'}.conf";
+my $cfile = "$config{'config_dir'}/awstats.$d->{'dom'}.conf";
 &lock_file($cfile);
 if (&copy_source_dest($file, $cfile)) {
 	&unlock_file($cfile);
@@ -649,10 +656,10 @@ return $text{'feat_backup_name'};
 
 sub feature_validate
 {
-local ($d) = @_;
+my ($d) = @_;
 
 # Make sure config file exists
-local $cfile = "$config{'config_dir'}/awstats.$d->{'dom'}.conf";
+my $cfile = "$config{'config_dir'}/awstats.$d->{'dom'}.conf";
 -r $cfile || return &text('feat_evalidate', "<tt>$cfile</tt>");
 
 # Check for logs directory
@@ -661,21 +668,21 @@ local $cfile = "$config{'config_dir'}/awstats.$d->{'dom'}.conf";
 # Check for cron job
 if (!$config{'nocron'}) {
 	&foreign_require("cron", "cron-lib.pl");
-	local $job = &find_cron_job($d->{'dom'});
+	my $job = &find_cron_job($d->{'dom'});
 	$job || return &text('feat_evalidatecron');
 	}
 
 # Make sure awstats.pl exists, and is the same as the installed version, unless
 # it is a link or wrapper
-local $cgidir = &get_cgidir($d);
-local $wrapper = "$cgidir/awstats.pl";
+my $cgidir = &get_cgidir($d);
+my $wrapper = "$cgidir/awstats.pl";
 -r $wrapper || return &text('feat_evalidateprog', "<tt>$wrapper</tt>");
-local @cst = stat($config{'awstats'});
-local @dst = stat($wrapper);
+my @cst = stat($config{'awstats'});
+my @dst = stat($wrapper);
 if (@cst && $cst[7] != $dst[7] && !-l $wrapper) {
-	open(WRAPPER, $wrapper);
-	local $sh = <WRAPPER>;
-	close(WRAPPER);
+	open(my $WRAPPER, "<", $wrapper);
+	my $sh = <$WRAPPER>;
+	close($WRAPPER);
 	if ($sh !~ /^#\!\/bin\/sh/) {
 		return &text('feat_evalidatever', "<tt>$config{'awstats'}</tt>", "<tt>$cgidir/awstats.pl</tt>");
 		}
@@ -687,7 +694,7 @@ return undef;
 # get_cgidir(&domain)
 sub get_cgidir
 {
-local $cgidir = $config{'copyto'} ?
+my $cgidir = $config{'copyto'} ?
 			"$_[0]->{'home'}/$config{'copyto'}" :
 			&virtual_server::cgi_bin_dir($_[0]);
 return $cgidir;
@@ -702,8 +709,8 @@ return &virtual_server::public_html_dir($_[0]);
 # Returns HTML for editing per-template options for this plugin
 sub template_input
 {
-local ($tmpl) = @_;
-local $v = $tmpl->{$module_name."passwd"};
+my ($tmpl) = @_;
+my $v = $tmpl->{$module_name."passwd"};
 $v = 1 if (!defined($v) && $tmpl->{'default'});
 return &ui_table_row($text{'tmpl_passwd'},
 	&ui_radio($input_name."_passwd", $v,
@@ -717,7 +724,7 @@ return &ui_table_row($text{'tmpl_passwd'},
 # template_input. All template fields must start with the module name.
 sub template_parse
 {
-local ($tmpl, $in) = @_;
+my ($tmpl, $in) = @_;
 $tmpl->{$module_name.'passwd'} = $in->{$input_name.'_passwd'};
 }
 

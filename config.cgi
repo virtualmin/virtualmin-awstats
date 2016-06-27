@@ -1,10 +1,14 @@
 #!/usr/local/bin/perl
 # Show a form for editing AWstats config file settings
+use strict;
+use warnings;
+our (%text, %in);
 
 require './virtualmin-awstats-lib.pl';
 &ReadParse();
-$conf = &get_config($in{'dom'});
+my $conf = &get_config($in{'dom'});
 &can_domain($in{'dom'}) || &error($text{'edit_ecannot'});
+my $d;
 if (&foreign_check("virtual-server")) {
 	&foreign_require("virtual-server", "virtual-server-lib.pl");
 	$d = &virtual_server::get_domain_by("dom", $in{'dom'});
@@ -18,7 +22,7 @@ print &ui_hidden_table_start($text{'config_header'}, "width=100%", 2,
 			     "main", 1);
 
 # Do DNS lookups?
-$dnslookup = &find_value("DNSLookup", $conf);
+my $dnslookup = &find_value("DNSLookup", $conf);
 print &ui_table_row($text{'config_dnslookup'},
 	&ui_select("dnslookup", $dnslookup,
 		   [ [ '', $text{'default'} ],
@@ -27,7 +31,7 @@ print &ui_table_row($text{'config_dnslookup'},
 		     [ 2, $text{'config_dnslookup2'} ] ]));
 
 # Allow full-year view?
-$year = &find_value("AllowFullYearView", $conf);
+my $year = &find_value("AllowFullYearView", $conf);
 print &ui_table_row($text{'config_year'},
 	&ui_select("year", $year,
 		   [ [ '', $text{'default'} ],
@@ -37,17 +41,17 @@ print &ui_table_row($text{'config_year'},
                      [ 3, $text{'config_year3'} ] ]));
 
 # Client hosts to skip
-$skiphosts = &find_value("SkipHosts", $conf);
+my $skiphosts = &find_value("SkipHosts", $conf);
 print &ui_table_row($text{'config_skiphosts'},
 	&ui_opt_textbox("skiphosts", $skiphosts, 40, $text{'config_none'}));
 
 # Browsers to skip
-$skipagents = &find_value("SkipUserAgents", $conf);
+my $skipagents = &find_value("SkipUserAgents", $conf);
 print &ui_table_row($text{'config_skipagents'},
 	&ui_opt_textbox("skipagents", $skipagents, 40, $text{'config_none'}));
 
 # Files to skip
-$skipfiles = &find_value("SkipFiles", $conf);
+my $skipfiles = &find_value("SkipFiles", $conf);
 print &ui_table_row($text{'config_skipfiles'},
 	&ui_radio("skipfiles_def", $skipfiles ? 0 : 1,
 		  [ [ 1, $text{'config_none'} ],
@@ -56,19 +60,19 @@ print &ui_table_row($text{'config_skipfiles'},
 		     5, 60));
 
 # File types to exclude
-$notpage = &find_value("NotPageList", $conf);
+my $notpage = &find_value("NotPageList", $conf);
 print &ui_table_row($text{'config_notpage'},
 	&ui_opt_textbox("notpage", $notpage, 60,
 	    $text{'default'}." (css js class gif jpg jpeg png bmp ico)<br>"));
 
 # HTTP codes to include
-$httpcodes = &find_value("ValidHTTPCodes", $conf);
+my $httpcodes = &find_value("ValidHTTPCodes", $conf);
 print &ui_table_row($text{'config_httpcodes'},
 	&ui_opt_textbox("httpcodes", $httpcodes, 40,
 		$text{'default'}." (200 304)"));
 
 # Framed report UI
-$frames = &find_value("UseFramesWhenCGI", $conf);
+my $frames = &find_value("UseFramesWhenCGI", $conf);
 print &ui_table_row($text{'config_frames'},
 	&ui_select("frames", $frames,
 		   [ [ undef, $text{'default'} ],
@@ -78,10 +82,10 @@ print &ui_table_row($text{'config_frames'},
 print &ui_table_hr();
 
 # Detection levels
-foreach $dt ("LevelForRobotsDetection", "LevelForBrowsersDetection",
-	     "LevelForOSDetection", "LevelForRefererAnalyze") {
-	$v = &find_value($dt, $conf);
-	$n = lc($dt); $n =~ s/^LevelFor//i;
+foreach my $dt ("LevelForRobotsDetection", "LevelForBrowsersDetection",
+	        "LevelForOSDetection", "LevelForRefererAnalyze") {
+	my $v = &find_value($dt, $conf);
+	my $n = lc($dt); $n =~ s/^LevelFor//i;
 	print &ui_table_row($text{'config_'.$n},
 		&ui_select($n, $v, [ [ '', $text{'default'} ],
 				     [ 0, $text{'config_level0'} ],
@@ -92,12 +96,12 @@ foreach $dt ("LevelForRobotsDetection", "LevelForBrowsersDetection",
 print &ui_hidden_table_end();
 
 # Enabled plugins
-@plugins = &find_values("LoadPlugin", $conf);
-@allplugins = &list_all_plugins();
+my @plugins = &find_values("LoadPlugin", $conf);
+my @allplugins = &list_all_plugins();
 if (@allplugins) {
 	print &ui_hidden_table_start($text{'config_plugins'}, "width=100%",
 				     2, "plugins", 0);
-	@table = ( );
+	my @table = ( );
 	foreach my $p (@allplugins) {
 		push(@table, [
 			{ 'type' => 'checkbox', 'name' => 'p',

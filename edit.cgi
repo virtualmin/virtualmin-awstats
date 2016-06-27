@@ -1,9 +1,13 @@
 #!/usr/local/bin/perl
 # Show options for one AWstats domain
+use strict;
+use warnings;
+our (%access, %text, %in);
 
 require './virtualmin-awstats-lib.pl';
 &foreign_require("cron", "cron-lib.pl");
 &ReadParse();
+my $conf;
 if ($in{'new'}) {
 	$access{'create'} || &error($text{'edit_ecannot2'});
 	&ui_print_header(undef, $text{'edit_title1'}, "");
@@ -11,6 +15,7 @@ if ($in{'new'}) {
 else {
 	$conf = &get_config($in{'dom'});
 	&can_domain($in{'dom'}) || &error($text{'edit_ecannot'});
+	my $d;
 	if (&foreign_check("virtual-server")) {
 		&foreign_require("virtual-server", "virtual-server-lib.pl");
 		$d = &virtual_server::get_domain_by("dom", $in{'dom'});
@@ -36,8 +41,9 @@ else {
 	}
 
 # Show log file (if editable)
-$log = &find_value("LogFile", $conf);
+my $log = &find_value("LogFile", $conf);
 if ($in{'new'} || $access{'editlog'}) {
+	my $logcmd;
 	if ($log =~ s/\s*\|\s*$//) {
 		$logcmd = 1;
 		}
@@ -54,28 +60,28 @@ else {
 	}
 
 # Show log format
-$format = &find_value("LogFormat", $conf);
-$formatnum = $in{'new'} ? 4 : $format =~ /^\d+$/ ? $format : 0;
+my $format = &find_value("LogFormat", $conf);
+my $formatnum = $in{'new'} ? 4 : $format =~ /^\d+$/ ? $format : 0;
 print &ui_table_row($text{'edit_format'},
 	    &ui_select("format", $formatnum,
 		[ map { [ $_, $text{'edit_format'.$_} ] } (1..4, 0) ])."<br>".
 	    &ui_textbox("other", $formatnum == 0 ? $format : undef, 50));
 
 # Destination directory
-$data = &find_value("DirData", $conf);
+my $data = &find_value("DirData", $conf);
 print &ui_table_row($text{'edit_data'},
 		    &ui_textbox("data", $data, 40)."\n".
 		    &file_chooser_button("data", 1));
 
 # Run as user
-$user = &get_run_user($in{'dom'});
+my $user = &get_run_user($in{'dom'});
 if ($access{'user'} eq '*') {
 	# Can select any user
 	print &ui_table_row($text{'edit_user'},
 			    &ui_user_textbox("user", $user));
 	}
 else {
-	@users = split(/\s+/, $access{'user'});
+	my @users = split(/\s+/, $access{'user'});
 	if (@users == 1) {
 		# Cannot select any but one
 		print &ui_table_row($text{'edit_user'}, "<tt>$users[0]</tt>");
@@ -91,7 +97,7 @@ else {
 
 # Show section for schedule
 print &ui_table_hr();
-$job = &find_cron_job($in{'dom'});
+my $job = &find_cron_job($in{'dom'});
 print &ui_table_row($text{'edit_sched'},
 		    &ui_radio("sched", $job ? 1 : 0,
 			      [ [ 0, $text{'edit_sched0'} ],
