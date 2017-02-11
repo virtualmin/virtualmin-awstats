@@ -463,8 +463,6 @@ if ($d->{'web'}) {
 							$vconf, $conf);
 				&flush_file_lines($virt->{'file'});
 				&virtual_server::register_post_action(
-				    defined(&main::restart_apache) ?
-				     \&main::restart_apache :
 				     \&virtual_server::restart_apache);
 				}
 			}
