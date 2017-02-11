@@ -1,19 +1,24 @@
 # Functions for configuring AWstats
+use strict;
+use warnings;
+our (%access, %config);
+our $module_config_directory;
+our %get_config_cache;
 
 BEGIN { push(@INC, ".."); };
 eval "use WebminCore;";
 &init_config();
 %access = &get_module_acl();
 
-$cron_cmd = "$module_config_directory/awstats.pl";
-$run_as_file = "$module_config_directory/runas";
+our $cron_cmd = "$module_config_directory/awstats.pl";
+our $run_as_file = "$module_config_directory/runas";
 
 # list_configs()
 # Returns a list of domains for which AWstats is configured
 sub list_configs
 {
-local @rv;
-local $dir = &translate_filename($config{'config_dir'});
+my @rv;
+my $dir = &translate_filename($config{'config_dir'});
 opendir(DIR, $dir);
 foreach my $f (readdir(DIR)) {
 	if ($f =~ /^awstats\.(\S+)\.conf$/ && !-l "$dir/$f") {
@@ -29,11 +34,12 @@ return @rv;
 # values.
 sub get_config
 {
-local ($dom) = @_;
+my ($dom) = @_;
 if (!defined($get_config_cache{$dom})) {
-	local @rv;
-	local $lnum = 0;
-	local $cfile = &get_config_file($dom);
+	my @rv;
+	my $lnum = 0;
+	my $cfile = &get_config_file($dom);
+	no strict "subs"; # XXX Lexical?
 	&open_readfile(FILE, $cfile) || &error("Failed to open $cfile : $!");
 	while(<FILE>) {
 		s/\r|\n//g;
@@ -49,6 +55,7 @@ if (!defined($get_config_cache{$dom})) {
 		$lnum++;
 		}
 	close(FILE);
+	use strict "subs";
 	$get_config_cache{$dom} = \@rv;
 	}
 return $get_config_cache{$dom};
@@ -65,8 +72,8 @@ return "$config{'config_dir'}/awstats.$_[0].conf";
 # Returns the value of some AWstats directive
 sub find_value
 {
-local ($name, $conf) = @_;
-local ($dir) = grep { lc($_->{'name'}) eq lc($name) } @$conf;
+my ($name, $conf) = @_;
+my ($dir) = grep { lc($_->{'name'}) eq lc($name) } @$conf;
 return $dir ? $dir->{'value'} : undef;
 }
 
@@ -74,8 +81,8 @@ return $dir ? $dir->{'value'} : undef;
 # Returns all values for some directive
 sub find_values
 {
-local ($name, $conf) = @_;
-local @dirs = grep { lc($_->{'name'}) eq lc($name) } @$conf;
+my ($name, $conf) = @_;
+my @dirs = grep { lc($_->{'name'}) eq lc($name) } @$conf;
 return map { $_->{'value'} } @dirs;
 }
 
@@ -83,11 +90,11 @@ return map { $_->{'value'} } @dirs;
 # Updates some value in the AWstats config
 sub save_directive
 {
-local ($conf, $dom, $name, $value) = @_;
-local $file = &get_config_file($dom);
-local $lref = &read_file_lines($file);
-local ($dir) = grep { lc($_->{'name'}) eq lc($name) } @$conf;
-local $line;
+my ($conf, $dom, $name, $value) = @_;
+my $file = &get_config_file($dom);
+my $lref = &read_file_lines($file);
+my ($dir) = grep { lc($_->{'name'}) eq lc($name) } @$conf;
+my $line;
 if (defined($value)) {
 	$line = $value =~ /\s/ && $value =~ /"/ ?
 		"$name='$value'" :
@@ -119,18 +126,18 @@ elsif (!$dir && defined($value)) {
 # Updates all values for some named directive in the config file
 sub save_directives
 {
-local ($conf, $dom, $name, $values) = @_;
-local @values = @$values;
-local $file = &get_config_file($dom);
-local $lref = &read_file_lines($file);
+my ($conf, $dom, $name, $values) = @_;
+my @values = @$values;
+my $file = &get_config_file($dom);
+my $lref = &read_file_lines($file);
 
 foreach my $l (@$lref) {
 	if ($l =~ /^(#*)\s*\Q$name\E\s*=\s*(.*)/i) {
 		# Found an existing line, perhaps commented
-		local ($cmt, $oldv) = ($1, $2);
+		my ($cmt, $oldv) = ($1, $2);
 		$oldv = $oldv =~ /^"(.*)"/ ? $1 :
 			$oldv =~ /^'(.*)'/ ? $1 : $oldv;
-		local $idx = &indexof($oldv, @values);
+		my $idx = &indexof($oldv, @values);
 		if ($idx >= 0 && !$cmt) {
 			# Already enabled, so do nothing
 			}
@@ -150,7 +157,7 @@ foreach my $l (@$lref) {
 
 # Append any values not in the file at all yet
 foreach my $v (@values) {
-	$line = $v =~ /\s/ && $v =~ /"/ ?
+	my $line = $v =~ /\s/ && $v =~ /"/ ?
 		"$name='$v'" :
 		$v =~ /\s/ ? "$name=\"$v\"" : "$name=$v";
 	push(@$lref, $line);
@@ -161,7 +168,7 @@ foreach my $v (@values) {
 # Deletes the config for one domain
 sub delete_config
 {
-local ($dom) = @_;
+my ($dom) = @_;
 &unlink_logged(&get_config_file("www.".$dom));
 &unlink_logged(&get_config_file($dom));
 }
@@ -171,7 +178,7 @@ local ($dom) = @_;
 sub can_domain
 {
 return 1 if ($access{'domains'} eq '*');
-local %can = map { $_, 1 } split(/\s+/, $access{'domains'});
+my %can = map { $_, 1 } split(/\s+/, $access{'domains'});
 return $can{$_[0]};
 }
 
@@ -180,7 +187,7 @@ return $can{$_[0]};
 sub awstats_model_file
 {
 foreach my $f ("awstats.model.conf", "awstats.conf") {
-	local $p = "$config{'config_dir'}/$f";
+	my $p = "$config{'config_dir'}/$f";
 	return $p if (-r $p);
 	}
 return undef;
@@ -205,9 +212,9 @@ return undef;
 # Finds the Cron job that generates stats for some domain
 sub find_cron_job
 {
-local ($dom) = @_;
-local @jobs = &cron::list_cron_jobs();
-local ($job) = grep { $_->{'user'} eq 'root' &&
+my ($dom) = @_;
+my @jobs = &cron::list_cron_jobs();
+my ($job) = grep { $_->{'user'} eq 'root' &&
 		      $_->{'command'} =~ /^\Q$cron_cmd\E\s+(--output\s+\S+\s+)?\Q$dom\E$/ } @jobs;
 return $job;
 }
@@ -217,7 +224,7 @@ return $job;
 # internal list
 sub get_run_user
 {
-local %runas;
+my %runas;
 &read_file_cached($run_as_file, \%runas);
 return $runas{$_[0]} || "root";
 }
@@ -225,7 +232,7 @@ return $runas{$_[0]} || "root";
 # save_run_user(domain, user)
 sub save_run_user
 {
-local %runas;
+my %runas;
 &read_file_cached($run_as_file, \%runas);
 $runas{$_[0]} = $_[1];
 &write_file($run_as_file, \%runas);
@@ -234,7 +241,7 @@ $runas{$_[0]} = $_[1];
 # rename_run_domain(domain, olddomain)
 sub rename_run_domain
 {
-local %runas;
+my %runas;
 &read_file_cached($run_as_file, \%runas);
 if ($runas{$_[1]}) {
 	$runas{$_[0]} = $runas{$_[1]};
@@ -246,7 +253,7 @@ if ($runas{$_[1]}) {
 # delete_run_user(domain)
 sub delete_run_user
 {
-local %runas;
+my %runas;
 &read_file_cached($run_as_file, \%runas);
 delete($runas{$_[0]});
 &write_file($run_as_file, \%runas);
@@ -257,27 +264,27 @@ delete($runas{$_[0]});
 # log files (or at least those that have changed since the last run)
 sub generate_report
 {
-local ($dom, $fh, $esc) = @_;
-local $user = &get_run_user($dom);
-local $cmd = "$config{'awstats'} -config=$dom -update";
+my ($dom, $fh, $esc) = @_;
+my $user = &get_run_user($dom);
+my $cmd = "$config{'awstats'} -config=$dom -update";
 $ENV{'GATEWAY_INTERFACE'} = undef;
 
 # Find all the log files
-local $conf = &get_config($dom);
-local $baselog = &find_value("LogFile", $conf);
-local @all = $baselog =~ /\|\s*$/ ? ( undef ) : &all_log_files($baselog);
+my $conf = &get_config($dom);
+my $baselog = &find_value("LogFile", $conf);
+my @all = $baselog =~ /\|\s*$/ ? ( undef ) : &all_log_files($baselog);
 
 # Find last modified time for each log file
-local ($a, %mtime);
-foreach $a (@all) {
-	local @st = stat($a);
+my ($a, %mtime);
+foreach my $a (@all) {
+	my @st = stat($a);
 	$mtime{$a} = $st[9];
 	}
 
 # Do each log file that we haven't already done
-local $anyok = 0;
-foreach $a (sort { $mtime{$a} <=> $mtime{$b} } @all) {
-	local $fullcmd = $cmd;
+my $anyok = 0;
+foreach my $a (sort { $mtime{$a} <=> $mtime{$b} } @all) {
+	my $fullcmd = $cmd;
 	if ($a =~ /\.gz$/i) {
 		$fullcmd .= " -logfile=".quotemeta("gunzip -c $a |");
 		}
@@ -294,6 +301,7 @@ foreach $a (sort { $mtime{$a} <=> $mtime{$b} } @all) {
 		$fullcmd = &command_as_user($user, 0, $fullcmd);
 		}
 	$fullcmd .= " 2>&1";
+	no strict "subs";
 	&open_execute_command(OUT, $fullcmd, 1, 0);
 	while(<OUT>) {
 		if ($esc) {
@@ -304,13 +312,14 @@ foreach $a (sort { $mtime{$a} <=> $mtime{$b} } @all) {
 			}
 		}
 	close(OUT);
+	use strict "subs";
 	$anyok = 1 if (!$?);
 	&additional_log("exec", undef, $fullcmd);
 	}
 
 # Link all awstatsXXXX.domain.txt files to awstatsXXXX.www.domain.txt , so
 # that the URL www.domain.com/awstats/awstats.pl works
-local $dirdata = &find_value("DirData", $conf);
+my $dirdata = &find_value("DirData", $conf);
 &link_domain_alias_data($dom, $dirdata, $user);
 
 return $anyok;
@@ -352,9 +361,9 @@ return $count;
 # alias link up any aliases of this domain
 sub link_domain_alias_data
 {
-local ($dom, $dirdata, $user) = @_;
-local @otherdoms = ( "www.".$dom );
-local $d;
+my ($dom, $dirdata, $user) = @_;
+my @otherdoms = ( "www.".$dom );
+my $d;
 if (&foreign_check("virtual-server")) {
 	&foreign_require("virtual-server", "virtual-server-lib.pl");
 	$d = &virtual_server::get_domain_by("dom", $dom);
@@ -369,7 +378,7 @@ opendir(DIRDATA, $dirdata);
 foreach my $f (readdir(DIRDATA)) {
 	if ($f =~ /^awstats(\d+)\.\Q$dom\E\.txt$/) {
 		foreach my $other (@otherdoms) {
-			local $wwwf = "awstats".$1.".".$other.".txt";
+			my $wwwf = "awstats".$1.".".$other.".txt";
 			next if (-r "$dirdata/$wwwf");
 			if ($d) {
 				&virtual_server::symlink_file_as_domain_user(
@@ -390,7 +399,7 @@ closedir(DIRDATA);
 # Remove any symbolic links for AWstats data files for some domain
 sub unlink_domain_alias_data
 {
-local ($aliasdom, $dirdata) = @_;
+my ($aliasdom, $dirdata) = @_;
 opendir(DIRDATA, $dirdata);
 foreach my $f (readdir(DIRDATA)) {
 	if ($f =~ /^awstats(\d+)\.(www\.)?\Q$aliasdom\E\.txt$/) {
@@ -406,11 +415,11 @@ closedir(DIRDATA);
 sub all_log_files
 {
 $_[0] =~ /^(.*)\/([^\/]+)$/;
-local $dir = $1;
-local $base = $2;
-local ($f, @rv);
+my $dir = $1;
+my $base = $2;
+my ($f, @rv);
 opendir(DIR, $dir);
-foreach $f (readdir(DIR)) {
+foreach my $f (readdir(DIR)) {
 	if ($f =~ /^\Q$base\E/ && -f "$dir/$f") {
 		push(@rv, "$dir/$f");
 		}
@@ -423,23 +432,25 @@ return @rv;
 # Copy awstats.pl and associated lib and data files into a domain's directory
 sub setup_awstats_commands
 {
-local ($d) = @_;
+my ($d) = @_;
 
 # Create an awstats.pl wrapper in the cgi-bin directory. Linking doesn't work,
 # due to suexec restrictions
-local $cgidir = &get_cgidir($d);
-local $wrapper = "$cgidir/awstats.pl";
+my $cgidir = &get_cgidir($d);
+my $wrapper = "$cgidir/awstats.pl";
 &lock_file($wrapper);
+no strict "subs"; # XXX Lexical?
 &virtual_server::open_tempfile_as_domain_user($d, WRAPPER, ">$wrapper");
 &print_tempfile(WRAPPER, "#!/bin/sh\n");
 &print_tempfile(WRAPPER, "exec $config{'awstats'}\n");
 &virtual_server::close_tempfile_as_domain_user($d, WRAPPER);
+use strict "subs";
 &virtual_server::set_permissions_as_domain_user($d, 0755, $wrapper);
 &unlock_file($wrapper);
 
 # Link other directories from source dir
 foreach my $dir ("lib", "lang", "plugins") {
-	local $src;
+	my $src;
 	if ($config{$dir} && -d $config{$dir}) {
 		# Specific directory is in config .. use it
 		$src = $config{$dir};
@@ -460,11 +471,12 @@ foreach my $dir ("lib", "lang", "plugins") {
 	}
 
 # Copy over icons directory
-local $htmldir = &get_htmldir($d);
-local @dirs = ( "icon", "awstats-icon", "awstatsicons" );
+my $htmldir = &get_htmldir($d);
+my @dirs = ( "icon", "awstats-icon", "awstatsicons" );
 if (!-d "$htmldir/$dirs[0]") {
 	&virtual_server::unlink_logged_as_domain_user($d,
 		map { "$htmldir/$_" } @dirs);
+	no warnings "once"; # XXX No idea how to predeclare this?
 	if ($virtual_server::config{'allow_symlinks'} eq '1') {
 		# Can still use links
 		foreach my $dir (@dirs) {
@@ -482,6 +494,7 @@ if (!-d "$htmldir/$dirs[0]") {
 				$d, $dirs[0], "$htmldir/$dir");
 			}
 		}
+	use warnings "once";
 	}
 
 return undef;
@@ -491,7 +504,7 @@ return undef;
 # Returns the directory in which plugins are stored
 sub get_plugins_dir
 {
-local $pdir = $config{'plugins'};
+my $pdir = $config{'plugins'};
 if ($pdir && -d "$pdir/plugins") {
 	$pdir .= "/plugins";
 	}
@@ -507,8 +520,8 @@ return $pdir;
 # Returns a list of all available plugins, without the .pm extensions
 sub list_all_plugins
 {
-local $pdir = &get_plugins_dir();
-local @rv;
+my $pdir = &get_plugins_dir();
+my @rv;
 opendir(PLUGINS, $pdir);
 foreach my $f (readdir(PLUGINS)) {
 	if ($f =~ /^(\S+)\.pm$/) {
@@ -523,10 +536,10 @@ return @rv;
 # Returns a human-readable description for some plugin
 sub get_plugin_desc
 {
-local ($name) = @_;
-local $file = &get_plugins_dir()."/".$name.".pm";
-local $lref = &read_file_lines($file, 1);
-local @cmts;
+my ($name) = @_;
+my $file = &get_plugins_dir()."/".$name.".pm";
+my $lref = &read_file_lines($file, 1);
+my @cmts;
 foreach my $l (@$lref) {
 	if ($l =~ /^\#+\s*(.*)/ &&
 	    $l !~ /^#!/ &&

@@ -1,9 +1,13 @@
 #!/usr/local/bin/perl
 # Refresh the AWstats report, from a cron job
+use strict;
+use warnings;
 
-$no_acl_check++;
+our $no_acl_check++;
+
 require './virtualmin-awstats-lib.pl';
 
+my $debug;
 if ($ARGV[0] eq "--debug") {
 	# Enable debug mode, which shows the output from the report command
 	shift(@ARGV);
@@ -19,12 +23,12 @@ if ($ARGV[0] eq "--output") {
 $dname = shift(@ARGV);
 
 if ($debug) {
-	&generate_report($dname, STDERR, 0);
+	&generate_report($ARGV[0], *STDERR, 0);
 	}
 else {
-	open(NULL, ">/dev/null");
-	&generate_report($dname, NULL, 0);
-	close(NULL);
+	open(my $NULL, ">", "/dev/null");
+	&generate_report($ARGV[0], $NULL, 0);
+	close($NULL);
 	}
 if ($output) {
 	&generate_html($dname, $output);

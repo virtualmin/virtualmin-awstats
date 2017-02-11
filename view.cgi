@@ -1,17 +1,21 @@
 #!/usr/local/bin/perl
 # Run AWstats to show the stats for some domain
+use strict;
+use warnings;
+our (%text, %in, %config);
 
 require './virtualmin-awstats-lib.pl';
 &ReadParse();
 $in{'config'} =~ s/\0.*$//g;
 &can_domain($in{'config'}) || &error($text{'view_ecannot'});
-$conf = &get_config($in{'config'});
-$prog = &find_value("WrapperScript", $conf);
+my $conf = &get_config($in{'config'});
+my $prog = &find_value("WrapperScript", $conf);
 $prog ||= "awstats.pl";
-$icons = &find_value("DirIcons", $conf);
+my $icons = &find_value("DirIcons", $conf);
 
 $ENV{'SERVER_NAME'} = $in{'config'};
 $ENV{'GATEWAY_INTERFACE'} = "CGI";
+no strict "subs"; # XXX Lexical?
 &open_execute_command(AWSTATS, $config{'awstats'}, 1, 1);
 while(<AWSTATS>) {
 	# Replace references to awstats.pl with links to this CGI
@@ -33,4 +37,4 @@ while(<AWSTATS>) {
 	print;
 	}
 close(AWSTATS);
-
+use strict "subs";
