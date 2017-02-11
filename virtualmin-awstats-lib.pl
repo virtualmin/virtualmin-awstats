@@ -208,7 +208,7 @@ sub find_cron_job
 local ($dom) = @_;
 local @jobs = &cron::list_cron_jobs();
 local ($job) = grep { $_->{'user'} eq 'root' &&
-		      $_->{'command'} eq "$cron_cmd $dom" } @jobs;
+		      $_->{'command'} =~ /^\Q$cron_cmd\E\s+(--output\s+\S+\s+)?\Q$dom\E$/ } @jobs;
 return $job;
 }
 
@@ -314,6 +314,20 @@ local $dirdata = &find_value("DirData", $conf);
 &link_domain_alias_data($dom, $dirdata, $user);
 
 return $anyok;
+}
+
+# generate_html(domain, dir)
+# Use the data files for some domain to generate a static HTML report
+sub generate_html
+{
+local ($dom, $dir) = @_;
+local $user = &get_run_user($dom);
+local $cmd = "$config{'awstats'} -config=$dom -output -staticlinks >$dir/index.html";
+$ENV{'GATEWAY_INTERFACE'} = undef;
+if ($user ne "root") {
+	$cmd = &command_as_user($user, 0, $cmd);
+	}
+&execute_command($cmd);
 }
 
 # clear_data_directory(dir)
