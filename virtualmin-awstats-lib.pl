@@ -275,10 +275,10 @@ my $baselog = &find_value("LogFile", $conf);
 my @all = $baselog =~ /\|\s*$/ ? ( undef ) : &all_log_files($baselog);
 
 # Find last modified time for each log file
-my ($a, %mtime);
-foreach my $a (@all) {
-	my @st = stat($a);
-	$mtime{$a} = $st[9];
+my ($all, %mtime);
+foreach my $all (@all) {
+	my @st = stat($all);
+	$mtime{$all} = $st[9];
 	}
 
 # Do each log file that we haven't already done
@@ -329,9 +329,9 @@ return $anyok;
 # Use the data files for some domain to generate a static HTML report
 sub generate_html
 {
-local ($dom, $dir) = @_;
-local $user = &get_run_user($dom);
-local $cmd = "$config{'awstats'} -config=$dom -output -staticlinks >$dir/index.html";
+my ($dom, $dir) = @_;
+my $user = &get_run_user($dom);
+my $cmd = "$config{'awstats'} -config=$dom -output -staticlinks >$dir/index.html";
 $ENV{'GATEWAY_INTERFACE'} = undef;
 if ($user ne "root") {
 	$cmd = &command_as_user($user, 0, $cmd);

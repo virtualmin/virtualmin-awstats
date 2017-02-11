@@ -128,19 +128,28 @@ my $dir = "$d->{'home'}/awstats";
 my $outdir = &virtual_server::public_html_dir($d)."/awstats";
 
 # Work out the log format
-my ($virt, $vconf) = &virtual_server::get_apache_virtual($d->{'dom'}, $d->{'web_port'});
-my $clog = &apache::find_directive("CustomLog", $vconf);
-my $fmt = $config{'format'} ? $config{'format'}
-			       : $clog =~ /combined$/i ? 1 : 4;
+my $fmt;
+if ($d->{'web'}) {
+	# Get from Apache config
+	my ($virt, $vconf) = &virtual_server::get_apache_virtual(
+				$d->{'dom'}, $d->{'web_port'});
+	my $clog = &apache::find_directive("CustomLog", $vconf);
+	$fmt = $config{'format'} ? $config{'format'}
+				 : $clog =~ /combined$/i ? 1 : 4;
+	}
+else {
+	# Assume combined for other webservers
+	$fmt = 1;
+	}
 
 # Update settings to match server
 &lock_file(&get_config_file($d->{'dom'}));
 my $conf = &get_config($d->{'dom'});
 &save_directive($conf, $d->{'dom'}, "SiteDomain", "\"$d->{'dom'}\"");
 my $qd = quotemeta($d->{'dom'});
-my $aliases = &virtual_server::substitute_template($config{'aliases'},$d);
+my $aliases = &virtual_server::substitute_template($config{'aliases'}, $d);
 &save_directive($conf, $d->{'dom'}, "HostAliases",
-		"REGEX[$qd\$] $aliases");
+		"REGEX[$qd\$]".($aliases ? " $aliases" : ""));
 &save_directive($conf, $d->{'dom'}, "LogFile",
 	&virtual_server::get_website_log($d));
 &save_directive($conf, $d->{'dom'}, "DirData", $dir);
