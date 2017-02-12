@@ -304,10 +304,10 @@ if ($d->{'dom'} ne $oldd->{'dom'}) {
 	# Update hostname in file
 	&lock_file($newfile);
 	my $conf = &get_config($d->{'dom'});
-	foreach my $d ("SiteDomain", "HostAliases") {
-		my $v = &find_value($d, $conf);
+	foreach my $dir ("SiteDomain", "HostAliases") {
+		my $v = &find_value($dir, $conf);
 		$v =~ s/$oldd->{'dom'}/$d->{'dom'}/g;
-		&save_directive($conf, $d->{'dom'}, $d, $v);
+		&save_directive($conf, $d->{'dom'}, $dir, $v);
 		}
 	&flush_file_lines();
 	&unlock_file($newfile);
@@ -335,10 +335,10 @@ if ($d->{'dom'} ne $oldd->{'dom'}) {
 
 	# Fix up domain in cron job
 	&virtual_server::obtain_lock_cron($d);
-	&foreign_require("cron", "cron-lib.pl");
+	&foreign_require("cron");
 	my $job = &find_cron_job($oldd->{'dom'});
 	if ($job) {
-		$job->{'command'} = "$cron_cmd $d->{'dom'}";
+		$job->{'command'} =~ s/\Q$oldd->{'dom'}\E$/$d->{'dom'}/;
 		&cron::change_cron_job($job);
 		}
 	&virtual_server::release_lock_cron($d);
