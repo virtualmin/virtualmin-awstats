@@ -8,6 +8,7 @@ our $no_acl_check++;
 require './virtualmin-awstats-lib.pl';
 
 my $debug;
+my $output;
 if ($ARGV[0] eq "--debug") {
 	# Enable debug mode, which shows the output from the report command
 	shift(@ARGV);
@@ -20,7 +21,7 @@ if ($ARGV[0] eq "--output") {
 	-d $output || die "Missing directory $output";
 	}
 @ARGV == 1 || die "usage: awstats.pl [--debug] [--output dir] <domainname>";
-$dname = shift(@ARGV);
+my $dname = shift(@ARGV);
 
 if ($debug) {
 	&generate_report($ARGV[0], *STDERR, 0);
