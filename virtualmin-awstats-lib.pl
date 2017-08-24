@@ -215,7 +215,7 @@ sub find_cron_job
 my ($dom) = @_;
 my @jobs = &cron::list_cron_jobs();
 my ($job) = grep { $_->{'user'} eq 'root' &&
-		      $_->{'command'} =~ /^\Q$cron_cmd\E\s+(--output\s+\S+\s+)?\Q$dom\E$/ } @jobs;
+		   $_->{'command'} =~ /^\Q$cron_cmd\E\s+(--output\s+\S+\s+)?\Q$dom\E$/ } @jobs;
 return $job;
 }
 
@@ -224,9 +224,11 @@ return $job;
 # internal list
 sub get_run_user
 {
+my ($dname) = @_;
+$dname ||= "";
 my %runas;
 &read_file_cached($run_as_file, \%runas);
-return $runas{$_[0]} || "root";
+return $runas{$dname} || "root";
 }
 
 # save_run_user(domain, user)

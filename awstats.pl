@@ -24,11 +24,11 @@ if ($ARGV[0] eq "--output") {
 my $dname = shift(@ARGV);
 
 if ($debug) {
-	&generate_report($ARGV[0], *STDERR, 0);
+	&generate_report($dname, *STDERR, 0);
 	}
 else {
 	open(my $NULL, ">", "/dev/null");
-	&generate_report($ARGV[0], $NULL, 0);
+	&generate_report($dname, $NULL, 0);
 	close($NULL);
 	}
 if ($output) {
