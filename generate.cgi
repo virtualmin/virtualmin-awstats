@@ -8,6 +8,7 @@ require './virtualmin-awstats-lib.pl';
 &ReadParse();
 &error_setup($text{'generate_err'});
 &can_domain($in{'dom'}) || &error($text{'edit_ecannot'});
+&foreign_require("virtual-server");
 my $d = &virtual_server::get_domain_by("dom", $in{'dom'});
 
 &ui_print_unbuffered_header(undef, $text{'gen_title'}, "");
@@ -24,7 +25,7 @@ if ($in{'wipe'} && $data) {
 print &text('gen_doing', "<tt>$in{'dom'}</tt>", "<tt>$log</tt>"),"<br>\n";
 print "<pre>";
 my $ok = &generate_report($in{'dom'}, *STDOUT, 1);
-if ($ok && !$d->{'web'}) {
+if ($ok && !&virtual_server::domain_has_website($d)) {
 	# Also re-generate static HTML
 	my $outdir = &virtual_server::public_html_dir($d)."/awstats";
 	&generate_html($in{'dom'}, $outdir);
