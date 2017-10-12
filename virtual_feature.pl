@@ -444,7 +444,7 @@ foreach my $dir ("icon", "awstats-icon", "awstatsicons") {
 	elsif (-d "$htmldir/$dir") {
 		# Might be a copy of the icon dir
 		my @srcs = glob("$config{'icons'}/*");
-		my @dsts = glob("$htmldir/$dir");
+		my @dsts = glob("$htmldir/$dir/*");
 		if (scalar(@srcs) == scalar(@dsts)) {
 			&virtual_server::unlink_logged_as_domain_user($d,"$htmldir/$dir");
 			}
