@@ -437,10 +437,18 @@ foreach my $dir ("lib", "lang", "plugins") {
 	&virtual_server::unlink_logged_as_domain_user($d, "$cgidir/$dir");
 	}
 my $htmldir = &get_htmldir($d);
-if (-l "$htmldir/icon") {
-	&virtual_server::unlink_logged_as_domain_user($d, "$htmldir/icon");
-	&virtual_server::unlink_logged_as_domain_user($d, "$htmldir/awstats-icon");
-	&virtual_server::unlink_logged_as_domain_user($d, "$htmldir/awstatsicons");
+foreach my $dir ("icon", "awstats-icon", "awstatsicons") {
+	if (-l "$htmldir/$dir") {
+		&virtual_server::unlink_logged_as_domain_user($d, "$htmldir/$dir");
+		}
+	elsif (-d "$htmldir/$dir") {
+		# Might be a copy of the icon dir
+		my @srcs = glob("$config{'icons'}/*");
+		my @dsts = glob("$htmldir/$dir");
+		if (scalar(@srcs) == scalar(@dsts)) {
+			&virtual_server::unlink_logged_as_domain_user($d,"$htmldir/$dir");
+			}
+		}
 	}
 
 # Remove script alias for /awstats
