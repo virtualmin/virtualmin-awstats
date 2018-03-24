@@ -23,6 +23,13 @@ if ($ARGV[0] eq "--output") {
 @ARGV == 1 || die "usage: awstats.pl [--debug] [--output dir] <domainname>";
 my $dname = shift(@ARGV);
 
+my $cfile = &get_config_file($dname);
+my $wwwcfile = &get_config_file("www.".$dname);
+if (!-l $wwwcfile) {
+	&unlink_logged($wwwcfile);
+	&symlink_logged($cfile, $wwwcfile);
+	}
+
 if ($debug) {
 	&generate_report($dname, *STDERR, 0);
 	}
