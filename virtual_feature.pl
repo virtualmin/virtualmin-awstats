@@ -377,7 +377,8 @@ if ($d->{'home'} ne $oldd->{'home'}) {
 	$changed++;
 	&$virtual_server::second_print($virtual_server::text{'setup_done'});
 	}
-if ($d->{'pass'} ne $oldd->{'pass'} && $d->{'web'}) {
+if (defined($d->{'pass'}) &&
+    $d->{'pass'} ne $oldd->{'pass'} && $d->{'web'}) {
 	# Password has changed .. update web password
 	if ($d->{'awstats_pass'}) {
 		&$virtual_server::first_print($text{'feat_modifypass'});
