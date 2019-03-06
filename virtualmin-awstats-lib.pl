@@ -376,9 +376,9 @@ if (&foreign_check("virtual-server")) {
 			}
 		}
 	}
-opendir(DIRDATA, $dirdata);
-foreach my $f (readdir(DIRDATA)) {
-	if ($f =~ /^awstats(\d+)\.\Q$dom\E\.txt$/) {
+if (opendir(DIRDATA, $dirdata)) {
+	foreach my $f (readdir(DIRDATA)) {
+		$f =~ /^awstats(\d+)\.\Q$dom\E\.txt$/ || next;
 		foreach my $other (@otherdoms) {
 			my $wwwf = "awstats".$1.".".$other.".txt";
 			next if (-r "$dirdata/$wwwf");
@@ -393,8 +393,8 @@ foreach my $f (readdir(DIRDATA)) {
 				}
 			}
 		}
+	closedir(DIRDATA);
 	}
-closedir(DIRDATA);
 }
 
 # unlink_domain_alias_data(domain-name, directory)
