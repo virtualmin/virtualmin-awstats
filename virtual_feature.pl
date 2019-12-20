@@ -171,14 +171,14 @@ if ($d->{'virt'}) {
 &save_run_user($d->{'dom'}, $d->{'user'});
 if (!$config{'nocron'}) {
 	my $job = { 'user' => 'root',
-		       'command' => "$cron_cmd ".
+		    'command' => "$cron_cmd ".
 			  ($d->{'web'} ? "" : "--output $outdir ").$d->{'dom'},
-		       'active' => 1,
-		       'mins' => int(rand()*60),
-		       'hours' => int(rand()*24),
-		       'days' => '*',
-		       'months' => '*',
-		       'weekdays' => '*' };
+		    'active' => 1,
+		    'mins' => int(rand()*60),
+		    'hours' => int(rand()*24),
+		    'days' => '*',
+		    'months' => '*',
+		    'weekdays' => '*' };
 	&cron::create_cron_job($job);
 	}
 &cron::create_wrapper($cron_cmd, $module_name, "awstats.pl");
@@ -219,9 +219,8 @@ else {
 
 # Setup password protection for awstats.pl
 my $tmpl = &virtual_server::get_template($d->{'template'});
-if ($d->{'web'} &&
-    ($tmpl->{$module_name.'passwd'} ||
-     $tmpl->{$module_name.'passwd'} eq '')) {
+my $p = $tmpl->{$module_name.'passwd'} || '';
+if ($d->{'web'} && $p ne '0') {
 	&$virtual_server::first_print($text{'feat_passwd'});
 	&virtual_server::obtain_lock_web($d);
 	my $added = 0;
