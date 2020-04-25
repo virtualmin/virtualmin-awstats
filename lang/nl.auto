@@ -1,0 +1,8 @@
+gen_wiping=Oude gegevensbestanden verwijderen in $1 ..
+gen_wipingdone=.. $1 bestanden verwijderd
+feat_label2=AWstats-rapportage
+feat_modifylog=Logbestand bijwerken in AWstats-configuratie.
+feat_module=AWstats Reporting (voor het bekijken van rapporten)
+config_regen=Bewaar en genereer rapport opnieuw
+config_wipe=Alle gegevensbestanden verwijderen en opnieuw genereren uit originele logboeken?
+config_below=Hieronder opgesomd ..
