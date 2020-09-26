@@ -1,10 +1,10 @@
-edit_sched0=Nein
-edit_title1=Erzeuge Report
-gen_title=Erzeuge Report
 index_awstats=AWstats
-index_report=Report
 index_sched=Zeitgesteuert?
+index_report=Report
 index_yes=Ja, $1
-links_config=AWstats Konfiguration
+edit_title1=Erzeuge Report
+edit_sched0=Nein
+gen_title=Erzeuge Report
 links_link=AWstats Report
 links_view=Zeige AWstats Report
+links_config=AWstats Konfiguration
