@@ -234,12 +234,12 @@ if ($d->{'web'} && $p ne '0') {
                 next if (!$virt);
 		my $lref = &read_file_lines($virt->{'file'});
 		splice(@$lref, $virt->{'eline'}, 0,
-		       "<Files awstats.pl>",
-		       "AuthName \"$d->{'dom'} statistics\"",
-		       "AuthType Basic",
-		       "AuthUserFile $passwd_file",
-		       "require valid-user",
-		       "</Files>");
+		       "    <Files awstats.pl>",
+		       "    AuthName \"$d->{'dom'} statistics\"",
+		       "    AuthType Basic",
+		       "    AuthUserFile $passwd_file",
+		       "    require valid-user",
+		       "    </Files>");
 		$added++;
 		&flush_file_lines($virt->{'file'});
 		undef(@apache::get_config_cache);
