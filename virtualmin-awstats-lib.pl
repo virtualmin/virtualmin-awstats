@@ -268,7 +268,7 @@ sub generate_report
 {
 my ($dom, $fh, $esc) = @_;
 my $user = &get_run_user($dom);
-my $cmd = "$config{'awstats'} -config=$dom -update";
+my $cmd = "$config{'awstats'} $config{'extraargs'} -config=$dom -update";
 $ENV{'GATEWAY_INTERFACE'} = undef;
 
 # Find all the log files
@@ -333,7 +333,7 @@ sub generate_html
 {
 my ($dom, $dir) = @_;
 my $user = &get_run_user($dom);
-my $cmd = "$config{'awstats'} -config=$dom -output -staticlinks >$dir/index.html";
+my $cmd = "$config{'awstats'} $config{'extraargs'} -config=$dom -output -staticlinks >$dir/index.html";
 $ENV{'GATEWAY_INTERFACE'} = undef;
 if ($user ne "root") {
 	$cmd = &command_as_user($user, 0, $cmd);
