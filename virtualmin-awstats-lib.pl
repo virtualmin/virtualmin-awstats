@@ -286,19 +286,42 @@ foreach my $all (@all) {
 # Do each log file that we haven't already done
 my $anyok = 0;
 foreach my $a (sort { $mtime{$a} <=> $mtime{$b} } @all) {
-	my $fullcmd = $cmd;
+	my $fullcmd = "";
+	my $paramcmd = "";
 	if ($a =~ /\.gz$/i) {
-		$fullcmd .= " -logfile=".quotemeta("gunzip -c $a |");
+		$paramcmd .= " -logfile=".quotemeta("gunzip -c $a |");
 		}
 	elsif ($a =~ /\.Z$/i) {
-		$fullcmd .= " -logfile=".quotemeta("uncompress -c $a |");
+		$paramcmd .= " -logfile=".quotemeta("uncompress -c $a |");
 		}
 	elsif ($a =~ /\.bz2$/i) {
-		$fullcmd .= " -logfile=".quotemeta("bunzip -c $a |");
+		$paramcmd .= " -logfile=".quotemeta("bunzip -c $a |");
 		}
 	elsif ($a) {
-		$fullcmd .= " -logfile=".quotemeta($a);
+		$paramcmd .= " -logfile=".quotemeta($a);
 		}
+	if($config{'byday'} eq '1') {
+		$fullcmd = $cmd." -databasebreak=day".$paramcmd;
+		if ($user ne "root") {
+			$fullcmd = &command_as_user($user, 0, $fullcmd);
+			}
+		$fullcmd .= " 2>&1";
+		no strict "subs";
+		&open_execute_command(OUT, $fullcmd, 1, 0);
+		while(<OUT>) {
+			if ($esc) {
+				print $fh &html_escape($_);
+				}
+			else {
+				print $fh $_;
+				}
+			}
+		close(OUT);
+		use strict "subs";
+		$anyok = 1 if (!$?);
+		&additional_log("exec", undef, $fullcmd);
+		}
+	$fullcmd = $cmd.$paramcmd;
 	if ($user ne "root") {
 		$fullcmd = &command_as_user($user, 0, $fullcmd);
 		}
@@ -333,6 +356,14 @@ sub generate_html
 {
 my ($dom, $dir) = @_;
 my $user = &get_run_user($dom);
+if($config{'byday'} eq '1') {
+	my $cmd = "$config{'awstats'} $config{'extraargs'} -databasebreak=day -config=$dom -output -staticlinks >$dir/index.html";
+	$ENV{'GATEWAY_INTERFACE'} = undef;
+	if ($user ne "root") {
+		$cmd = &command_as_user($user, 0, $cmd);
+		}
+	&execute_command($cmd);
+	}
 my $cmd = "$config{'awstats'} $config{'extraargs'} -config=$dom -output -staticlinks >$dir/index.html";
 $ENV{'GATEWAY_INTERFACE'} = undef;
 if ($user ne "root") {
