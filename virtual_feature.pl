@@ -109,9 +109,9 @@ if (!$model) {
 	&$virtual_server::second_print($text{'save_emodel'});
 	return 0;
 	}
-my $out = &backquote_logged("cp ".quotemeta($model)." ".quotemeta("$config{'config_dir'}/awstats.$d->{'dom'}.conf")." 2>&1");
-if ($?) {
-	&$virtual_server::second_print(&text('save_ecopy', "<tt>$out</tt>"));
+my $ok = &copy_source_dest($model, "$config{'config_dir'}/awstats.$d->{'dom'}.conf");
+if (!$ok) {
+	&$virtual_server::second_print(&text('save_ecopy', "<tt>$!</tt>"));
 	return 0;
 	}
 
