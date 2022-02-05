@@ -109,7 +109,8 @@ if (!$model) {
 	&$virtual_server::second_print($text{'save_emodel'});
 	return 0;
 	}
-my $ok = &copy_source_dest($model, "$config{'config_dir'}/awstats.$d->{'dom'}.conf");
+my $cfile = "$config{'config_dir'}/awstats.$d->{'dom'}.conf";
+my $ok = &copy_source_dest($model, $cfile);
 if (!$ok) {
 	&$virtual_server::second_print(&text('save_ecopy', "<tt>$!</tt>"));
 	return 0;
@@ -118,6 +119,7 @@ if (!$ok) {
 # Copy awstats.pl and associated files into the domain
 my $err = &setup_awstats_commands($d);
 if ($err) {
+	&unlink_file($cfile);
 	&$virtual_server::second_print($err);
 	return 0;
 	}
