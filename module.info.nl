@@ -1,1 +1,1 @@
-desc_nl=AWstats Rapportage
+desc_nl=AWStats Rapportage

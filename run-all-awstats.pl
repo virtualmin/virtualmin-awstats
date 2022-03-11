@@ -1,5 +1,5 @@
 #!/usr/local/bin/perl
-# Run AWstats reports for all virtual servers
+# Run AWStats reports for all virtual servers
 use strict;
 use warnings;
 our $module_name;
@@ -21,7 +21,7 @@ $< == 0 || die "run-all-awstats.pl must be run as root";
 &cron::create_wrapper($cron_cmd, $module_name, "awstats.pl");
 foreach my $d (&virtual_server::list_domains()) {
 	next if (!$d->{$module_name});
-	print "Running AWstats for $d->{'dom'}\n";
+	print "Running AWStats for $d->{'dom'}\n";
 	system("$cron_cmd $d->{'dom'}");
 	}
 

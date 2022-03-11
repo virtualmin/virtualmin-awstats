@@ -1,5 +1,5 @@
 #!/usr/local/bin/perl
-# Refresh the AWstats report
+# Refresh the AWStats report
 use strict;
 use warnings;
 our (%text, %in);

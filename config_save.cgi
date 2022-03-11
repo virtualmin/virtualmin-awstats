@@ -1,5 +1,5 @@
 #!/usr/local/bin/perl
-# Save AWstats config settings
+# Save AWStats config settings
 use strict;
 use warnings;
 our (%text, %in);

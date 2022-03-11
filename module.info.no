@@ -1,1 +1,1 @@
-desc_no=AWstats Rapportering
+desc_no=AWStats Rapportering

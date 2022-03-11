@@ -2,7 +2,7 @@ gen_just_done=.. ferdig
 gen_wiping=Slette gamle datafiler i $1 ..
 gen_wipingdone=.. slettet $1 filer
 
-feat_modifylog=Oppdaterer loggfilen i AWstats-konfigurasjonen ..
+feat_modifylog=Oppdaterer loggfilen i AWStats-konfigurasjonen ..
 
 config_regen=Lagre og generer rapport på nytt
 config_wipe=Vil du slette alle datafiler og generere på nytt fra originale logger?

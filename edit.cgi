@@ -1,5 +1,5 @@
 #!/usr/local/bin/perl
-# Show options for one AWstats domain
+# Show options for one AWStats domain
 use strict;
 use warnings;
 our (%access, %text, %in);

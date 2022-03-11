@@ -6,28 +6,28 @@ edit_log1=Komuttan çıktı
 edit_config=Raporu Yapılandır
 
 save_ecmd=Eksik veya yürütülebilir olmayan günlük kaynağı komutu
-save_emodel=.. şablon AWstats yapılandırma dosyası bulunamadı
+save_emodel=.. şablon AWStats yapılandırma dosyası bulunamadı
 
 gen_just_done=.. tamamlamak
 gen_wiping=$1 içindeki eski veri dosyaları siliniyor.
 gen_wipingdone=.. $1 dosya silindi
 
-feat_label2=AWstats raporlaması
-feat_modifypass=AWstats için şifre güncelleniyor ..
-feat_modifylog=AWstats yapılandırmasındaki günlük dosyası güncelleniyor.
-feat_evalidatever=Sistemin $1 'deki AWstats programı, alan adının $2 'deki kopyasıyla aynı değil. Senkronize etmek için AWstats özelliğini devre dışı bırakmanız ve yeniden etkinleştirmeniz gerekir
-feat_passwd=AWstats için şifre koruması ayarlanıyor ..
-feat_dpasswd=AWstats için şifre koruması kaldırılıyor ..
-feat_setupalias=$1 'de AWstats yapılandırılıyor.
-feat_deletealias=$1 içindeki AWstats yapılandırması kaldırılıyor.
-feat_module=AWstats Raporlaması (raporları görüntülemek için)
+feat_label2=AWStats raporlaması
+feat_modifypass=AWStats için şifre güncelleniyor ..
+feat_modifylog=AWStats yapılandırmasındaki günlük dosyası güncelleniyor.
+feat_evalidatever=Sistemin $1 'deki AWStats programı, alan adının $2 'deki kopyasıyla aynı değil. Senkronize etmek için AWStats özelliğini devre dışı bırakmanız ve yeniden etkinleştirmeniz gerekir
+feat_passwd=AWStats için şifre koruması ayarlanıyor ..
+feat_dpasswd=AWStats için şifre koruması kaldırılıyor ..
+feat_setupalias=$1 'de AWStats yapılandırılıyor.
+feat_deletealias=$1 içindeki AWStats yapılandırması kaldırılıyor.
+feat_module=AWStats Raporlaması (raporları görüntülemek için)
 
-links_config=AWstats Yapılandırması
+links_config=AWStats Yapılandırması
 
-tmpl_passwd=AWstats web sayfası parola korumalı mı?
+tmpl_passwd=AWStats web sayfası parola korumalı mı?
 
-config_title=AWstats'ı yapılandırın
-config_header=AWstats yapılandırma seçenekleri
+config_title=AWStats'ı yapılandırın
+config_header=AWStats yapılandırma seçenekleri
 config_dnslookup=Günlüklerde IP adresleri mi arıyorsunuz?
 config_dnslookup0=Asla
 config_dnslookup1=Her zaman
