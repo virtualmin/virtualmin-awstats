@@ -1,5 +1,5 @@
 #!/usr/local/bin/perl
-# Run AWstats to show the stats for some domain
+# Run AWStats to show the stats for some domain
 use strict;
 use warnings;
 our (%text, %in, %config);

@@ -1,4 +1,4 @@
-# Functions for configuring AWstats
+# Functions for configuring AWStats
 use strict;
 use warnings;
 our (%access, %config);
@@ -14,7 +14,7 @@ our $cron_cmd = "$module_config_directory/awstats.pl";
 our $run_as_file = "$module_config_directory/runas";
 
 # list_configs()
-# Returns a list of domains for which AWstats is configured
+# Returns a list of domains for which AWStats is configured
 sub list_configs
 {
 my @rv;
@@ -30,7 +30,7 @@ return @rv;
 }
 
 # get_config(domain)
-# Parses the AWstats configuration for some virtual server into a array ref of
+# Parses the AWStats configuration for some virtual server into a array ref of
 # values.
 sub get_config
 {
@@ -62,14 +62,14 @@ return $get_config_cache{$dom};
 }
 
 # get_config_file(domain)
-# Returns the AWstats config file for some domain
+# Returns the AWStats config file for some domain
 sub get_config_file
 {
 return "$config{'config_dir'}/awstats.$_[0].conf";
 }
 
 # find_value(name, &conf)
-# Returns the value of some AWstats directive
+# Returns the value of some AWStats directive
 sub find_value
 {
 my ($name, $conf) = @_;
@@ -87,7 +87,7 @@ return map { $_->{'value'} } @dirs;
 }
 
 # save_directive(&config, domain, name, value)
-# Updates some value in the AWstats config
+# Updates some value in the AWStats config
 sub save_directive
 {
 my ($conf, $dom, $name, $value) = @_;
@@ -174,7 +174,7 @@ my ($dom) = @_;
 }
 
 # can_domain(domain)
-# Returns 1 if the current user can manage some AWstats domain
+# Returns 1 if the current user can manage some AWStats domain
 sub can_domain
 {
 return 1 if ($access{'domains'} eq '*');
@@ -183,7 +183,7 @@ return $can{$_[0]};
 }
 
 # awstats_model_file()
-# Returns the full path to the template AWstats config file, or undef if none
+# Returns the full path to the template AWStats config file, or undef if none
 sub awstats_model_file
 {
 foreach my $f ("awstats.model.conf", "awstats.conf") {
@@ -262,7 +262,7 @@ delete($runas{$_[0]});
 }
 
 # generate_report(domain, handle, html-escape?)
-# Updates the AWstats report for a particular domain, from all of its
+# Updates the AWStats report for a particular domain, from all of its
 # log files (or at least those that have changed since the last run)
 sub generate_report
 {
@@ -398,7 +398,7 @@ if (opendir(DIRDATA, $dirdata)) {
 }
 
 # unlink_domain_alias_data(domain-name, directory)
-# Remove any symbolic links for AWstats data files for some domain
+# Remove any symbolic links for AWStats data files for some domain
 sub unlink_domain_alias_data
 {
 my ($aliasdom, $dirdata) = @_;

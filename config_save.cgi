@@ -1,5 +1,5 @@
 #!/usr/local/bin/perl
-# Save AWstats config settings
+# Save AWStats config settings
 use strict;
 use warnings;
 our (%text, %in);
@@ -69,7 +69,8 @@ if (&foreign_check("virtual-server")) {
 	}
 if ($in{'gen'}) {	
 	&redirect("generate.cgi?dom=".&urlize($in{'dom'}).
-			      "&wipe=".&urlize($in{'wipe'}));
+			      "&wipe=".&urlize($in{'wipe'}).
+			      "&linked=".&urlize($in{'linked'}));
 	}
 elsif ($d) {
 	&virtual_server::domain_redirect($d);

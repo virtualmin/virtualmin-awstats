@@ -392,7 +392,7 @@ if (defined($d->{'pass'}) &&
 my $alog = &virtual_server::get_website_log($d);
 my $oldalog = &virtual_server::get_old_website_log($alog, $d, $oldd);
 if ($alog ne $oldalog) {
-	# Log file has been renamed - update AWstats config
+	# Log file has been renamed - update AWStats config
 	&$virtual_server::first_print($text{'feat_modifylog'});
 	my $cfile = &get_config_file($d->{'dom'});
 	&lock_file($cfile);
@@ -632,11 +632,11 @@ return ( # Link to either view a report, or edit settings
            'page' => 'view.cgi?config='.&urlize($d->{'dom'}),
 	   'cat' => 'logs',
          },
-	 # Link to edit AWstats config for this domain
+	 # Link to edit AWStats config for this domain
 	 { 'mod' => $module_name,
            'desc' => $text{'links_config'},
-           'page' => 'config.cgi?dom='.&urlize($d->{'dom'}),
-	   'cat' => 'logs',
+           'page' => 'config.cgi?linked=1&dom='.&urlize($d->{'dom'}),
+	   'cat' => 'services',
          },
        );
 }

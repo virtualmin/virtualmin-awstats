@@ -1,6 +1,6 @@
-index_title=AWstats Raporlama
+index_title=AWStats Raporlama
 index_econfig=<a href='$1'>Modül konfigürasyonunu</a> kontrol edip konfigürasyonun doğrulugundan emin olunuz.
-index_awstats=AWstats
+index_awstats=AWStats
 index_dom=Alanadı ismi
 index_log=Log dosyası
 index_sched=Planlı?
@@ -8,20 +8,23 @@ index_report=Raporlama
 index_view=İncele..
 index_yes=Evet, $1
 index_no=Hayır
-index_none=AWstats raporlaması için henüz hiçbir alanadı ayarlanmamış.
+index_none=AWStats raporlaması için henüz hiçbir alanadı ayarlanmamış.
 index_add=Raporlama için yeni bir log dosyası ekle.
 index_return=rapor listesi
-check_ecmd=Sisteminizde $1 AWstats komutu bulunamadı.
-check_edir=AWstats konfigürasyon klasörü $1 mevcut değil.
-check_eicons=AWstats resim klasörü $1 mevcut değil.
-check_emodel=Şablon AWstats konfigürasyon dosyası $1 mevcut değil.
+
+check_ecmd=Sisteminizde $1 AWStats komutu bulunamadı.
+check_edir=AWStats konfigürasyon klasörü $1 mevcut değil.
+check_eicons=AWStats resim klasörü $1 mevcut değil.
+check_emodel=Şablon AWStats konfigürasyon dosyası $1 mevcut değil.
+
 view_ecannot=Bu alanadı raporlarını görüntülemeye izniniz yok
 view_epath=Geçersiz ikon yolu
+
 edit_ecannot=Bu alanadı raporlarını yapılandırmaya izniniz yok
 edit_ecannot2=Raporlama için yeni bir log dosyası eklemeye izniniz yok
 edit_title2=Rapor Düzenle
 edit_title1=Rapor Oluştur
-edit_header=AWstats rapor seçenekleri
+edit_header=AWStats rapor seçenekleri
 edit_dom=Alanadı ismi
 edit_format=Log dosyası biçimi
 edit_format1=Apache bileştirilmiş
@@ -30,14 +33,15 @@ edit_format3=Webstar
 edit_format4=Apache genel
 edit_format0=Özgün..
 edit_data=Raporun saklanacağı klasör
-edit_user=AWstats'ın yürütüleceği kullanıcı
+edit_user=AWStats'ın yürütüleceği kullanıcı
 edit_sched=Rapor zaman planına uygun üretilsin mi?
 edit_sched0=Hayı
 edit_sched1=Evet, aşağıda seçili zamanlarda ..
 edit_gen=Şimdi raporla
 edit_view=Rapor İncele
 edit_emodel=<tt>model</tt> alanadı yeni sanal sunucular için şablon olarak kullanılır ve silinemez.
-save_err=AWstats rapou kaydedilemedi
+
+save_err=AWStats rapou kaydedilemedi
 save_edom=Eksik veya geçersiz alanadı ismi
 save_eclash=Bu alanadı ismi için bir rapor zaten mevcut
 save_elog=Eksik veya varolmayan log dosyası
@@ -47,31 +51,34 @@ save_euser=Raporu yürütecek kullanıcı eksik veya geçersiz
 save_euser2=Raporları girilen kullanıcı olarak yürütmeye izniniz yok
 save_ecopy=Şablon konfigürasyonu kopyalanamadı  : $1
 save_ecopy2=Wstats programı kopyalanamadı : $1
+
 gen_title=Rapor Üret
 gen_doing=$2 log dosyasından $1 raporu güncelleniyor  ..
-gen_done=.. tamamlandı! <a href='$1'>Sonuç raporunu görüntüle</a>.
+gen_done=.. tamamlandı! &nbsp;<a href='$1'>Sonuç raporunu görüntüle</a>
 gen_failed=.. başarısız! Sebebi için yukardki hata mesajına bakın.
-feat_name=AWstats Raporlama
-feat_losing=Planlanmış AWstats raporlaması ve yapılandırılması silinecek
-feat_disname=AWstats raporlaması
-feat_label=AWstats raporlaması etkinleştirilsin mi?
-feat_edepweb=Web sitesi olmayan bir sunucu için AWstats raporlaması etkinleştirilemez
-feat_clash=Bu alanadı için AWstats raporlaması zaten etkinleştirilmiş
-feat_setup=AWstats raporlaması kuruluyor ..
-feat_edepunix=Uniz kullanıcısı olmayan bir sunucu için AWstats raporlaması etkinleştirilemez
-feat_edepdir=Anaklasörü olmayan bir sunucu için AWstats raporlaması etkinleştirilemez
-feat_modify=AWstats konfigürasyonundaki alanadı ismi güncelleniyor ..
+
+feat_name=AWStats Raporlama
+feat_losing=Planlanmış AWStats raporlaması ve yapılandırılması silinecek
+feat_disname=AWStats raporlaması
+feat_label=AWStats raporlaması etkinleştirilsin mi?
+feat_edepweb=Web sitesi olmayan bir sunucu için AWStats raporlaması etkinleştirilemez
+feat_clash=Bu alanadı için AWStats raporlaması zaten etkinleştirilmiş
+feat_setup=AWStats raporlaması kuruluyor ..
+feat_edepunix=Uniz kullanıcısı olmayan bir sunucu için AWStats raporlaması etkinleştirilemez
+feat_edepdir=Anaklasörü olmayan bir sunucu için AWStats raporlaması etkinleştirilemez
+feat_modify=AWStats konfigürasyonundaki alanadı ismi güncelleniyor ..
 feat_modifyuser=Awstats raporlamasını yürütecek kullanıcı güncelleniyor ..
-feat_modifyhome=AWstats konfigürasyonundaki anaklasör güncelleniyor ..
-feat_delete=AWstats konfigürasyon dosyası ve zamanlandırılmıoş işi siliniyor ..
-feat_backup=AWstats konfigürasyon dosyası yedekleniyor ..
+feat_modifyhome=AWStats konfigürasyonundaki anaklasör güncelleniyor ..
+feat_delete=AWStats konfigürasyon dosyası ve zamanlandırılmıoş işi siliniyor ..
+feat_backup=AWStats konfigürasyon dosyası yedekleniyor ..
 feat_nofile=.. konfigürasyon dosyası bulunamadı!
-feat_restore=AWstats konfigürasyon dosyası geri yükleniyor ..
+feat_restore=AWStats konfigürasyon dosyası geri yükleniyor ..
 feat_nocopy=.. kopyalanamadı!
-feat_backup_name=AWstats konfigürasyon dosyası
-feat_evalidate=AWstats konfigürasyon dosyası $1 mevcut değil
-feat_evalidatedir=AWstats veri klasörü $1 mevcut değil
-feat_evalidatecron=AWstats zamanlandırılmış işi bulunamadı
-feat_evalidateprog=AWstats program kopyası $1 mevcut değil
-links_link=AWstats Raporu Düzenle
-links_view=AWstats Raporu İncelle
+feat_backup_name=AWStats konfigürasyon dosyası
+feat_evalidate=AWStats konfigürasyon dosyası $1 mevcut değil
+feat_evalidatedir=AWStats veri klasörü $1 mevcut değil
+feat_evalidatecron=AWStats zamanlandırılmış işi bulunamadı
+feat_evalidateprog=AWStats program kopyası $1 mevcut değil
+
+links_link=AWStats Raporu Düzenle
+links_view=AWStats Raporu İncelle

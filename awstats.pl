@@ -1,5 +1,5 @@
 #!/usr/local/bin/perl
-# Refresh the AWstats report, from a cron job
+# Refresh the AWStats report, from a cron job
 use strict;
 use warnings;
 

@@ -1,5 +1,5 @@
 #!/usr/local/bin/perl
-# Output an image for some AWstats domain
+# Output an image for some AWStats domain
 use strict;
 use warnings;
 our (%text, %in, %config);
