@@ -636,7 +636,7 @@ return ( # Link to either view a report, or edit settings
 	 { 'mod' => $module_name,
            'desc' => $text{'links_config'},
            'page' => 'config.cgi?dom='.&urlize($d->{'dom'}),
-	   'cat' => 'logs',
+	   'cat' => 'server',
          },
        );
 }
