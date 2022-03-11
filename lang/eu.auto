@@ -12,12 +12,15 @@ index_no=Ez
 index_none=Oraindik ez da domeinurik ezarri AWstats berri emateko.
 index_add=Gehitu berri emateko erregistro fitxategi berria.
 index_return=txostenen zerrenda
+
 check_ecmd=AWstats $1 komandoa ez da zure sisteman aurkitu.
 check_edir=$1 AWstats konfigurazioaren direktorio ez da existitzen.
 check_eicons=$1 AWstats irudien direktorio ez da existitzen.
 check_emodel=$1 AWstats konfigurazio fitxategia ez da existitzen.
+
 view_ecannot=Ezin duzu txostena domeinu hau ikusi
 view_epath=Ikono bide baliogabea
+
 edit_ecannot=Ezin duzu txostena domeinu honetarako konfiguratu
 edit_ecannot2=Ezin duzu erregistroko fitxategi berririk gehitu txostenak egiteko.
 edit_title2=Editatu Txostena
@@ -42,6 +45,7 @@ edit_gen=Sortu txostena orain
 edit_view=Ikusi Txostena
 edit_config=Konfiguratu txostena
 edit_emodel=<tt>eredua</tt> domeinua zerbitzari birtual berrien txantiloi gisa erabiltzen da eta ezin da ezabatu
+
 save_err=Huts egin du AWstats txostena gordetzean
 save_edom=Domeinu izen falta edo baliogabea
 save_eclash=Domeinu izen beraren txostena dagoeneko
@@ -54,12 +58,15 @@ save_euser2=Ezin duzu sartu erabiltzaile gisa txostenak exekutatzeko
 save_ecopy=Ezin izan da txantiloiaren konfigurazioa kopiatu : $1 
 save_ecopy2=Huts egin du AWstats programa kopiatzean : $1 
 save_emodel=.. Ez da aurkitu AWstats konfigurazio fitxategia
+
 gen_title=Sortu Txostena
 gen_doing=Orain $1 txostena eguneratzen duzu $2 erregistro fitxategitik.
-gen_done=.. egin! <a href='$1'>Ikusi emaitza txostena</a>.
+gen_just_done=.. eginda
+gen_done=.. egin! &nbsp;<a href='$1'>Ikusi emaitza txostena</a>
 gen_failed=.. huts egin du! Ikusi goiko errore mezua zergatik dagoen.
 gen_wiping=Datu fitxategi zaharrak $1 ezabatzen ..
 gen_wipingdone=$1 fitxategi ezabatu ditu
+
 feat_name=AWstats-en berri ematea
 feat_losing=Programatutako AWstats-en berri ematea desgaituta egongo da eta haren konfigurazioa ezabatuko da
 feat_disname=AWstats-en berri ematea
@@ -91,10 +98,13 @@ feat_dpasswd=Pasahitz babesa kentzen AWstats ..
 feat_setupalias=AWstats konfigurazioa $1 ..
 feat_deletealias=AWstats-en konfigurazioa kentzen $1 ..
 feat_module=AWstats Reporting (txostenak ikusteko)
+
 links_link=AWstats txostena
 links_view=AWstats txostena
 links_config=AWstats Konfigurazioa
+
 tmpl_passwd=Pasahitza babesteko AWstats web orria?
+
 config_title=Konfiguratu AWstats
 config_header=AWstats konfigurazio aukerak
 config_dnslookup=Bilatu IP helbideak erregistroetan?

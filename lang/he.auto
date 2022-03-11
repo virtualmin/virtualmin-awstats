@@ -12,12 +12,15 @@ index_no=לא
 index_none=עדיין לא הוקמו תחומים לדיווח על AWstats.
 index_add=הוסף קובץ יומן חדש לדיווח.
 index_return=רשימת הדוחות
+
 check_ecmd=הפקודה AWstats $1 לא נמצאה במערכת שלך.
 check_edir=ספריית התצורה של AWstats $1 אינה קיימת.
 check_eicons=ספריית התמונות של AWstats $1 אינה קיימת.
 check_emodel=קובץ התצורה AWstats של התבנית $1 אינו קיים.
+
 view_ecannot=אינך רשאי להציג את הדוח עבור תחום זה
 view_epath=נתיב סמל לא חוקי
+
 edit_ecannot=אינך רשאי להגדיר את הדוח עבור תחום זה
 edit_ecannot2=אינך מורשה להוסיף קובץ יומן חדש לדיווח.
 edit_title2=ערוך דוח
@@ -42,6 +45,7 @@ edit_gen=צור דוח עכשיו
 edit_view=צפה בדוח
 edit_config=הגדר דוח
 edit_emodel=התחום <tt>מודל</tt> משמש כתבנית לשרתים וירטואליים חדשים ולא ניתן למחוק אותו
+
 save_err=שמירת הדוח של AWstats נכשלה
 save_edom=שם תחום חסר או לא חוקי
 save_eclash=כבר קיים דוח עבור אותו שם תחום
@@ -54,12 +58,15 @@ save_euser2=אינך רשאי להריץ דוחות כמשתמש שהוזן
 save_ecopy=העתקת תצורת התבנית נכשלה : $1 
 save_ecopy2=העתקת תוכנית AWstats נכשלה : $1 
 save_emodel=.. תבנית קובץ התצורה של AWstats לא נמצאה
+
 gen_title=להפיק דוח
 gen_doing=עכשיו עדכן את הדוח עבור $1 מקובץ היומן $2 ..
-gen_done=.. בוצע! <a href='$1'>הצגת הדוח שהתקבל</a>.
+gen_just_done=.. בוצע
+gen_done=.. בוצע! &nbsp;<a href='$1'>הצגת הדוח שהתקבל</a>
 gen_failed=.. נכשל! עיין בהודעת השגיאה למעלה מהסיבה לכך.
 gen_wiping=מוחק קבצי נתונים ישנים ב- $1 ..
 gen_wipingdone=.. מחק $1 קבצים
+
 feat_name=דיווחי AWstats
 feat_losing=דיווח AWstats מתוזמן יושבת, והתצורה שלו תימחק
 feat_disname=דיווחי AWstats
@@ -91,10 +98,13 @@ feat_dpasswd=הסרת הגנת סיסמא עבור AWstats ..
 feat_setupalias=הגדרת AWstats ב- $1.
 feat_deletealias=מסיר את התצורה עבור AWstats ב- $1.
 feat_module=דיווח AWstats (לצפייה בדוחות)
+
 links_link=דוח AWstats
 links_view=דוח AWstats
 links_config=תצורת AWstats
+
 tmpl_passwd=דף האינטרנט של AWstats עם הגנת סיסמה?
+
 config_title=קבע את התצורה של AWstats
 config_header=אפשרויות תצורה של AWstats
 config_dnslookup=לחפש כתובות IP ביומנים?

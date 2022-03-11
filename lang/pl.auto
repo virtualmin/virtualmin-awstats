@@ -12,12 +12,15 @@ index_no=Nie
 index_none=Nie skonfigurowano jeszcze domen dla raportów AWstats.
 index_add=Dodaj nowy plik dziennika do raportowania.
 index_return=lista raportów
+
 check_ecmd=W systemie nie znaleziono polecenia AWstats $1.
 check_edir=Katalog konfiguracyjny AWstats $1 nie istnieje.
 check_eicons=Katalog obrazów AWstats $1 nie istnieje.
 check_emodel=Szablon pliku konfiguracyjnego AWstats $1 nie istnieje.
+
 view_ecannot=Nie możesz przeglądać raportu dla tej domeny
 view_epath=Nieprawidłowa ścieżka do ikony
+
 edit_ecannot=Nie możesz konfigurować raportu dla tej domeny
 edit_ecannot2=Nie możesz dodać nowego pliku dziennika do raportowania.
 edit_title2=Edytuj raport
@@ -42,6 +45,7 @@ edit_gen=Wygeneruj raport teraz
 edit_view=Zobacz raport
 edit_config=Skonfiguruj raport
 edit_emodel=Domena <tt>model</tt> jest używana jako szablon dla nowych serwerów wirtualnych i nie można jej usunąć
+
 save_err=Nie udało się zapisać raportu AWstats
 save_edom=Brakująca lub nieprawidłowa nazwa domeny
 save_eclash=Raport dla tej samej nazwy domeny już istnieje
@@ -54,12 +58,15 @@ save_euser2=Nie możesz uruchamiać raportów jako wprowadzony użytkownik
 save_ecopy=Nie udało się skopiować konfiguracji szablonu : $1 
 save_ecopy2=Nie udało się skopiować programu AWstats : $1 
 save_emodel=.. szablon Plik konfiguracyjny AWstats nie został znaleziony
+
 gen_title=Generuj raport
 gen_doing=Teraz aktualizuję raport dla $1 z pliku dziennika $2 ..
-gen_done=.. gotowy! <a href='$1'>Wyświetl wynikowy raport</a>.
+gen_just_done=.. gotowy
+gen_done=.. gotowy! &nbsp;<a href='$1'>Wyświetl wynikowy raport</a>
 gen_failed=.. nie powiodło się! Zobacz powyższy komunikat o błędzie, z jakiego powodu.
 gen_wiping=Usuwanie starych plików danych w $1 ..
 gen_wipingdone=.. usunął $1 plików
+
 feat_name=Raportowanie AWstats
 feat_losing=Zaplanowane raportowanie AWstats zostanie wyłączone, a jego konfiguracja usunięta
 feat_disname=Raportowanie AWstats
@@ -91,10 +98,13 @@ feat_dpasswd=Usuwanie ochrony hasłem dla AWstats ..
 feat_setupalias=Konfigurowanie AWstats w $1 ..
 feat_deletealias=Usuwanie konfiguracji AWstats w $1 ..
 feat_module=AWstats Reporting (do przeglądania raportów)
+
 links_link=Raport AWstats
 links_view=Raport AWstats
 links_config=Konfiguracja AWstats
+
 tmpl_passwd=Zabezpieczona hasłem strona internetowa AWstats?
+
 config_title=Skonfiguruj AWstats
 config_header=Opcje konfiguracji AWstats
 config_dnslookup=Wyszukaj adresy IP w logach?

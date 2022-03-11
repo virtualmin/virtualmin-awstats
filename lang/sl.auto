@@ -12,12 +12,15 @@ index_no=Ne
 index_none=Nobena domena še ni bila nastavljena za poročanje o AWstatsu.
 index_add=Dodajte novo datoteko dnevnika za poročanje.
 index_return=seznam poročil
+
 check_ecmd=Ukaza AWstats $1 v vašem sistemu ni bilo mogoče najti.
 check_edir=Konfiguracijski imenik AWstats $1 ne obstaja.
 check_eicons=Imenik slik AWstats $1 ne obstaja.
 check_emodel=Konfiguracijska datoteka AWstats predloge $1 ne obstaja.
+
 view_ecannot=Poročila za to domeno ne smete pregledati
 view_epath=Neveljavna pot ikone
+
 edit_ecannot=Ni vam dovoljeno konfigurirati poročila za to domeno
 edit_ecannot2=Ni vam dovoljeno dodati nove datoteke dnevnika za poročanje.
 edit_title2=Uredi poročilo
@@ -42,6 +45,7 @@ edit_gen=Ustvari poročilo zdaj
 edit_view=Prikaži poročilo
 edit_config=Konfiguriraj poročilo
 edit_emodel=Domena <tt>model</tt> se uporablja kot predloga za nove virtualne strežnike in je ni mogoče izbrisati
+
 save_err=Poročila AWstats ni bilo mogoče shraniti
 save_edom=Manjkajoče ali neveljavno ime domene
 save_eclash=Poročilo za isto ime domene že obstaja
@@ -54,12 +58,15 @@ save_euser2=Ne morete zagnati poročil kot vneseni uporabnik
 save_ecopy=Konfiguracija predloge ni uspela kopirati : $1 
 save_ecopy2=Kopiranja programa AWstats ni uspelo : $1 
 save_emodel=.. Konfiguracijske datoteke predloge AWstats ni bilo mogoče najti
+
 gen_title=Ustvari poročilo
 gen_doing=Zdaj posodabljamo poročilo za $1 iz datoteke dnevnika $2 ..
-gen_done=.. Končano! <a href='$1'>Oglejte si poročilo</a>.
+gen_just_done=.. Končano
+gen_done=.. Končano! &nbsp;<a href='$1'>Oglejte si poročilo</a>
 gen_failed=.. ni uspelo! Glej zgornje sporočilo o napaki za razlog.
 gen_wiping=Brisanje starih podatkovnih datotek v $1 ..
 gen_wipingdone=.. izbrisane datoteke $1 
+
 feat_name=AWstats poročanje
 feat_losing=Načrtovano poročanje o AWstatsu bo onemogočeno, njegova konfiguracija pa izbrisana
 feat_disname=AWstats poročanje
@@ -91,10 +98,13 @@ feat_dpasswd=Odstranjevanje zaščite z geslom za AWstats ..
 feat_setupalias=Konfiguracija AWstats v $1.
 feat_deletealias=Odstranjevanje konfiguracije za AWstats v $1.
 feat_module=AWstats Reporting (za ogled poročil)
+
 links_link=AWstats Poročilo
 links_view=AWstats Poročilo
 links_config=Konfiguracija AWstats
+
 tmpl_passwd=Spletno stran AWstats, zaščiteno z geslom?
+
 config_title=Konfigurirajte AWstats
 config_header=Možnosti konfiguracije AWstats
 config_dnslookup=Iskanje IP naslovov v dnevnikih?

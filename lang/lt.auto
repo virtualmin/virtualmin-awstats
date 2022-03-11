@@ -12,12 +12,15 @@ index_no=Ne
 index_none=Dar nėra įsteigti domenai, skirti „AWstats“ ataskaitoms teikti.
 index_add=Pridėkite naują žurnalų failą ataskaitoms teikti.
 index_return=ataskaitų sąrašas
+
 check_ecmd=Jūsų sistemoje nerasta komandos „AWstats“ $1.
 check_edir=„AWstats“ konfigūracijos katalogo $1 nėra.
 check_eicons=„AWstats“ vaizdų katalogo $1 nėra.
 check_emodel=Šablono „AWstats“ konfigūracijos failas $1 neegzistuoja.
+
 view_ecannot=Jums neleidžiama žiūrėti šio domeno ataskaitos
 view_epath=Netinkamas piktogramos kelias
+
 edit_ecannot=Jums neleidžiama konfigūruoti šio domeno ataskaitos
 edit_ecannot2=Neleidžiama pridėti naujo žurnalo failo ataskaitoms teikti.
 edit_title2=Redaguoti ataskaitą
@@ -42,6 +45,7 @@ edit_gen=Sukurti ataskaitą dabar
 edit_view=Peržiūrėti ataskaitą
 edit_config=Konfigūruokite ataskaitą
 edit_emodel=Domenas <tt>modelis</tt> naudojamas kaip naujų virtualių serverių šablonas, jo negalima ištrinti
+
 save_err=Nepavyko išsaugoti „AWstats“ ataskaitos
 save_edom=Trūksta arba netinkamas domeno vardas
 save_eclash=To paties domeno vardo ataskaita jau yra
@@ -54,12 +58,15 @@ save_euser2=Jums neleidžiama vykdyti ataskaitų kaip įvestam vartotojui
 save_ecopy=Nepavyko nukopijuoti šablono konfigūracijos : $1 
 save_ecopy2=Nepavyko nukopijuoti „AWstats“ programos : $1 
 save_emodel=.. Šablono „AWstats“ konfigūracijos failas nerastas
+
 gen_title=Sukurti ataskaitą
 gen_doing=Dabar atnaujiname $1 ataskaitą iš žurnalo failo $2.
-gen_done=.. padaryta! <a href='$1'>Peržiūrėkite gautą ataskaitą</a>.
+gen_just_done=.. padaryta
+gen_done=.. padaryta! &nbsp;<a href='$1'>Peržiūrėkite gautą ataskaitą</a>
 gen_failed=.. nepavyko! Norėdami sužinoti priežastį, skaitykite aukščiau pateiktą klaidos pranešimą.
 gen_wiping=Ištrinami seni duomenų failai iš $1.
 gen_wipingdone=.. ištrinti $1 failai
+
 feat_name=AWstats ataskaitų teikimas
 feat_losing=Suplanuotos AWstats ataskaitos bus išjungtos, o jos konfigūracija bus ištrinta
 feat_disname=AWstats ataskaitų teikimas
@@ -91,10 +98,13 @@ feat_dpasswd=Pašalinama „AWstats“ slaptažodžio apsauga.
 feat_setupalias=AWstats konfigūravimas $1 ..
 feat_deletealias=Pašalinama AWstats konfigūracija $1.
 feat_module=„AWstats Reporting“ (ataskaitų peržiūrai)
+
 links_link=„AWstats“ ataskaita
 links_view=„AWstats“ ataskaita
 links_config=„AWstats“ konfigūracija
+
 tmpl_passwd=Apsaugokite slaptažodžiu „AWstats“ tinklalapį?
+
 config_title=Konfigūruokite AWstats
 config_header=AWstats konfigūracijos parinktys
 config_dnslookup=Ieškokite IP adresų žurnaluose?

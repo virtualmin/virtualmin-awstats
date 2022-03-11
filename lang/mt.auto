@@ -12,12 +12,15 @@ index_no=Le
 index_none=L-ebda dominju ma ġie stabbilit għar-rappurtar tal-AWstats s'issa.
 index_add=Żid fajl tal-ġurnal ġdid għar-rappurtar.
 index_return=lista tar-rapporti
+
 check_ecmd=Il-kmand AWstats $1 ma nstabx fis-sistema tiegħek.
 check_edir=Id-direttorju tal-konfigurazzjoni AWstats $1 ma jeżistix.
 check_eicons=Id-direttorju tal-immaġini AWstats $1 ma jeżistix.
 check_emodel=Il-mudell tal-fajl tal-konfigurazzjoni AWstats $1 ma jeżistix.
+
 view_ecannot=M'għandekx permess tara r-rapport għal dan id-dominju
 view_epath=Triq ikona mhux valida
+
 edit_ecannot=M'għandekx permess biex tikkonfigura r-rapport għal dan id-dominju
 edit_ecannot2=M'għandekx permess li żżid fajl tal-ġurnal ġdid għar-rappurtar.
 edit_title2=Editja r-Rapport
@@ -42,6 +45,7 @@ edit_gen=Iġġenera Rapport Issa
 edit_view=Ara r-Rapport
 edit_config=Ikkonfigura r-Rapport
 edit_emodel=Il- <tt>mudell</tt> domain jintuża bħala mudell għal servers virtwali ġodda u ma jistax jitħassar
+
 save_err=Ma rnexxielux isalva r-rapport AWstats
 save_edom=Isem tad-dominju nieqes jew invalidu
 save_eclash=Rapport diġà għall-istess isem tad-dominju diġà jeżisti
@@ -54,12 +58,15 @@ save_euser2=M'għandekx permess tmexxi rapporti bħala utent imdaħħal
 save_ecopy=Ma rnexxiex kopja l-konfigurazzjoni tal-mudell : $1 
 save_ecopy2=Ma rnexxiex tikkopja l-programm AWstats : $1 
 save_emodel=Il - fajl tal-konfigurazzjoni tal-mudell AWstats ma nstabx
+
 gen_title=Iġġenera Rapport
 gen_doing=Issa aġġorna r-rapport għal $1 mil-fajl tal-log $2 ..
-gen_done=.. ghamel! <a href='$1'>Ara r-rapport li jirriżulta</a>.
+gen_just_done=.. magħmul
+gen_done=.. ghamel! &nbsp;<a href='$1'>Ara r-rapport li jirriżulta</a>
 gen_failed=.. naqas! Ara l-messaġġ ta 'żball ta' hawn fuq għar-raġuni għaliex.
 gen_wiping=Tħassar fajls ta 'dejta qodma f' $1 ..
 gen_wipingdone=.. fajls imħassra $1 
+
 feat_name=Rappurtaġġ tal-Istimi
 feat_losing=Ir-rappurtar AWstats Skedati se jkun diżattivat, u l-konfigurazzjoni tagħha titħassar
 feat_disname=Rappurtaġġ tal-Istimi
@@ -91,10 +98,13 @@ feat_dpasswd=It-tneħħija tal-protezzjoni tal-password għal AWstats ..
 feat_setupalias=Konfigurazzjoni ta 'AWstats f' $1 ..
 feat_deletealias=It-tneħħija tal-konfigurazzjoni għal AWstats f ' $1 ..
 feat_module=Rappurtaġġ AWstats (biex tara rapporti)
+
 links_link=Rapport AWstats
 links_view=Rapport AWstats
 links_config=Konfigurazzjoni AWstats
+
 tmpl_passwd=Il-paġna web tal-AWstats tipproteġi l-password?
+
 config_title=Ikkonfigura AWstats
 config_header=Għażliet ta 'konfigurazzjoni AWstats
 config_dnslookup=Tfittex indirizzi IP fiż-zkuk?

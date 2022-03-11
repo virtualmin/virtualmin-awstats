@@ -12,12 +12,15 @@ index_no=Nē
 index_none=Pagaidām nav iestatīti domēni AWstats pārskatu sniegšanai.
 index_add=Pievienojiet jaunu žurnālfailu pārskatiem.
 index_return=ziņojumu saraksts
+
 check_ecmd=Komanda AWstats $1 jūsu sistēmā netika atrasta.
 check_edir=AWstats konfigurācijas direktorija $1 neeksistē.
 check_eicons=AWstats attēlu direktorija $1 neeksistē.
 check_emodel=Veidne AWstats konfigurācijas fails $1 neeksistē.
+
 view_ecannot=Jums nav atļauts skatīt šī domēna pārskatu
 view_epath=Nederīgs ikonas ceļš
+
 edit_ecannot=Jums nav atļauts konfigurēt šī domēna pārskatu
 edit_ecannot2=Pārskatīšanai jums nav atļauts pievienot jaunu žurnāla failu.
 edit_title2=Rediģēt ziņojumu
@@ -42,6 +45,7 @@ edit_gen=Ģenerēt pārskatu tūlīt
 edit_view=Skatīt ziņojumu
 edit_config=Konfigurēt pārskatu
 edit_emodel=Domēns <tt>modelis</tt> tiek izmantots kā veidne jauniem virtuālajiem serveriem, un to nevar izdzēst
+
 save_err=Neizdevās saglabāt AWstats pārskatu
 save_edom=Trūkst vai nav derīgs domēna vārds
 save_eclash=Pārskats par to pašu domēna vārdu jau pastāv
@@ -54,12 +58,15 @@ save_euser2=Jums nav atļauts palaist pārskatus kā ievadītam lietotājam
 save_ecopy=Neizdevās nokopēt veidnes konfigurāciju : $1 
 save_ecopy2=Neizdevās nokopēt AWstats programmu : $1 
 save_emodel=.. veidne AWstats konfigurācijas fails netika atrasts
+
 gen_title=Ģenerēt pārskatu
 gen_doing=Tagad tiek atjaunināts ziņojums par $1 no žurnālfaila $2.
-gen_done=.. darīts! <a href='$1'>Skatiet iegūto pārskatu</a>.
+gen_just_done=.. darīts
+gen_done=.. darīts! &nbsp;<a href='$1'>Skatiet iegūto pārskatu</a>
 gen_failed=.. neizdevās! Iemeslu, kāpēc to darīt, skatiet iepriekš redzamajā kļūdas ziņojumā.
 gen_wiping=Notiek veco datu failu dzēšana $1.
 gen_wipingdone=.. izdzēsti $1 faili
+
 feat_name=AWstats pārskati
 feat_losing=Plānotais AWstats pārskats tiks atspējots, un tā konfigurācija tiks izdzēsta
 feat_disname=AWstats pārskati
@@ -91,10 +98,13 @@ feat_dpasswd=Paroles aizsardzības noņemšana AWstats.
 feat_setupalias=AWstats konfigurēšana $1.
 feat_deletealias=Notiek AWstats konfigurācijas noņemšana $1.
 feat_module=AWstats Reporting (pārskatu skatīšanai)
+
 links_link=AWstats ziņojums
 links_view=AWstats ziņojums
 links_config=AWstats konfigurācija
+
 tmpl_passwd=AWstats vietnes aizsargāta ar paroli?
+
 config_title=Konfigurējiet AWstats
 config_header=AWstats konfigurācijas opcijas
 config_dnslookup=Meklēt IP adreses žurnālos?

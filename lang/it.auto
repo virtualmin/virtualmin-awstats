@@ -12,12 +12,15 @@ index_no=No
 index_none=Nessun dominio è stato ancora impostato per i report AWstats.
 index_add=Aggiungi un nuovo file di registro per i rapporti.
 index_return=elenco di rapporti
+
 check_ecmd=Il comando AWstats $1 non è stato trovato sul tuo sistema.
 check_edir=La directory di configurazione di AWstats $1 non esiste.
 check_eicons=La directory di immagini AWstats $1 non esiste.
 check_emodel=Il file di configurazione AWstats modello $1 non esiste.
+
 view_ecannot=Non sei autorizzato a visualizzare il rapporto per questo dominio
 view_epath=Percorso icona non valido
+
 edit_ecannot=Non è consentito configurare il report per questo dominio
 edit_ecannot2=Non è consentito aggiungere un nuovo file di registro per la segnalazione.
 edit_title2=Modifica rapporto
@@ -42,6 +45,7 @@ edit_gen=Genera report ora
 edit_view=Visualizza rapporto
 edit_config=Configura rapporto
 edit_emodel=Il dominio <tt>modello</tt> viene utilizzato come modello per i nuovi server virtuali e non può essere eliminato
+
 save_err=Impossibile salvare il rapporto AWstats
 save_edom=Nome di dominio mancante o non valido
 save_eclash=Esiste già un rapporto con lo stesso nome di dominio
@@ -54,12 +58,15 @@ save_euser2=Non è consentito eseguire report come utente inserito
 save_ecopy=Impossibile copiare la configurazione del modello : $1 
 save_ecopy2=Impossibile copiare il programma AWstats : $1 
 save_emodel=.. il file di configurazione del modello AWstats non è stato trovato
+
 gen_title=Genera rapporto
 gen_doing=Ora aggiornando il rapporto per $1 dal file di registro $2 ..
-gen_done=.. fatto! <a href='$1'>Visualizza il rapporto risultante</a>.
+gen_just_done=.. fatto
+gen_done=.. fatto! &nbsp;<a href='$1'>Visualizza il rapporto risultante</a>
 gen_failed=.. fallito! Vedere il messaggio di errore sopra per il motivo.
 gen_wiping=Eliminazione di vecchi file di dati in $1 ..
 gen_wipingdone=.. file $1 eliminati
+
 feat_name=Segnalazione di AWstats
 feat_losing=Il reporting di AWstats pianificato verrà disabilitato e la sua configurazione eliminata
 feat_disname=Segnalazione di AWstats
@@ -91,10 +98,13 @@ feat_dpasswd=Rimozione della protezione con password per AWstats ..
 feat_setupalias=Configurazione di AWstats in $1 ..
 feat_deletealias=Rimozione della configurazione per AWstats in $1 ..
 feat_module=AWstats Reporting (per la visualizzazione di report)
+
 links_link=Rapporto AWstats
 links_view=Rapporto AWstats
 links_config=Configurazione di AWstats
+
 tmpl_passwd=Pagina Web AWstats protetta da password?
+
 config_title=Configura AWstats
 config_header=Opzioni di configurazione di AWstats
 config_dnslookup=Cercare gli indirizzi IP nei registri?

@@ -12,12 +12,15 @@ index_no=Ne
 index_none=Još nisu postavljene domene za izvještavanje o AWstatsu.
 index_add=Dodajte novu datoteku dnevnika za izvještavanje.
 index_return=popis izvještaja
+
 check_ecmd=Naredba AWstats $1 nije pronađena u vašem sustavu.
 check_edir=Konfiguracijski direktorij AWstats $1 ne postoji.
 check_eicons=Imenik slika AWstats $1 ne postoji.
 check_emodel=Konfiguracijska datoteka predloška AWstats $1 ne postoji.
+
 view_ecannot=Nije vam dopušteno pregledati izvještaj za ovu domenu
 view_epath=Nevažeća staza ikona
+
 edit_ecannot=Nije vam dopušteno konfigurirati izvješće za ovu domenu
 edit_ecannot2=Ne možete dodati novu datoteku dnevnika za izvještavanje.
 edit_title2=Uredi izvješće
@@ -42,6 +45,7 @@ edit_gen=Generiraj izvještaj odmah
 edit_view=Pogledaj izvještaj
 edit_config=Konfiguriranje izvješća
 edit_emodel=Domena <tt></tt> koristi se kao predložak za nove virtualne poslužitelje i ne može se izbrisati
+
 save_err=Spremanje izvješća AWstats nije uspjelo
 save_edom=Nedostaje ili nevažeće ime domene
 save_eclash=Izvještaj za isto ime domene već postoji
@@ -54,12 +58,15 @@ save_euser2=Nije vam dopušteno pokretati izvješća kao uneseni korisnik
 save_ecopy=Kopiranje konfiguracije predloška nije uspjelo : $1 
 save_ecopy2=Kopiranje programa AWstats nije uspjelo : $1 
 save_emodel=.. datoteka konfiguracijske datoteke AWstats predloška nije pronađena
+
 gen_title=Generiranje izvještaja
 gen_doing=Sada ažuriranje izvješća za $1 iz datoteke zapisa $2 ..
-gen_done=.. gotovo! <a href='$1'>Pogledajte rezultirajuće izvješće</a>.
+gen_just_done=.. gotovo
+gen_done=.. gotovo! &nbsp;<a href='$1'>Pogledajte rezultirajuće izvješće</a>
 gen_failed=.. neuspjeh! Pogledajte gornju poruku pogreške zbog razloga.
 gen_wiping=Brisanje starih podataka u $1 ..
 gen_wipingdone=.. obrisao $1 datoteke
+
 feat_name=AWstats izvještavanje
 feat_losing=Zakazana AWstats izvješćivanja bit će onemogućena, a njena konfiguracija izbrisana
 feat_disname=AWstats izvještavanje
@@ -91,10 +98,13 @@ feat_dpasswd=Uklanjanje zaštite lozinkom za AWstats ..
 feat_setupalias=Konfiguriranje AWstats-a u $1.
 feat_deletealias=Uklanjanje konfiguracije za AWstats u $1 ..
 feat_module=AWstats Reporting (za gledanje izvještaja)
+
 links_link=AWstats Report
 links_view=AWstats Report
 links_config=AWstats Konfiguracija
+
 tmpl_passwd=Web-mjesto AWstats zaštićene lozinkom?
+
 config_title=Konfigurirajte AWstats
 config_header=AWstats opcije konfiguracije
 config_dnslookup=Pretraživanje IP adresa u zapisnicima?

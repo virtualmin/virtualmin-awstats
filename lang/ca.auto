@@ -12,12 +12,15 @@ index_no=No
 index_none=Encara no s'han establert dominis per als informes d'AWstats.
 index_add=Afegiu un fitxer de registre nou per informar.
 index_return=llista d’informes
+
 check_ecmd=L'ordre AWstats $1 no s'ha trobat al sistema.
 check_edir=El directori de configuració AWstats $1 no existeix.
 check_eicons=El directori d'imatges AWstats $1 no existeix.
 check_emodel=El fitxer de configuració AWstats de plantilla $1 no existeix.
+
 view_ecannot=No teniu permís de veure l'informe d'aquest domini
 view_epath=La ruta de la icona no és vàlida
+
 edit_ecannot=No teniu permís de configurar l’informe per a aquest domini
 edit_ecannot2=No teniu permís d'afegir cap fitxer de registre nou per als informes.
 edit_title2=Edita l'informe
@@ -42,6 +45,7 @@ edit_gen=Genereu informe ara
 edit_view=Veure informe
 edit_config=Configura l’informe
 edit_emodel=El domini <tt>model</tt> s'utilitza com a plantilla per a nous servidors virtuals i no es pot suprimir
+
 save_err=No s'ha pogut desar l'informe AWstats
 save_edom=Nom del domini que falta o no és vàlid
 save_eclash=Ja existeix un informe per al mateix nom de domini
@@ -54,12 +58,15 @@ save_euser2=No teniu permís d'executar informes com a usuari introduït
 save_ecopy=No s'ha pogut copiar la configuració de la plantilla : $1 
 save_ecopy2=No s'ha pogut copiar el programa AWstats : $1 
 save_emodel=.. No s'ha trobat el fitxer de configuració de la plantilla AWstats
+
 gen_title=Generar informe
 gen_doing=Ara s'actualitza l'informe per a $1 des del fitxer de registre $2.
-gen_done=.. fet! <a href='$1'>Consulteu l'informe resultant</a>.
+gen_just_done=.. fet
+gen_done=.. fet! &nbsp;<a href='$1'>Consulteu l'informe resultant</a>
 gen_failed=.. fracassat! Vegeu el missatge d'error anterior per veure el motiu pel qual.
 gen_wiping=Se suprimeix fitxers de dades antics de $1 ..
 gen_wipingdone=.. ha suprimit $1 fitxers
+
 feat_name=Informe AWstats
 feat_losing=Els informes programats AWstats estaran desactivats i la seva configuració serà eliminada
 feat_disname=Informe AWstats
@@ -91,10 +98,13 @@ feat_dpasswd=Eliminació de la protecció de contrasenya per a AWstats ..
 feat_setupalias=Configuració d'AWstats en $1 ..
 feat_deletealias=S'està suprimint la configuració dels AWstats a $1 ..
 feat_module=Informes AWstats (per veure informes)
+
 links_link=Informe AWstats
 links_view=Informe AWstats
 links_config=Configuració AWstats
+
 tmpl_passwd=Pàgina web de protecció de contrasenya AWstats?
+
 config_title=Configura AWstats
 config_header=Opcions de configuració AWstats
 config_dnslookup=Cerqueu adreces IP als registres?

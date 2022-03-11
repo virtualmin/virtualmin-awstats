@@ -12,12 +12,15 @@ index_no=没有
 index_none=尚未为AWstats报告设置任何域。
 index_add=添加新的日志文件以进行报告。
 index_return=报告清单
+
 check_ecmd=在系统上找不到AWstats命令 $1。
 check_edir=AWstats配置目录 $1不存在。
 check_eicons=AWstats图像目录 $1不存在。
 check_emodel=模板AWstats配置文件 $1不存在。
+
 view_ecannot=您无权查看此域的报告
 view_epath=无效的图标路径
+
 edit_ecannot=您无权为此域配置报告
 edit_ecannot2=您无权添加新的日志文件进行报告。
 edit_title2=编辑报告
@@ -42,6 +45,7 @@ edit_gen=立即生成报告
 edit_view=查看报告
 edit_config=配置报告
 edit_emodel=<tt>model</tt>域用作新虚拟服务器的模板，无法删除
+
 save_err=无法保存AWstats报告
 save_edom=域名缺失或无效
 save_eclash=相同域名的报告已存在
@@ -54,12 +58,15 @@ save_euser2=您不允许以输入的用户身份运行报告
 save_ecopy=复制模板配置失败： $1
 save_ecopy2=复制AWstats程序失败： $1
 save_emodel=..找不到模板AWstats配置文件
+
 gen_title=产生报告
 gen_doing=现在，从日志文件 $2中更新 $1的报告。
-gen_done=..完成了！ <a href='$1'>查看结果报告</a>。
+gen_just_done=.. 完毕
+gen_done=..完成了！ &nbsp;<a href='$1'>查看结果报告</a>。
 gen_failed=..失败了！有关原因，请参见上面的错误消息。
 gen_wiping=删除 $1中的旧数据文件 ..
 gen_wipingdone=..已删除 $1个文件
+
 feat_name=AWstats报告
 feat_losing=计划的AWstats报告将被禁用，其配置将被删除
 feat_disname=AWstats报告
@@ -91,10 +98,13 @@ feat_dpasswd=删除AWstats的密码保护。
 feat_setupalias=在 $1..中配置AWstats
 feat_deletealias=删除 $1中的AWstats配置。
 feat_module=AWstats报告（用于查看报告）
+
 links_link=AWstats报告
 links_view=AWstats报告
 links_config=AWstats配置
+
 tmpl_passwd=密码保护的AWstats网页？
+
 config_title=配置AWstats
 config_header=AWstats配置选项
 config_dnslookup=在日志中查找IP地址？

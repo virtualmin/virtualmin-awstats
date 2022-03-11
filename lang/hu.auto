@@ -12,12 +12,15 @@ index_no=Nem
 index_none=Az AWstats jelentéskészítéséhez még nincs beállítva domain.
 index_add=Új naplófájl hozzáadása a jelentéshez.
 index_return=jelentések listája
+
 check_ecmd=A rendszer nem található a $1 AWstats parancs.
 check_edir=A (z) $1 AWstats konfigurációs könyvtár nem létezik.
 check_eicons=A (z) $1 AWstats képek könyvtára nem létezik.
 check_emodel=A (z) $1 AWstats konfigurációs fájl nem létezik.
+
 view_ecannot=Nem engedélyezi a domain jelentésének megtekintését
 view_epath=Érvénytelen ikon elérési útja
+
 edit_ecannot=Nem konfigurálhatja a jelentést erre a domainre
 edit_ecannot2=Nem szabad új naplófájlt hozzáadni a jelentéshez.
 edit_title2=Jelentés szerkesztése
@@ -42,6 +45,7 @@ edit_gen=Jelentés készítése most
 edit_view=Jelentés megtekintése
 edit_config=Konfigurálja a jelentést
 edit_emodel=A <tt>modell</tt> tartomány új virtuális szerverek sablonjaként használatos, és nem törölhető
+
 save_err=Az AWstats jelentés mentése nem sikerült
 save_edom=Hiányzó vagy érvénytelen domain név
 save_eclash=Ugyanazon domain névhez tartozó jelentés már létezik
@@ -54,12 +58,15 @@ save_euser2=A bevitt felhasználóként nem futtathat jelentéseket
 save_ecopy=Nem sikerült a sablonkonfiguráció másolása : $1 
 save_ecopy2=Nem sikerült lemásolni az AWstats programot : $1 
 save_emodel=.. Az AWstats konfigurációs fájlja nem található
+
 gen_title=Jelentést készít
 gen_doing=Most frissítem a (z) $1 jelentését a $2 naplófájlból.
-gen_done=.. Kész! <a href='$1'>Tekintse meg a kapott jelentést</a>.
+gen_just_done=.. Kész
+gen_done=.. Kész! &nbsp;<a href='$1'>Tekintse meg a kapott jelentést</a>
 gen_failed=.. nem sikerült! Ennek okát lásd a fenti hibaüzenetben.
 gen_wiping=Régi adatfájlok törlése a (z) $1 -ben.
 gen_wipingdone=.. $1 fájl törölve
+
 feat_name=AWstats jelentések
 feat_losing=Az ütemezett AWstats jelentések le lesznek tiltva, és konfigurációjuk törölve
 feat_disname=AWstats jelentések
@@ -91,10 +98,13 @@ feat_dpasswd=Jelszóvédelem eltávolítása az AWstats számára ..
 feat_setupalias=Az AWstats konfigurálása a $1 -ben.
 feat_deletealias=Az AWstats konfigurációjának eltávolítása $1 -ben.
 feat_module=AWstats Reporting (a jelentések megtekintéséhez)
+
 links_link=Az AWstats jelentés
 links_view=Az AWstats jelentés
 links_config=AWstats Configuration
+
 tmpl_passwd=Jelszóval védett AWstats weboldal?
+
 config_title=Az AWstats konfigurálása
 config_header=AWstats konfigurációs beállításai
 config_dnslookup=IP-címek keresése a naplókban?

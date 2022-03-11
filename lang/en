@@ -61,7 +61,8 @@ save_emodel=.. template AWstats configuration file was not found
 
 gen_title=Generate Report
 gen_doing=Now updating the report for $1 from log file $2 ..
-gen_done=.. done! <a href='$1'>View the resulting report</a>.
+gen_just_done=.. done
+gen_done=.. done! &nbsp;<a href='$1'>View the resulting report</a>
 gen_failed=.. failed! See the error message above for the reason why.
 gen_wiping=Deleting old data files in $1 ..
 gen_wipingdone=.. deleted $1 files

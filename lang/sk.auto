@@ -12,12 +12,15 @@ index_no=žiadny
 index_none=Zatiaľ neboli nastavené žiadne domény pre prehľady AWstats.
 index_add=Pridajte nový protokol do prehľadov.
 index_return=zoznam správ
+
 check_ecmd=Príkaz AWstats $1 nebol vo vašom systéme nájdený.
 check_edir=Konfiguračný adresár AWstats $1 neexistuje.
 check_eicons=Adresár obrázkov AWstats $1 neexistuje.
 check_emodel=Šablóna konfigurácie AWstats $1 neexistuje.
+
 view_ecannot=Nemáte povolenie zobraziť prehľad tejto domény
 view_epath=Neplatná cesta k ikonám
+
 edit_ecannot=Nemáte povolenie konfigurovať prehľad pre túto doménu
 edit_ecannot2=Nemáte povolenie pridávať nový súbor denníka na nahlasovanie.
 edit_title2=Upraviť prehľad
@@ -42,6 +45,7 @@ edit_gen=Vygenerovať prehľad
 edit_view=Pozrieť si správu
 edit_config=Konfigurovať prehľad
 edit_emodel=Doména <tt>model</tt> sa používa ako šablóna pre nové virtuálne servery a nedá sa odstrániť
+
 save_err=Nepodarilo sa uložiť prehľad AWstats
 save_edom=Chýba alebo je neplatný názov domény
 save_eclash=Prehľad pre rovnaký názov domény už existuje
@@ -54,12 +58,15 @@ save_euser2=Ako zadaný používateľ nemáte povolenie spúšťať prehľady
 save_ecopy=Nepodarilo sa skopírovať konfiguráciu šablóny : $1 
 save_ecopy2=Nepodarilo sa kopírovať program AWstats : $1 
 save_emodel=.. šablóna Konfiguračný súbor AWstats nebol nájdený
+
 gen_title=Generovať správu
 gen_doing=Aktualizácia prehľadu pre $1 z protokolového súboru $2 ..
-gen_done=.. hotový! <a href='$1'>Zobraziť výslednú správu</a>.
+gen_just_done=.. hotový
+gen_done=.. hotový! &nbsp;<a href='$1'>Zobraziť výslednú správu</a>
 gen_failed=.. zlyhalo! Dôvod prečo je uvedený vyššie v chybovom hlásení.
 gen_wiping=Odstraňujú sa staré dátové súbory v $1 ..
 gen_wipingdone=.. odstránené $1 súbory
+
 feat_name=AWstats reporting
 feat_losing=Plánované prehľady AWstats budú deaktivované a ich konfigurácia bude odstránená
 feat_disname=AWstats reporting
@@ -91,10 +98,13 @@ feat_dpasswd=Odstránenie ochrany heslom pre AWstats ..
 feat_setupalias=Konfigurácia AWstatov v $1 ..
 feat_deletealias=Odstraňuje sa konfigurácia pre AWstats v $1 ..
 feat_module=AWstats Reporting (na prezeranie správ)
+
 links_link=Správa AWstats
 links_view=Správa AWstats
 links_config=Konfigurácia AWstats
+
 tmpl_passwd=Webová stránka AWstats chránená heslom?
+
 config_title=Nakonfigurujte AWstats
 config_header=Možnosti konfigurácie AWstats
 config_dnslookup=Vyhľadajte IP adresy v protokoloch?

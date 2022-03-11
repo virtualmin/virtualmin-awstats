@@ -12,12 +12,15 @@ index_no=Nu
 index_none=Încă nu au fost configurate domenii pentru raportarea AWstats.
 index_add=Adăugați un nou fișier jurnal pentru raportare.
 index_return=lista rapoartelor
+
 check_ecmd=Comanda AWstats $1 nu a fost găsită în sistemul dvs.
 check_edir=Directorul de configurare AWstats $1 nu există.
 check_eicons=Directorul de imagini AWstats $1 nu există.
 check_emodel=Fișierul de configurare AWstats șablon $1 nu există.
+
 view_ecannot=Nu aveți voie să vizualizați raportul pentru acest domeniu
 view_epath=Calea pentru pictogramă este nevalidă
+
 edit_ecannot=Nu aveți voie să configurați raportul pentru acest domeniu
 edit_ecannot2=Nu aveți voie să adăugați un nou fișier jurnal pentru raportare.
 edit_title2=Editează raportul
@@ -42,6 +45,7 @@ edit_gen=Generați raportul acum
 edit_view=Vizualizează raportul
 edit_config=Configurați raportul
 edit_emodel=Domeniul <tt>model</tt> este utilizat ca șablon pentru serverele virtuale noi și nu poate fi șters
+
 save_err=Nu a reușit să salveze raportul AWstats
 save_edom=Numele de domeniu lipsesc sau nevalide
 save_eclash=Există deja un raport pentru același nume de domeniu
@@ -54,12 +58,15 @@ save_euser2=Nu aveți voie să rulați rapoarte ca utilizator introdus
 save_ecopy=Eroare la copierea configurației șablonului : $1 
 save_ecopy2=Eroare la copierea programului AWstats : $1 
 save_emodel=.. Fișierul de configurare șablon AWstats nu a fost găsit
+
 gen_title=Generează raport
 gen_doing=Actualizați raportul pentru $1 din fișierul jurnal $2 ..
-gen_done=.. Terminat! <a href='$1'>Vizualizați raportul rezultat</a>.
+gen_just_done=.. Terminat
+gen_done=.. Terminat! &nbsp;<a href='$1'>Vizualizați raportul rezultat</a>
 gen_failed=.. a eșuat! Consultați mesajul de eroare de mai sus pentru motivul pentru care.
 gen_wiping=Ștergerea fișierelor de date vechi în $1 ..
 gen_wipingdone=.. șterse $1 fișiere
+
 feat_name=Rapoarte AWstats
 feat_losing=Rapoartele programate AWstats vor fi dezactivate, iar configurația acestuia va fi eliminată
 feat_disname=Rapoarte AWstats
@@ -91,10 +98,13 @@ feat_dpasswd=Eliminarea protecției prin parolă pentru AWstats ..
 feat_setupalias=Configurarea AWstats în $1 ..
 feat_deletealias=Eliminarea configurației pentru AWstats în $1 ..
 feat_module=Raportare AWstats (pentru vizualizarea rapoartelor)
+
 links_link=Raport AWstats
 links_view=Raport AWstats
 links_config=Configurare AWstats
+
 tmpl_passwd=Pagina web AWstats pentru protecție prin parolă?
+
 config_title=Configurați AWstats
 config_header=Opțiuni de configurare AWstats
 config_dnslookup=Căutați adrese IP în jurnalele?

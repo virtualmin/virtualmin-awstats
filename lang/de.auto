@@ -8,12 +8,15 @@ index_no=Nein
 index_none=Für die AWstats-Berichterstattung wurden noch keine Domains eingerichtet.
 index_add=Fügen Sie eine neue Protokolldatei für die Berichterstellung hinzu.
 index_return=Liste der Berichte
+
 check_ecmd=Der AWstats-Befehl $1 wurde auf Ihrem System nicht gefunden.
 check_edir=Das AWstats-Konfigurationsverzeichnis $1 existiert nicht.
 check_eicons=Das AWstats-Bildverzeichnis $1 existiert nicht.
 check_emodel=Die AWstats-Konfigurationsdatei $1 der Vorlage ist nicht vorhanden.
+
 view_ecannot=Sie dürfen den Bericht für diese Domain nicht anzeigen
 view_epath=Ungültiger Symbolpfad
+
 edit_ecannot=Sie dürfen den Bericht nicht für diese Domäne konfigurieren
 edit_ecannot2=Sie dürfen keine neue Protokolldatei für die Berichterstellung hinzufügen.
 edit_title2=Bericht bearbeiten
@@ -36,6 +39,7 @@ edit_gen=Bericht jetzt erstellen
 edit_view=Zeige Bericht
 edit_config=Bericht konfigurieren
 edit_emodel=Die Domäne <tt>model</tt> wird als Vorlage für neue virtuelle Server verwendet und kann nicht gelöscht werden
+
 save_err=AWstats-Bericht konnte nicht gespeichert werden
 save_edom=Fehlender oder ungültiger Domainname
 save_eclash=Ein Bericht für denselben Domainnamen ist bereits vorhanden
@@ -48,11 +52,14 @@ save_euser2=Sie dürfen keine Berichte als eingegebener Benutzer ausführen
 save_ecopy=Fehler beim Kopieren der Vorlagenkonfiguration : $1 
 save_ecopy2=AWstats-Programm konnte nicht kopiert werden : $1 
 save_emodel=.. template AWstats Konfigurationsdatei wurde nicht gefunden
+
 gen_doing=Aktualisieren Sie nun den Bericht für $1 aus der Protokolldatei $2 ..
-gen_done=.. erledigt! <a href='$1'>Den resultierenden Bericht anzeigen</a>.
+gen_just_done=.. fertig
+gen_done=.. erledigt! &nbsp;<a href='$1'>Den resultierenden Bericht anzeigen</a>
 gen_failed=.. gescheitert! In der obigen Fehlermeldung finden Sie den Grund dafür.
 gen_wiping=Löschen alter Datendateien in $1 ..
 gen_wipingdone=.. $1 Dateien gelöscht
+
 feat_name=AWstats Berichterstattung
 feat_losing=Geplante AWstats-Berichte werden deaktiviert und ihre Konfiguration gelöscht
 feat_disname=AWstats Berichterstattung
@@ -84,7 +91,9 @@ feat_dpasswd=Passwortschutz für AWstats entfernen ..
 feat_setupalias=AWstats in $1 konfigurieren ..
 feat_deletealias=Konfiguration für AWstats in $1 entfernen ..
 feat_module=AWstats Reporting (zum Anzeigen von Berichten)
+
 tmpl_passwd=AWstats-Webseite mit Passwort schützen?
+
 config_title=Konfigurieren Sie AWstats
 config_header=AWstats Konfigurationsoptionen
 config_dnslookup=IP-Adressen in Protokollen suchen?

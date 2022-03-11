@@ -12,12 +12,15 @@ index_no=لا
 index_none=لم يتم إعداد أي نطاقات لتقارير AWstats حتى الآن.
 index_add=إضافة ملف سجل جديد لإعداد التقارير.
 index_return=قائمة التقارير
+
 check_ecmd=لم يتم العثور على الأمر AWstats $1 على نظامك.
 check_edir=دليل تكوين AWstats $1 غير موجود.
 check_eicons=دليل صور AWstats $1 غير موجود.
 check_emodel=ملف تكوين AWstats للقالب$1 غير موجود.
+
 view_ecannot=غير مسموح لك بعرض التقرير لهذا المجال
 view_epath=مسار الرمز غير صالح
+
 edit_ecannot=لا يسمح لك بتكوين التقرير لهذا المجال
 edit_ecannot2=لا يسمح لك بإضافة ملف سجل جديد لإعداد التقارير.
 edit_title2=تحرير التقرير
@@ -42,6 +45,7 @@ edit_gen=إنشاء تقرير الآن
 edit_view=عرض التقرير
 edit_config=تكوين التقرير
 edit_emodel=يتم استخدام نطاق <tt>النموذج</tt> كقالب للخوادم الافتراضية الجديدة ، ولا يمكن حذفه
+
 save_err=فشل حفظ تقرير AWstats
 save_edom=اسم المجال مفقود أو غير صالح
 save_eclash=تقرير عن نفس اسم المجال موجود بالفعل
@@ -54,12 +58,15 @@ save_euser2=لا يسمح لك بتشغيل التقارير كمستخدم تم
 save_ecopy=فشل نسخ تكوين القالب :$1
 save_ecopy2=فشل نسخ برنامج AWstats :$1
 save_emodel=.. لم يتم العثور على ملف تكوين AWstats
+
 gen_title=انشاء تقرير
 gen_doing=يتم الآن تحديث التقرير لـ$1 من ملف السجل$2 ..
-gen_done=.. فعله! <a href='$1'>عرض التقرير الناتج</a>.
+gen_just_done=.. منجز
+gen_done=.. فعله! &nbsp;<a href='$1'>عرض التقرير الناتج</a>
 gen_failed=.. فشل! راجع رسالة الخطأ أعلاه لمعرفة السبب.
 gen_wiping=حذف ملفات البيانات القديمة في$1 ..
 gen_wipingdone=.. حذف ملفات$1
+
 feat_name=تقارير AWstats
 feat_losing=سيتم إيقاف إعداد تقارير AWstats المجدولة وحذف تكوينها
 feat_disname=تقارير AWstats
@@ -91,10 +98,13 @@ feat_dpasswd=إزالة حماية كلمة مرور AWstats ..
 feat_setupalias=جاري تكوين AWstats في$1 ..
 feat_deletealias=إزالة التكوين لـ AWstats في$1 ..
 feat_module=تقارير AWstats (لعرض التقارير)
+
 links_link=تقرير AWstats
 links_view=تقرير AWstats
 links_config=تكوين AWstats
+
 tmpl_passwd=صفحة ويب AWstats محمية بكلمة مرور؟
+
 config_title=تكوين AWstats
 config_header=خيارات تكوين AWstats
 config_dnslookup=البحث عن عناوين IP في السجلات؟

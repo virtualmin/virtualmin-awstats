@@ -12,12 +12,15 @@ index_no=Tidak
 index_none=Belum ada domain yang disediakan untuk pelaporan AWstats.
 index_add=Tambahkan fail log baru untuk pelaporan.
 index_return=senarai laporan
+
 check_ecmd=Perintah AWstats $1 tidak dijumpai di sistem anda.
 check_edir=Direktori konfigurasi AWstats $1 tidak wujud.
 check_eicons=Direktori gambar AWstats $1 tidak wujud.
 check_emodel=Fail konfigurasi AWstats templat $1 tidak wujud.
+
 view_ecannot=Anda tidak dibenarkan melihat laporan untuk domain ini
 view_epath=Laluan ikon tidak sah
+
 edit_ecannot=Anda tidak dibenarkan mengkonfigurasi laporan untuk domain ini
 edit_ecannot2=Anda tidak dibenarkan menambahkan fail log baru untuk pelaporan.
 edit_title2=Edit Laporan
@@ -42,6 +45,7 @@ edit_gen=Hasilkan Laporan Sekarang
 edit_view=Lihat Laporan
 edit_config=Konfigurasikan Laporan
 edit_emodel=Domain <tt>model</tt> digunakan sebagai templat untuk pelayan maya baru, dan tidak dapat dihapus
+
 save_err=Gagal menyimpan laporan AWstats
 save_edom=Nama domain tidak ada atau tidak sah
 save_eclash=Laporan untuk nama domain yang sama sudah ada
@@ -54,12 +58,15 @@ save_euser2=Anda tidak dibenarkan menjalankan laporan sebagai pengguna yang dima
 save_ecopy=Gagal menyalin konfigurasi templat : $1 
 save_ecopy2=Gagal menyalin program AWstats : $1 
 save_emodel=.. fail konfigurasi templat AWstats tidak dijumpai
+
 gen_title=Hasilkan Laporan
 gen_doing=Sekarang mengemas kini laporan untuk $1 dari fail log $2 ..
-gen_done=.. selesai! <a href='$1'>Lihat laporan yang dihasilkan</a>.
+gen_just_done=.. selesai
+gen_done=.. selesai! &nbsp;<a href='$1'>Lihat laporan yang dihasilkan</a>
 gen_failed=.. gagal! Lihat mesej ralat di atas untuk sebabnya.
 gen_wiping=Memadamkan fail data lama di $1 ..
 gen_wipingdone=.. memadamkan $1 fail
+
 feat_name=Pelaporan AWstats
 feat_losing=Pelaporan AWstats yang dijadualkan akan dilumpuhkan dan konfigurasinya dihapuskan
 feat_disname=Pelaporan AWstats
@@ -91,10 +98,13 @@ feat_dpasswd=Mengalih keluar perlindungan kata laluan untuk AWstats ..
 feat_setupalias=Mengkonfigurasi AWstats dalam $1 ..
 feat_deletealias=Mengalih keluar konfigurasi untuk AWstats di $1 ..
 feat_module=Pelaporan AWstats (untuk melihat laporan)
+
 links_link=Laporan AWstats
 links_view=Laporan AWstats
 links_config=Konfigurasi AWstats
+
 tmpl_passwd=Laman web AWstats yang dilindungi kata laluan?
+
 config_title=Konfigurasikan AWstats
 config_header=Pilihan konfigurasi AWstats
 config_dnslookup=Cari alamat IP dalam log?

@@ -12,12 +12,15 @@ index_no=Ei
 index_none=AWstats-raportointiin ei ole vielä määritetty verkkotunnuksia.
 index_add=Lisää uusi lokitiedosto raportointia varten.
 index_return=luettelo raporteista
+
 check_ecmd=AWstats-komentoa $1 ei löydy järjestelmästäsi.
 check_edir=AWstats-määrityshakemistoa $1 ei ole.
 check_eicons=AWstats-kuvahakemistoa $1 ei ole.
 check_emodel=Mallipohjaa AWstats-asetustiedostoa $1 ei ole.
+
 view_ecannot=Et voi katsella tämän verkkotunnuksen raporttia
 view_epath=Virheellinen kuvakepolku
+
 edit_ecannot=Et voi määrittää raporttia tälle verkkotunnukselle
 edit_ecannot2=Et voi lisätä uutta lokitiedostoa raportointia varten.
 edit_title2=Muokkaa raporttia
@@ -42,6 +45,7 @@ edit_gen=Luo raportti nyt
 edit_view=Katso raportti
 edit_config=Määritä raportti
 edit_emodel=Verkkotunnusta <tt>malli</tt> käytetään mallina uusille virtuaalipalvelimille, eikä sitä voida poistaa
+
 save_err=AWstats-raportin tallentaminen epäonnistui
 save_edom=Puuttuva tai virheellinen verkkotunnus
 save_eclash=Samaa verkkotunnusta koskeva raportti on jo olemassa
@@ -54,12 +58,15 @@ save_euser2=Et voi suorittaa raportteja kirjoitettuna käyttäjänä
 save_ecopy=Mallimääritysten kopiointi epäonnistui : $1 
 save_ecopy2=AWstats-ohjelman kopiointi epäonnistui : $1 
 save_emodel=.. mallin AWstats-määritystiedostoa ei löytynyt
+
 gen_title=Luo raportti
 gen_doing=Päivitetään nyt raportin $1 lokitiedostosta $2 ..
-gen_done=.. valmis! <a href='$1'>Näytä tuloksena oleva raportti</a>.
+gen_just_done=.. tehty
+gen_done=.. valmis! &nbsp;<a href='$1'>Näytä tuloksena oleva raportti</a>
 gen_failed=.. epäonnistui! Katso syy miksi yllä olevassa virhesanomassa.
 gen_wiping=Vanhojen datatiedostojen poistaminen $1 : stä ..
 gen_wipingdone=.. poistettu $1 tiedostoa
+
 feat_name=AWstats-raportointi
 feat_losing=Ajastettu AWstats -raportointi poistetaan käytöstä ja sen kokoonpano poistetaan
 feat_disname=AWstats-raportointi
@@ -91,10 +98,13 @@ feat_dpasswd=AWstats-salasanasuojauksen poistaminen ..
 feat_setupalias=AWstats-konfigurointi $1 : ssä.
 feat_deletealias=AWstats-määritysten poistaminen $1 : ssä.
 feat_module=AWstats Reporting (raporttien katselemiseen)
+
 links_link=AWstats-raportti
 links_view=AWstats-raportti
 links_config=AWstats-kokoonpano
+
 tmpl_passwd=Salasanasuojattu AWstats-verkkosivu?
+
 config_title=AWstats-asetusten määrittäminen
 config_header=AWstats-asetusvaihtoehdot
 config_dnslookup=Etsi lokien IP-osoitteita?

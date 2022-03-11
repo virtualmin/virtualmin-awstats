@@ -12,12 +12,15 @@ index_no=Không
 index_none=Chưa có tên miền nào được thiết lập cho báo cáo AWstats.
 index_add=Thêm một tệp nhật ký mới để báo cáo.
 index_return=danh sách báo cáo
+
 check_ecmd=Lệnh AWstats $1 không được tìm thấy trên hệ thống của bạn.
 check_edir=Thư mục cấu hình AWstats $1 không tồn tại.
 check_eicons=Thư mục hình ảnh AWstats $1 không tồn tại.
 check_emodel=Tệp cấu hình AWstats mẫu $1 không tồn tại.
+
 view_ecannot=Bạn không được phép xem báo cáo cho tên miền này
 view_epath=Đường dẫn biểu tượng không hợp lệ
+
 edit_ecannot=Bạn không được phép định cấu hình báo cáo cho tên miền này
 edit_ecannot2=Bạn không được phép thêm tệp nhật ký mới để báo cáo.
 edit_title2=Chỉnh sửa báo cáo
@@ -42,6 +45,7 @@ edit_gen=Tạo báo cáo ngay
 edit_view=Xem báo cáo
 edit_config=Cấu hình báo cáo
 edit_emodel=Tên miền <tt>model</tt> được sử dụng làm mẫu cho các máy chủ ảo mới và không thể xóa được
+
 save_err=Không thể lưu báo cáo AWstats
 save_edom=Tên miền bị thiếu hoặc không hợp lệ
 save_eclash=Một báo cáo cho cùng một tên miền đã tồn tại
@@ -54,12 +58,15 @@ save_euser2=Bạn không được phép chạy báo cáo với tư cách là ng�
 save_ecopy=Không thể sao chép cấu hình mẫu : $1 
 save_ecopy2=Không thể sao chép chương trình AWstats : $1 
 save_emodel=.. không tìm thấy tệp cấu hình AWstats
+
 gen_title=Tạo báo cáo
 gen_doing=Hiện đang cập nhật báo cáo cho $1 từ tệp nhật ký $2 ..
-gen_done=.. làm xong! <a href='$1'>Xem báo cáo kết quả</a>.
+gen_just_done=.. xong
+gen_done=.. làm xong! &nbsp;<a href='$1'>Xem báo cáo kết quả</a>
 gen_failed=.. thất bại! Xem thông báo lỗi ở trên để biết lý do tại sao.
 gen_wiping=Xóa các tệp dữ liệu cũ trong $1 ..
 gen_wipingdone=.. đã xóa $1 tệp
+
 feat_name=Báo cáo AWstats
 feat_losing=Báo cáo AWstats được lên lịch sẽ bị vô hiệu hóa và cấu hình của nó bị xóa
 feat_disname=Báo cáo AWstats
@@ -91,10 +98,13 @@ feat_dpasswd=Xóa mật khẩu bảo vệ cho AWstats ..
 feat_setupalias=Định cấu hình AWstats trong $1 ..
 feat_deletealias=Xóa cấu hình cho AWstats trong $1 ..
 feat_module=Báo cáo AWstats (để xem báo cáo)
+
 links_link=Báo cáo AWstats
 links_view=Báo cáo AWstats
 links_config=Cấu hình AWstats
+
 tmpl_passwd=Mật khẩu bảo vệ trang web AWstats?
+
 config_title=Cấu hình AWstats
 config_header=Tùy chọn cấu hình AWstats
 config_dnslookup=Tra cứu địa chỉ IP trong nhật ký?

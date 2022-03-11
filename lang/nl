@@ -12,12 +12,15 @@ index_no=Nee
 index_none=Er zijn nog geen domeinen opgezet voor AWstats rapportage.
 index_add=Toevoegen van een nieuwe log file voor rapportage.
 index_return=Lijst met rapporten
+
 check_ecmd=De AWstats opdracht $1 is niet gevonden op uw systeem.
 check_edir=De AWstats configuratie directory $1 bestaat niet.
 check_eicons=De AWstats image directory $1 bestaat niet.
 check_emodel=De template AWstats configuratie directory $1 bestaat niet.
+
 view_ecannot=U bent niet bevoegd om het rapport te bekijken voor dit domein
 view_epath=Ongeldig iconen pad
+
 edit_ecannot=U bent niet bevoegd om het rapport van dit domein te configureren
 edit_ecannot2=U bent niet bevoegd om een nieuwe log file voor rapportage toe te voegen.
 edit_title2=Rapport Bewerken
@@ -42,6 +45,7 @@ edit_gen=Genereer Rapport Nu
 edit_view=Rapport Bekijken
 edit_config=Configureer Rapport
 edit_emodel=Het <tt>model</tt> domein word gebruikt als een template voor nieuwe virtuele servers, en kan daarom niet worden verwijdert
+
 save_err=Mislukt om AWstats rapport op te slaan
 save_edom=Ontbrekende of ongeldige domein naam
 save_eclash=Een rapport voor hetzelfde domein bestaat reeds
@@ -54,10 +58,12 @@ save_euser2=U bent niet bevoegd rapporten uit te voeren als de ingelogde gebruik
 save_ecopy=Mislukt om template configuratie te kopiëren : $1
 save_ecopy2=Kopiëren mislukt van het AWstats programma : $1
 save_emodel=.. template van AWstats configuratie file is niet gevonden
+
 gen_title=Genereer Rapport
 gen_doing=Nu het rapport aan het updaten voor $1 van log file $2 ..
-gen_done=.. klaar! <a href='$1'>Bekijk het rapport</a>.
+gen_done=.. klaar! &nbsp;<a href='$1'>Bekijk het rapport</a>
 gen_failed=.. mislukt! Bekijk het fouten bericht hierboven waarom.
+
 feat_name=AWstats rapportage
 feat_losing=Geplande AWstats rapportage zal worden uitgeschakeld en de configuratie word verwijdert.
 feat_disname=AWstats rapportage
@@ -86,10 +92,13 @@ feat_passwd=Opzetten van wachtwoord bescherming voor AWstats ..
 feat_dpasswd=Verwijder wachtwoord bescherming van AWstats ..
 feat_setupalias=Configureren van AWstats in $1 ..
 feat_deletealias=Verwijder configuratie van AWstats in $1 ..
+
 links_link=AWstats Rapport
 links_view=Bekijk AWstats Rapport
 links_config=AWstats Configuratie
+
 tmpl_passwd=Wachtwoord beschermde AWstats web pagina?
+
 config_title=Configureer AWstats
 config_header=AWstats configuratie opties
 config_dnslookup=IP adressen opzoeken in de logs?

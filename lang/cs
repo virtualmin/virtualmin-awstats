@@ -1,6 +1,8 @@
 index_return=seznam reportů
+
 links_view=Zobrazit zprávu AWstats
 links_config=Nastavení AWstats
+
 config_title=Nastavení AWstats
 config_header=Nastavení možností AWstats
 config_dnslookup=Zjistit doménu z IP adresy?

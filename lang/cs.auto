@@ -11,12 +11,15 @@ index_yes=Ano, $1
 index_no=Ne
 index_none=Zatím nebyly nastaveny žádné domény pro reporting AWstats.
 index_add=Přidejte nový soubor protokolu pro hlášení.
+
 check_ecmd=Příkaz AWstats $1 nebyl ve vašem systému nalezen.
 check_edir=Konfigurační adresář AWstats $1 neexistuje.
 check_eicons=Adresář obrázků AWstats $1 neexistuje.
 check_emodel=Šablona konfiguračního souboru AWstats $1 neexistuje.
+
 view_ecannot=Nemáte oprávnění zobrazit přehled této domény
 view_epath=Neplatná cesta k ikoně
+
 edit_ecannot=Není dovoleno konfigurovat přehled pro tuto doménu
 edit_ecannot2=Není dovoleno přidávat nový soubor protokolu pro hlášení.
 edit_title2=Upravit přehled
@@ -41,6 +44,7 @@ edit_gen=Vygenerovat přehled
 edit_view=Zobrazit hlášení
 edit_config=Konfigurace sestavy
 edit_emodel=Doména <tt>model</tt> se používá jako šablona pro nové virtuální servery a nelze ji odstranit
+
 save_err=Nepodařilo se uložit sestavu AWstats
 save_edom=Chybějící nebo neplatný název domény
 save_eclash=Sestava pro stejný název domény již existuje
@@ -53,12 +57,15 @@ save_euser2=Jako zadaný uživatel nesmíte spouštět přehledy
 save_ecopy=Konfigurace šablony se nezdařila : $1 
 save_ecopy2=Program AWstats se nezdařil : $1 
 save_emodel=.. šablona Konfigurační soubor AWstats nebyl nalezen
+
 gen_title=Generovat zprávu
 gen_doing=Aktualizace sestavy pro $1 z log souboru $2 ..
-gen_done=.. Hotovo! <a href='$1'>Zobrazit výslednou zprávu</a>.
+gen_just_done=.. Hotovo
+gen_done=.. Hotovo! &nbsp;<a href='$1'>Zobrazit výslednou zprávu</a>
 gen_failed=.. selhalo! Viz výše uvedená chybová zpráva z důvodu důvodu.
 gen_wiping=Mazání starých datových souborů v $1 ..
 gen_wipingdone=.. smazáno $1 souborů
+
 feat_name=AWstats reporting
 feat_losing=Plánované hlášení AWstats bude deaktivováno a jeho konfigurace bude odstraněna
 feat_disname=AWstats reporting
@@ -90,8 +97,11 @@ feat_dpasswd=Odstranění ochrany heslem pro AWstats ..
 feat_setupalias=Konfigurace AWstatů v $1 ..
 feat_deletealias=Odebrání konfigurace pro AWstats v $1 ..
 feat_module=AWstats Reporting (pro prohlížení reportů)
+
 links_link=Zpráva AWstats
+
 tmpl_passwd=Webová stránka AWstats chráněná heslem?
+
 config_notpage=Přípony souborů vyloučit
 config_regen=Uložit a znovu vygenerovat přehled
 config_wipe=Smazat všechny datové soubory a znovu vygenerovat z původních protokolů?

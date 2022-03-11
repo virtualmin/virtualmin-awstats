@@ -12,12 +12,15 @@ index_no=아니
 index_none=아직 AWstats보고를위한 도메인이 설정되지 않았습니다.
 index_add=보고를 위해 새 로그 파일을 추가하십시오.
 index_return=보고서 목록
+
 check_ecmd=시스템에서 AWstats 명령 $1 을 (를) 찾을 수 없습니다.
 check_edir=AWstats 구성 디렉토리 $1 이 (가) 없습니다.
 check_eicons=AWstats 이미지 디렉토리 $1 이 (가) 없습니다.
 check_emodel=템플리트 AWstats 구성 파일 $1 이 (가) 없습니다.
+
 view_ecannot=이 도메인에 대한 보고서를 볼 수 없습니다
 view_epath=잘못된 아이콘 경로
+
 edit_ecannot=이 도메인에 대한 보고서를 구성 할 수 없습니다
 edit_ecannot2=보고를 위해 새 로그 파일을 추가 할 수 없습니다.
 edit_title2=보고서 편집
@@ -42,6 +45,7 @@ edit_gen=지금 보고서 생성
 edit_view=보고서보기
 edit_config=보고서 구성
 edit_emodel=<tt>모델</tt> 도메인은 새로운 가상 서버의 템플릿으로 사용되며 삭제할 수 없습니다
+
 save_err=AWstats 보고서를 저장하지 못했습니다
 save_edom=도메인 이름이 없거나 잘못되었습니다
 save_eclash=동일한 도메인 이름에 대한 보고서가 이미 존재합니다
@@ -54,12 +58,15 @@ save_euser2=입력 한 사용자로 보고서를 실행할 수 없습니다
 save_ecopy=템플릿 구성을 복사하지 못했습니다  : $1 
 save_ecopy2=AWstats 프로그램을 복사하지 못했습니다  : $1 
 save_emodel=.. 템플리트 AWstats 구성 파일을 찾을 수 없습니다
+
 gen_title=보고서 생성
 gen_doing=이제 로그 파일 $2 에서 $1 에 대한 보고서를 업데이트합니다.
-gen_done=.. 완료! <a href='$1'>결과 보고서보기</a>.
+gen_just_done=.. 완료
+gen_done=.. 완료! &nbsp;<a href='$1'>결과 보고서보기</a>
 gen_failed=.. 실패했습니다! 이유는 위의 오류 메시지를 참조하십시오.
 gen_wiping=$1 에서 이전 데이터 파일을 삭제하는 중입니다.
 gen_wipingdone=.. 삭제 된 $1 파일
+
 feat_name=AWstats보고
 feat_losing=예약 된 AWstats보고가 비활성화되고 구성이 삭제됩니다.
 feat_disname=AWstats보고
@@ -91,10 +98,13 @@ feat_dpasswd=AWstats의 비밀번호 보호 제거 ..
 feat_setupalias=$1 에서 AWstats 구성 ..
 feat_deletealias=$1 에서 AWstats 구성 제거 중 ..
 feat_module=AWstats보고 (보고서보기)
+
 links_link=AWstats 보고서
 links_view=AWstats 보고서
 links_config=AWstats 구성
+
 tmpl_passwd=비밀번호로 보호 된 AWstats 웹 페이지?
+
 config_title=AWstats 구성
 config_header=AWstats 구성 옵션
 config_dnslookup=로그에서 IP 주소를 조회 하시겠습니까?

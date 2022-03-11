@@ -12,12 +12,15 @@ index_no=Geen
 index_none=Daar is nog geen domeine opgestel vir AWstats-rapportering nie.
 index_add=Voeg 'n nuwe loglêer by vir verslaggewing.
 index_return=lys van verslae
+
 check_ecmd=Die AWstats-opdrag $1 is nie op u stelsel gevind nie.
 check_edir=Die AWstats-konfigurasiegids $1 bestaan nie.
 check_eicons=Die AWstats-prente-gids $1 bestaan nie.
 check_emodel=Die sjabloon AWstats-konfigurasielêer $1 bestaan nie.
+
 view_ecannot=U mag nie die verslag vir hierdie domein bekyk nie
 view_epath=Ongeldige ikoonpad
+
 edit_ecannot=U mag nie die verslag vir hierdie domein opstel nie
 edit_ecannot2=U mag nie 'n nuwe loglêer vir verslaggewing byvoeg nie.
 edit_title2=Verslag wysig
@@ -42,6 +45,7 @@ edit_gen=Genereer nou verslag
 edit_view=Bekyk verslag
 edit_config=Stel verslag op
 edit_emodel=Die <tt>model</tt> domein word gebruik as 'n sjabloon vir nuwe virtuele bedieners en kan nie uitgevee word nie
+
 save_err=Kon nie AWstats-verslag stoor nie
 save_edom=Domeinnaam ontbreek of ongeldig
 save_eclash='N Verslag met dieselfde domeinnaam bestaan reeds
@@ -54,12 +58,15 @@ save_euser2=U mag nie die ingevoerde gebruiker verslae uitvoer nie
 save_ecopy=Kon nie die sjabloonkonfigurasie kopieer nie : $1 
 save_ecopy2=Kon nie AWstats-program kopieer nie : $1 
 save_emodel=.. sjabloon AWstats-konfigurasielêer is nie gevind nie
+
 gen_title=Genereer verslag
 gen_doing=Opdatering van die verslag vir $1 vanaf loglêer $2.
-gen_done=.. klaar! <a href='$1'>Kyk na die resulterende verslag</a>.
+gen_just_done=... klaar
+gen_done=.. klaar! &nbsp;<a href='$1'>Kyk na die resulterende verslag</a>
 gen_failed=.. misluk! Kyk na die foutboodskap hierbo om die rede.
 gen_wiping=Vee ou datalêers in $1 uit.
 gen_wipingdone=.. $1 lêers uitgevee
+
 feat_name=AWstats berig
 feat_losing=Geplande AWstats-rapportering sal gedeaktiveer word, en die opstelling daarvan word uitgevee
 feat_disname=AWstats berig
@@ -91,10 +98,13 @@ feat_dpasswd=Wagwoordbeskerming vir AWstats verwyder
 feat_setupalias=Stel AWstats in $1 op.
 feat_deletealias=Verwyder konfigurasie vir AWstats in $1.
 feat_module=AWstats Reporting (vir die lees van verslae)
+
 links_link=AWstats-verslag
 links_view=AWstats-verslag
 links_config=AWstats-konfigurasie
+
 tmpl_passwd=AWstats-webblad met wagwoordbeskerming?
+
 config_title=Stel AWstats op
 config_header=AWstats-opstellingsopsies
 config_dnslookup=Soek IP-adresse in logboeke?

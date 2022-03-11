@@ -12,12 +12,15 @@ index_no=番号
 index_none=AWstatsレポート用に設定されたドメインはまだありません。
 index_add=レポート用の新しいログファイルを追加します。
 index_return=レポートのリスト
+
 check_ecmd=AWstatsコマンド $1がシステムで見つかりませんでした。
 check_edir=AWstats構成ディレクトリ $1は存在しません。
 check_eicons=AWstats画像ディレクトリ $1は存在しません。
 check_emodel=テンプレートAWstats構成ファイル $1は存在しません。
+
 view_ecannot=このドメインのレポートを表示することはできません
 view_epath=無効なアイコンパス
+
 edit_ecannot=このドメインのレポートを構成することはできません
 edit_ecannot2=レポート用に新しいログファイルを追加することはできません。
 edit_title2=レポートを編集
@@ -42,6 +45,7 @@ edit_gen=今すぐレポートを作成
 edit_view=レポートを表示
 edit_config=レポートの構成
 edit_emodel=<tt>model</tt>ドメインは新しい仮想サーバーのテンプレートとして使用されており、削除できません
+
 save_err=AWstatsレポートを保存できませんでした
 save_edom=ドメイン名がないか無効です
 save_eclash=同じドメイン名のレポートが既に存在します
@@ -54,12 +58,15 @@ save_euser2=入力したユーザーとしてレポートを実行すること�
 save_ecopy=テンプレート構成のコピーに失敗しました： $1
 save_ecopy2=AWstatsプログラムのコピーに失敗しました： $1
 save_emodel=..テンプレートAWstats構成ファイルが見つかりませんでした
+
 gen_title=レポートを生成
 gen_doing=ログファイル $2から $1のレポートを更新しています. ..
-gen_done=..完了！ <a href='$1'>結果のレポートを表示します</a>。
+gen_just_done=.. 終わり
+gen_done=..完了！ &nbsp;<a href='$1'>結果のレポートを表示します</a>。
 gen_failed=..失敗しました！理由については、上記のエラーメッセージを参照してください。
 gen_wiping=$1の古いデータファイルを削除しています. ..
 gen_wipingdone=..削除された $1ファイル
+
 feat_name=AWstatsレポート
 feat_losing=スケジュールされたAWstatsレポートは無効になり、その構成は削除されます
 feat_disname=AWstatsレポート
@@ -91,10 +98,13 @@ feat_dpasswd=AWstatsのパスワード保護の削除 ..
 feat_setupalias=$1でAWstatsを構成しています ..
 feat_deletealias=$1のAWstatsの構成を削除しています. ..
 feat_module=AWstatsレポート（レポートの表示用）
+
 links_link=AWstatsレポート
 links_view=AWstatsレポート
 links_config=AWstats構成
+
 tmpl_passwd=AWstats Webページをパスワードで保護しますか？
+
 config_title=AWstatsを構成する
 config_header=AWstats構成オプション
 config_dnslookup=ログでIPアドレスを検索しますか？

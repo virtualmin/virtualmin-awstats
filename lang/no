@@ -12,12 +12,15 @@ index_no=Nei
 index_none=Ingen domener er blitt satt opp for AWstats rapportering enda.
 index_add=Legg til en ny loggfil for rapportering.
 index_return=liste over rapporter
+
 check_ecmd=AWstats kommandoen $1 ble ikke funnet på systemet ditt.
 check_edir=AWstats konfigurasjonskatalogen $1 finnes ikke.
 check_eicons=AWstats bilde-katalogen $1 finnes ikke.
 check_emodel=AWstats konfigurasjonsfil-malen $1 finnes ikke.
+
 view_ecannot=Du har ikke lov til å se rapporten for dette domenet
 view_epath=Ugyldig ikon-sti
+
 edit_ecannot=Du har ikke lov til å konfigurere rapporten for dette domenet
 edit_ecannot2=Du har ikke lov til å legge til en ny loggfil for rapportering.
 edit_title2=Rediger rapport
@@ -42,6 +45,7 @@ edit_gen=Generer rapport nå
 edit_view=Vis rapport
 edit_config=Konfigurer rapport
 edit_emodel=<tt>model</tt> domenet brukes som mal for nye virtuelle tjenere og kan derfor ikke slettes
+
 save_err=Kunne ikke lagre AWstats rapport
 save_edom=Manglende eller ugyldig domenenavn
 save_eclash=En rapport for samme domenenavn finnes allerede
@@ -54,10 +58,12 @@ save_euser2=Du har ikke lov til å kjøre rapporter som den angitte brukeren
 save_ecopy=Kunne ikke kopierer mal-konfigurasjon : $1
 save_ecopy2=Kunne ikke kopiere AWstats programmet : $1
 save_emodel=.. mal for AWstats konfigurasjonsfil ble ikke funnet
+
 gen_title=Generer rapport
 gen_doing=Oppdaterer nå rapporten for $1 fra loggfilen $2 ..
-gen_done=.. ferdig! <a href='$1'>Vis den ferdige rapporten</a>.
+gen_done=.. ferdig! &nbsp;<a href='$1'>Vis den ferdige rapporten</a>
 gen_failed=.. feilet! Se feilmeldingen ovenfor for å finne årsaken.
+
 feat_name=AWstats rapportering
 feat_losing=Tidsplanlagt AWstats rapportering vil bli deaktivert, og dens konfigurasjon vil bli slettet
 feat_disname=AWstats rapportering
@@ -88,10 +94,13 @@ feat_dpasswd=Fjerner passordbeskyttelse for AWstats ..
 feat_setupalias=Konfigurerer AWstats i $1 ..
 feat_deletealias=Fjerner konfigurasjon for AWstats i $1 ..
 feat_module=AWstats rapportering (for visning av rapporter)
+
 links_link=AWstats rapport
 links_view=Vis AWstats rapport
 links_config=AWstats konfigurasjon
+
 tmpl_passwd=Passord-beskytt AWstats nettside?
+
 config_title=Konfigurer AWstats
 config_header=AWstats konfigurasjonsinnstillinger
 config_dnslookup=Slå opp IP adresser i logger?

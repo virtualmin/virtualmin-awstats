@@ -1,12 +1,17 @@
 index_conf=Yapılandırma ..
+
 edit_logsrc=Günlük kaynağı
 edit_log0=Log dosyası
 edit_log1=Komuttan çıktı
 edit_config=Raporu Yapılandır
+
 save_ecmd=Eksik veya yürütülebilir olmayan günlük kaynağı komutu
 save_emodel=.. şablon AWstats yapılandırma dosyası bulunamadı
+
+gen_just_done=.. tamamlamak
 gen_wiping=$1 içindeki eski veri dosyaları siliniyor.
 gen_wipingdone=.. $1 dosya silindi
+
 feat_label2=AWstats raporlaması
 feat_modifypass=AWstats için şifre güncelleniyor ..
 feat_modifylog=AWstats yapılandırmasındaki günlük dosyası güncelleniyor.
@@ -16,8 +21,11 @@ feat_dpasswd=AWstats için şifre koruması kaldırılıyor ..
 feat_setupalias=$1 'de AWstats yapılandırılıyor.
 feat_deletealias=$1 içindeki AWstats yapılandırması kaldırılıyor.
 feat_module=AWstats Raporlaması (raporları görüntülemek için)
+
 links_config=AWstats Yapılandırması
+
 tmpl_passwd=AWstats web sayfası parola korumalı mı?
+
 config_title=AWstats'ı yapılandırın
 config_header=AWstats yapılandırma seçenekleri
 config_dnslookup=Günlüklerde IP adresleri mi arıyorsunuz?

@@ -12,12 +12,15 @@ index_no=نہیں
 index_none=ابھی آوسٹٹس کی اطلاع دہندگی کے لئے کوئی ڈومین مرتب نہیں کیا گیا ہے۔
 index_add=رپورٹنگ کے لئے ایک نئی لاگ فائل شامل کریں۔
 index_return=رپورٹوں کی فہرست
+
 check_ecmd=آپ کے سسٹم پر AWstats کمانڈ$1 نہیں ملا۔
 check_edir=AWstats کنفیگریشن ڈائریکٹری$1 موجود نہیں ہے۔
 check_eicons=AWstats امیجز ڈائریکٹری$1 موجود نہیں ہے۔
 check_emodel=AWstats تشکیل فائل$1 ٹیمپلیٹ موجود نہیں ہے۔
+
 view_ecannot=آپ کو اس ڈومین کی رپورٹ دیکھنے کی اجازت نہیں ہے
 view_epath=آئیکن کا غلط راستہ
+
 edit_ecannot=آپ کو اس ڈومین کیلئے رپورٹ تشکیل کرنے کی اجازت نہیں ہے
 edit_ecannot2=آپ کو اطلاع دینے کے لئے ایک نئی لاگ فائل شامل کرنے کی اجازت نہیں ہے۔
 edit_title2=رپورٹ میں ترمیم کریں
@@ -42,6 +45,7 @@ edit_gen=ابھی رپورٹ تیار کریں
 edit_view=رپورٹ ملاحظہ کریں
 edit_config=رپورٹ تشکیل دیں
 edit_emodel=The <tt>model</tt> domain is used as a template for new virtual servers, and cannot be deleted
+
 save_err=AWstats رپورٹ کو محفوظ کرنے میں ناکام
 save_edom=غائب یا غلط ڈومین نام
 save_eclash=اسی ڈومین نام کی ایک رپورٹ پہلے ہی موجود ہے
@@ -54,12 +58,15 @@ save_euser2=درج کردہ صارف کی حیثیت سے آپ کو رپورٹس
 save_ecopy=ٹیمپلیٹ کی تشکیل کی کاپی کرنے میں ناکام :$1
 save_ecopy2=AWstats پروگرام کی کاپی کرنے میں ناکام :$1
 save_emodel=.. ٹیمپلیٹ AWstats کنفگریشن فائل نہیں ملی
+
 gen_title=رپورٹ تیار کریں
 gen_doing=اب لاگ فائل$2 سے$1 کے لئے رپورٹ کو اپ ڈیٹ کر رہا ہے۔
-gen_done=.. done! <a href='$1'>View the resulting report</a>.
+gen_just_done=.. ہو گیا
+gen_done=.. done! &nbsp;<a href='$1'>View the resulting report</a>
 gen_failed=.. ناکام! اس کی وجہ کے لئے اوپر غلطی کا پیغام ملاحظہ کریں۔
 gen_wiping=پرانی ڈیٹا فائلوں کو$1 میں حذف کیا جارہا ہے۔
 gen_wipingdone=..$1 فائلیں حذف ہوگئیں
+
 feat_name=AWstats رپورٹنگ
 feat_losing=شیڈولڈ آوسٹٹس رپورٹنگ غیر فعال ہوجائے گی ، اور اس کی تشکیل حذف کردی گئی ہے
 feat_disname=AWstats رپورٹنگ
@@ -91,10 +98,13 @@ feat_dpasswd=AWstats کیلئے پاس ورڈ کے تحفظ کو ہٹا رہا �
 feat_setupalias=$1 میں AWstats کی تشکیل۔
 feat_deletealias=$1 میں AWstats کی تشکیل ہٹانا۔
 feat_module=AWstats رپورٹنگ (رپورٹ دیکھنے کے لئے)
+
 links_link=AWstats رپورٹ
 links_view=AWstats رپورٹ
 links_config=AWstats تشکیل
+
 tmpl_passwd=AWstats ویب پیج کو پاس ورڈ سے تحفظ فراہم کریں؟
+
 config_title=AWstats تشکیل دیں
 config_header=AWstats ترتیب کے اختیارات
 config_dnslookup=نوشتہ جات میں IP پتے تلاش کریں؟

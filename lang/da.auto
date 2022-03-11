@@ -12,12 +12,15 @@ index_no=Ingen
 index_none=Der er endnu ikke oprettet nogen domæner til AWstats-rapportering.
 index_add=Tilføj en ny logfil til rapportering.
 index_return=liste over rapporter
+
 check_ecmd=Kommandoen AWstats $1 blev ikke fundet på dit system.
 check_edir=AWstats-konfigurationsmappen $1 findes ikke.
 check_eicons=AWstats-billedkataloget $1 findes ikke.
 check_emodel=Skabelonen AWstats-konfigurationsfil $1 findes ikke.
+
 view_ecannot=Du har ikke tilladelse til at se rapporten for dette domæne
 view_epath=Ugyldig ikonsti
+
 edit_ecannot=Du har ikke tilladelse til at konfigurere rapporten til dette domæne
 edit_ecannot2=Du har ikke tilladelse til at tilføje en ny logfil til rapportering.
 edit_title2=Rediger rapport
@@ -42,6 +45,7 @@ edit_gen=Generer rapport nu
 edit_view=Se rapport
 edit_config=Konfigurer rapport
 edit_emodel=Domænet <tt>model</tt> bruges som en skabelon til nye virtuelle servere og kan ikke slettes
+
 save_err=Kunne ikke gemme AWstats-rapporten
 save_edom=Manglende eller ugyldigt domænenavn
 save_eclash=En rapport for det samme domænenavn findes allerede
@@ -54,12 +58,15 @@ save_euser2=Du har ikke tilladelse til at køre rapporter som den indtastede bru
 save_ecopy=Kunne ikke kopiere skabelonkonfiguration : $1 
 save_ecopy2=Kunne ikke kopiere AWstats-programmet : $1 
 save_emodel=.. skabelon AWstats-konfigurationsfil blev ikke fundet
+
 gen_title=Generer rapport
 gen_doing=Opdaterer nu rapporten for $1 fra logfil $2 ..
-gen_done=.. Færdig! <a href='$1'>Se den resulterende rapport</a>.
+gen_just_done=.. Færdig
+gen_done=.. Færdig! &nbsp;<a href='$1'>Se den resulterende rapport</a>
 gen_failed=.. mislykkedes! Se fejlmeddelelsen ovenfor af grunden til.
 gen_wiping=Sletning af gamle datafiler i $1 ..
 gen_wipingdone=.. slettede $1 filer
+
 feat_name=AWstats rapportering
 feat_losing=Planlagt AWstats-rapportering vil blive deaktiveret, og dens konfiguration slettes
 feat_disname=AWstats rapportering
@@ -91,10 +98,13 @@ feat_dpasswd=Fjernelse af adgangskodebeskyttelse til AWstats ..
 feat_setupalias=Konfiguration af AWstats i $1.
 feat_deletealias=Fjernelse af konfiguration for AWstats i $1.
 feat_module=AWstats Reporting (til visning af rapporter)
+
 links_link=AWstats-rapport
 links_view=AWstats-rapport
 links_config=AWstats-konfiguration
+
 tmpl_passwd=Adgangskodebeskyttet AWstats-webside?
+
 config_title=Konfigurer AWstats
 config_header=AWstats konfigurationsindstillinger
 config_dnslookup=Opslag af IP-adresser i logfiler?

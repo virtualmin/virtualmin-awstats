@@ -12,12 +12,15 @@ index_no=Nej
 index_none=Inga domäner har ställts in för AWstats-rapportering än.
 index_add=Lägg till en ny loggfil för rapportering.
 index_return=lista över rapporter
+
 check_ecmd=AWstats-kommandot $1 hittades inte på ditt system.
 check_edir=AWstats-konfigurationskatalogen $1 finns inte.
 check_eicons=AWstats-bildkatalogen $1 finns inte.
 check_emodel=Mallen AWstats-konfigurationsfilen $1 finns inte.
+
 view_ecannot=Du får inte se rapporten för den här domänen
 view_epath=Ogiltig ikonväg
+
 edit_ecannot=Du får inte konfigurera rapporten för den här domänen
 edit_ecannot2=Du får inte lägga till en ny loggfil för rapportering.
 edit_title2=Redigera rapport
@@ -42,6 +45,7 @@ edit_gen=Skapa rapport nu
 edit_view=Visa rapport
 edit_config=Konfigurera rapport
 edit_emodel=Domänen <tt>modell</tt> används som en mall för nya virtuella servrar och kan inte raderas
+
 save_err=Det gick inte att spara AWstats-rapporten
 save_edom=Saknat eller ogiltigt domännamn
 save_eclash=En rapport för samma domännamn finns redan
@@ -54,12 +58,15 @@ save_euser2=Du får inte köra rapporter som den angivna användaren
 save_ecopy=Det gick inte att kopiera mallkonfiguration : $1 
 save_ecopy2=Det gick inte att kopiera AWstats-programmet : $1 
 save_emodel=.. mall AWstats-konfigurationsfil hittades inte
+
 gen_title=Generera rapport
 gen_doing=Uppdaterar nu rapporten för $1 från loggfilen $2 ..
-gen_done=.. Gjort! <a href='$1'>Visa den resulterande rapporten</a>.
+gen_just_done=.. Gjort
+gen_done=.. Gjort! &nbsp;<a href='$1'>Visa den resulterande rapporten</a>
 gen_failed=.. misslyckades! Se felmeddelandet ovan för anledningen.
 gen_wiping=Ta bort gamla datafiler i $1 ..
 gen_wipingdone=.. raderade $1 filer
+
 feat_name=AWstats rapportering
 feat_losing=Schemalagd AWstats-rapportering kommer att inaktiveras och dess konfiguration raderas
 feat_disname=AWstats rapportering
@@ -91,10 +98,13 @@ feat_dpasswd=Ta bort lösenordsskydd för AWstats ..
 feat_setupalias=Konfigurera AWstats i $1 ..
 feat_deletealias=Tar bort konfigurationen för AWstats i $1.
 feat_module=AWstats Reporting (för visning av rapporter)
+
 links_link=AWstats-rapport
 links_view=AWstats-rapport
 links_config=AWstats-konfiguration
+
 tmpl_passwd=Lösenordsskydd AWstats webbsida?
+
 config_title=Konfigurera AWstats
 config_header=AWstats konfigurationsalternativ
 config_dnslookup=Sök IP-adresser i loggar?

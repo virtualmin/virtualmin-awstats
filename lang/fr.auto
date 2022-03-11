@@ -12,12 +12,15 @@ index_no=Non
 index_none=Aucun domaine n'a encore été configuré pour les rapports AWstats.
 index_add=Ajoutez un nouveau fichier journal pour les rapports.
 index_return=liste des rapports
+
 check_ecmd=La commande AWstats $1 est introuvable sur votre système.
 check_edir=Le répertoire de configuration AWstats $1 n'existe pas.
 check_eicons=Le répertoire d'images AWstats $1 n'existe pas.
 check_emodel=Le modèle de fichier de configuration AWstats $1 n'existe pas.
+
 view_ecannot=Vous n'êtes pas autorisé à afficher le rapport pour ce domaine
 view_epath=Chemin d'icône non valide
+
 edit_ecannot=Vous n'êtes pas autorisé à configurer le rapport pour ce domaine
 edit_ecannot2=Vous n'êtes pas autorisé à ajouter un nouveau fichier journal pour les rapports.
 edit_title2=Modifier le rapport
@@ -42,6 +45,7 @@ edit_gen=Générer un rapport maintenant
 edit_view=Voir le rapport
 edit_config=Configurer le rapport
 edit_emodel=Le domaine <tt>modèle</tt> est utilisé comme modèle pour les nouveaux serveurs virtuels et ne peut pas être supprimé
+
 save_err=Échec de l'enregistrement du rapport AWstats
 save_edom=Nom de domaine manquant ou invalide
 save_eclash=Un rapport pour le même nom de domaine existe déjà
@@ -54,12 +58,15 @@ save_euser2=Vous n'êtes pas autorisé à exécuter des rapports en tant qu'util
 save_ecopy=Impossible de copier la configuration du modèle : $1 
 save_ecopy2=Impossible de copier le programme AWstats : $1 
 save_emodel=.. le fichier de configuration du modèle AWstats est introuvable
+
 gen_title=Générer un rapport
 gen_doing=Mise à jour du rapport pour $1 à partir du fichier journal $2 ..
-gen_done=.. terminé! <a href='$1'>Affichez le rapport résultant</a>.
+gen_just_done=.. terminé
+gen_done=.. terminé! &nbsp;<a href='$1'>Affichez le rapport résultant</a>
 gen_failed=.. échoué! Voir le message d'erreur ci-dessus pour la raison.
 gen_wiping=Suppression des anciens fichiers de données dans $1 ..
 gen_wipingdone=.. fichiers $1 supprimés
+
 feat_name=Rapports AWstats
 feat_losing=Les rapports AWstats planifiés seront désactivés et sa configuration supprimée
 feat_disname=Rapports AWstats
@@ -91,10 +98,13 @@ feat_dpasswd=Suppression de la protection par mot de passe pour AWstats.
 feat_setupalias=Configuration d'AWstats dans $1 ..
 feat_deletealias=Suppression de la configuration pour AWstats dans $1 ..
 feat_module=AWstats Reporting (pour visualiser les rapports)
+
 links_link=Rapport AWstats
 links_view=Rapport AWstats
 links_config=Configuration AWstats
+
 tmpl_passwd=Page Web AWstats protégée par mot de passe?
+
 config_title=Configurer AWstats
 config_header=Options de configuration AWstats
 config_dnslookup=Rechercher des adresses IP dans les journaux?

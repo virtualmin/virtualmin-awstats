@@ -11,12 +11,15 @@ index_no=Hayır
 index_none=AWstats raporlaması için henüz hiçbir alanadı ayarlanmamış.
 index_add=Raporlama için yeni bir log dosyası ekle.
 index_return=rapor listesi
+
 check_ecmd=Sisteminizde $1 AWstats komutu bulunamadı.
 check_edir=AWstats konfigürasyon klasörü $1 mevcut değil.
 check_eicons=AWstats resim klasörü $1 mevcut değil.
 check_emodel=Şablon AWstats konfigürasyon dosyası $1 mevcut değil.
+
 view_ecannot=Bu alanadı raporlarını görüntülemeye izniniz yok
 view_epath=Geçersiz ikon yolu
+
 edit_ecannot=Bu alanadı raporlarını yapılandırmaya izniniz yok
 edit_ecannot2=Raporlama için yeni bir log dosyası eklemeye izniniz yok
 edit_title2=Rapor Düzenle
@@ -37,6 +40,7 @@ edit_sched1=Evet, aşağıda seçili zamanlarda ..
 edit_gen=Şimdi raporla
 edit_view=Rapor İncele
 edit_emodel=<tt>model</tt> alanadı yeni sanal sunucular için şablon olarak kullanılır ve silinemez.
+
 save_err=AWstats rapou kaydedilemedi
 save_edom=Eksik veya geçersiz alanadı ismi
 save_eclash=Bu alanadı ismi için bir rapor zaten mevcut
@@ -47,10 +51,12 @@ save_euser=Raporu yürütecek kullanıcı eksik veya geçersiz
 save_euser2=Raporları girilen kullanıcı olarak yürütmeye izniniz yok
 save_ecopy=Şablon konfigürasyonu kopyalanamadı  : $1
 save_ecopy2=Wstats programı kopyalanamadı : $1
+
 gen_title=Rapor Üret
 gen_doing=$2 log dosyasından $1 raporu güncelleniyor  ..
-gen_done=.. tamamlandı! <a href='$1'>Sonuç raporunu görüntüle</a>.
+gen_done=.. tamamlandı! &nbsp;<a href='$1'>Sonuç raporunu görüntüle</a>
 gen_failed=.. başarısız! Sebebi için yukardki hata mesajına bakın.
+
 feat_name=AWstats Raporlama
 feat_losing=Planlanmış AWstats raporlaması ve yapılandırılması silinecek
 feat_disname=AWstats raporlaması
@@ -73,5 +79,6 @@ feat_evalidate=AWstats konfigürasyon dosyası $1 mevcut değil
 feat_evalidatedir=AWstats veri klasörü $1 mevcut değil
 feat_evalidatecron=AWstats zamanlandırılmış işi bulunamadı
 feat_evalidateprog=AWstats program kopyası $1 mevcut değil
+
 links_link=AWstats Raporu Düzenle
 links_view=AWstats Raporu İncelle
