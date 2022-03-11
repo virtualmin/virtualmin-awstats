@@ -11,7 +11,7 @@ require './virtualmin-awstats-lib.pl';
 &foreign_require("virtual-server");
 my $d = &virtual_server::get_domain_by("dom", $in{'dom'});
 
-&ui_print_unbuffered_header(undef, $text{'gen_title'}, "");
+&ui_print_unbuffered_header(undef, $text{'gen_title'}, "", undef, undef, $in{'linked'} ? 1 : 0);
 
 my $conf = &get_config($in{'dom'});
 my $log = &find_value("LogFile", $conf);
@@ -19,7 +19,8 @@ my $data = &find_value("DirData", $conf);
 if ($in{'wipe'} && $data) {
 	print &text('gen_wiping', "<tt>".&html_escape($data)."</tt>"),"<br>\n";
 	my $c = &clear_data_directory($in{'dom'}, $data);
-	print &text('gen_wipedone', $c),"<p>\n";
+	print &text('gen_wipedone', $c),"\n";
+	print "$text{'gen_just_done'}<br>\n";
 	}
 
 print &text('gen_doing', "<tt>$in{'dom'}</tt>", "<tt>$log</tt>"),"<br>\n";
@@ -31,8 +32,8 @@ if ($ok && !&virtual_server::domain_has_website($d)) {
 	&generate_html($in{'dom'}, $outdir);
 	}
 print "</pre>";
-print(($ok ? &text('gen_done', "view.cgi?config=$in{'dom'}")
-	   : $text{'gen_failed'}), "<p>\n");
+print(($ok ? ("<p></p> ".&text('gen_done', "view.cgi?config=$in{'dom'}"))
+	   : "$text{'gen_failed'}"), "<p>\n");
 
-&ui_print_footer("", $text{'index_return'});
 
+!$in{'linked'} && &ui_print_footer("", $text{'index_return'});

@@ -635,7 +635,7 @@ return ( # Link to either view a report, or edit settings
 	 # Link to edit AWstats config for this domain
 	 { 'mod' => $module_name,
            'desc' => $text{'links_config'},
-           'page' => 'config.cgi?dom='.&urlize($d->{'dom'}),
+           'page' => 'config.cgi?linked=1&dom='.&urlize($d->{'dom'}),
 	   'cat' => 'server',
          },
        );
