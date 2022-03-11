@@ -479,7 +479,8 @@ if (!-d "$htmldir/$dirs[0]") {
 	&virtual_server::unlink_logged_as_domain_user($d,
 		map { "$htmldir/$_" } @dirs);
 	no warnings "once"; # XXX No idea how to predeclare this?
-	if ($virtual_server::config{'allow_symlinks'} eq '1') {
+	if ($virtual_server::config{'allow_symlinks'} &&
+	    $virtual_server::config{'allow_symlinks'} eq '1') {
 		# Can still use links
 		foreach my $dir (@dirs) {
 			&virtual_server::symlink_logged_as_domain_user(
