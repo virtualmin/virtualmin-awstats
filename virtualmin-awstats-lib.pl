@@ -215,6 +215,7 @@ sub find_cron_job
 my ($dom) = @_;
 my @jobs = &cron::list_cron_jobs();
 my ($job) = grep { $_->{'user'} eq 'root' &&
+		   $_->{'command'} &&
 		   $_->{'command'} =~ /^\Q$cron_cmd\E\s+(--output\s+\S+\s+)?\Q$dom\E$/ } @jobs;
 return $job;
 }
