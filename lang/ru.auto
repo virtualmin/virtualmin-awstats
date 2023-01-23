@@ -1,13 +1,19 @@
 index_conf=Config ..
+
 edit_logsrc=Источник журнала
 edit_log0=Лог-файл
 edit_log1=Выход из команды
+
 save_ecmd=Отсутствующая или неисполняемая команда источника журнала
+
+gen_just_done=.. Готово
 gen_wiping=Удаление старых файлов данных в $1 ..
 gen_wipingdone=.. удалено $1 файлов
-feat_label2=Отчеты AWstats
-feat_modifylog=Обновление файла журнала в конфигурации AWstats.
-feat_module=AWstats Reporting (для просмотра отчетов)
+
+feat_label2=Отчеты AWStats
+feat_modifylog=Обновление файла журнала в конфигурации AWStats.
+feat_module=AWStats Reporting (для просмотра отчетов)
+
 config_regen=Сохранить и заново сгенерировать отчет
 config_wipe=Удалить все файлы данных и заново сгенерировать из оригинальных журналов?
 config_below=Перечислено ниже ..

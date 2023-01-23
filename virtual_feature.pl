@@ -109,15 +109,17 @@ if (!$model) {
 	&$virtual_server::second_print($text{'save_emodel'});
 	return 0;
 	}
-my $out = &backquote_logged("cp ".quotemeta($model)." ".quotemeta("$config{'config_dir'}/awstats.$d->{'dom'}.conf")." 2>&1");
-if ($?) {
-	&$virtual_server::second_print(&text('save_ecopy', "<tt>$out</tt>"));
+my $cfile = "$config{'config_dir'}/awstats.$d->{'dom'}.conf";
+my $ok = &copy_source_dest($model, $cfile);
+if (!$ok) {
+	&$virtual_server::second_print(&text('save_ecopy', "<tt>$!</tt>"));
 	return 0;
 	}
 
 # Copy awstats.pl and associated files into the domain
 my $err = &setup_awstats_commands($d);
 if ($err) {
+	&unlink_file($cfile);
 	&$virtual_server::second_print($err);
 	return 0;
 	}
@@ -390,7 +392,7 @@ if (defined($d->{'pass'}) &&
 my $alog = &virtual_server::get_website_log($d);
 my $oldalog = &virtual_server::get_old_website_log($alog, $d, $oldd);
 if ($alog ne $oldalog) {
-	# Log file has been renamed - update AWstats config
+	# Log file has been renamed - update AWStats config
 	&$virtual_server::first_print($text{'feat_modifylog'});
 	my $cfile = &get_config_file($d->{'dom'});
 	&lock_file($cfile);
@@ -630,11 +632,11 @@ return ( # Link to either view a report, or edit settings
            'page' => 'view.cgi?config='.&urlize($d->{'dom'}),
 	   'cat' => 'logs',
          },
-	 # Link to edit AWstats config for this domain
+	 # Link to edit AWStats config for this domain
 	 { 'mod' => $module_name,
            'desc' => $text{'links_config'},
-           'page' => 'config.cgi?dom='.&urlize($d->{'dom'}),
-	   'cat' => 'logs',
+           'page' => 'config.cgi?linked=1&dom='.&urlize($d->{'dom'}),
+	   'cat' => 'services',
          },
        );
 }

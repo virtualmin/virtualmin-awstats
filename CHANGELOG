@@ -1,32 +1,32 @@
 ---- Changes since 2.3 ----
-Old rotated log files are included in AWstats reports as well.
+Old rotated log files are included in AWStats reports as well.
 ---- Changes since 2.4 ----
 Added Apache script alias for /awstats so that the URL /awstats/awstats.pl works.
 Either awstats.conf or awstats.model.conf are supported as template config files.
 ---- Changes since 2.5 ----
-Log files with % in their names are no longer checked for existance, as AWstats replaces these with dates/times.
+Log files with % in their names are no longer checked for existance, as AWStats replaces these with dates/times.
 ---- Changes since 2.7 ----
 Fixed lib, lang and plugin paths on FC6.
 ---- Changes since 3.0 ----
 Fixed bug that prevented custom plugins, lang and lib directories from working.
 Added links for awstats-icon directory, for Debian.
 ---- Changes since 3.1 ----
-AWstats data files containing the domain name are now linked to those with www. before the domain, so that the URL www.yourdomain.com/awstats/awstats.pl shows some data.
+AWStats data files containing the domain name are now linked to those with www. before the domain, so that the URL www.yourdomain.com/awstats/awstats.pl shows some data.
 ---- Changes since 3.2 ----
 Added a template pages option to have the /awstats web directory password protected.
 ---- Changes since 3.3 ----
 Fixed password protection of awstats.pl via different paths.
-Alias domains whose target has AWstats enabled are now added to the configuration of the target, so that AWstats can be correctly accessed via the alias domain name.
+Alias domains whose target has AWStats enabled are now added to the configuration of the target, so that AWStats can be correctly accessed via the alias domain name.
 ---- Changes since 3.8 ----
-The AWstats library and plugin directories are copied into domains when the AWstats feature is enable, to avoid possible in-compatability issues if the global awstats.pl is upgraded.
+The AWStats library and plugin directories are copied into domains when the AWStats feature is enable, to avoid possible in-compatability issues if the global awstats.pl is upgraded.
 ---- Changes since 3.9 ----
-Added the AWstats Configuration page, for setting various useful options in a domain's awstats.conf file.
+Added the AWStats Configuration page, for setting various useful options in a domain's awstats.conf file.
 ---- Changes since 4.0 ----
 Instead of copying awstats.pl and the lib, plugins and lang directories into the domain's cgi-bin directory, a wrapper to call awstats.pl is created and the directories are symlinked.
 ---- Changes since 4.2 ----
 Logs can now be generated from the output of a command, instead of a file.
 ---- Changes since 4.4 ----
-Access to a password-protected AWstats report can now be granted to individual users on the Mail and FTP Users page.
+Access to a password-protected AWStats report can now be granted to individual users on the Mail and FTP Users page.
 ---- Changes since 4.7 ----
 Copy icons into each domain's directory instead of symlinking, to avoid cross-user symlink restrictions.
 ---- Changes since 4.8 ----

@@ -1,5 +1,5 @@
 #!/usr/local/bin/perl
-# Show a form for editing AWstats config file settings
+# Show a form for editing AWStats config file settings
 use strict;
 use warnings;
 our (%text, %in);
@@ -14,7 +14,7 @@ if (&foreign_check("virtual-server")) {
 	$d = &virtual_server::get_domain_by("dom", $in{'dom'});
 	}
 &ui_print_header($d ? &virtual_server::domain_in($d) : undef,
-		 $text{'config_title'}, "");
+		 $text{'config_title'}, "", undef, undef, $in{'linked'} ? 1 : undef);
 
 print &ui_form_start("config_save.cgi", "post");
 print &ui_hidden("dom", $in{'dom'});
@@ -121,7 +121,8 @@ if (@allplugins) {
 
 print &ui_submit($text{'save'});
 print &ui_submit($text{'config_regen'}, 'gen');
-print &ui_checkbox('wipe', 1, $text{'config_wipe'}, 0);
+print "&nbsp;&nbsp;" . &ui_checkbox('wipe', 1, $text{'config_wipe'}, 0);
+print &ui_hidden("linked", $in{'linked'} ? 1 : 0);
 print &ui_form_end();
 
-&ui_print_footer("", $text{'index_return'});
+!$in{'linked'} && &ui_print_footer("", $text{'index_return'});

@@ -1,11 +1,11 @@
 [![Build Status](https://travis-ci.org/virtualmin/virtualmin-awstats.svg?branch=master)](https://travis-ci.org/virtualmin/virtualmin-awstats)
 
 # virtualmin-awstats
-Virtualmin plugin to manage AWstats analytics and provide a UI for domain owners to view their own reports
+Virtualmin plugin to manage AWStats analytics and provide a UI for domain owners to view their own reports
 
-![Virtualmin AWstats Configuration](http://i.imgur.com/tcpWqSQ.png)
+![Virtualmin AWStats Configuration](http://i.imgur.com/tcpWqSQ.png)
 
-![Virtualmin AWstats Report](http://i.imgur.com/LFEjp7T.png)
+![Virtualmin AWStats Report](http://i.imgur.com/LFEjp7T.png)
 
 # Installation
 
@@ -29,6 +29,6 @@ http://software.virtualmin.com/gpl/wbm
 
 # Usage
 
-Click *AWstats Reports* in the *Logs and Reports* menu for your domain. To alter the configuration of AWstats, such as enabling AWstats plugins, selecting reporting levels, etc. browse to *AWstats Configuration* in the same menu.
+Click *AWStats Reports* in the *Logs and Reports* menu for your domain. To alter the configuration of AWStats, such as enabling AWStats plugins, selecting reporting levels, etc. browse to *AWStats Configuration* in the same menu.
 
-You can configure whether Virtualmin provides access to the AWstats module in the *Features and Plugins* page (in *System Settings*), and you can configure system-wide AWstats details from the *Configure* button on that page.
+You can configure whether Virtualmin provides access to the AWStats module in the *Features and Plugins* page (in *System Settings*), and you can configure system-wide AWStats details from the *Configure* button on that page.
