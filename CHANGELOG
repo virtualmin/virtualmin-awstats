@@ -29,3 +29,5 @@ Logs can now be generated from the output of a command, instead of a file.
 Access to a password-protected AWStats report can now be granted to individual users on the Mail and FTP Users page.
 ---- Changes since 4.7 ----
 Copy icons into each domain's directory instead of symlinking, to avoid cross-user symlink restrictions.
+---- Changes since 4.8 ----
+Added extra arguments for command line to be able use: -databasebreak=hour, -databasebreak=day,...

@@ -9,3 +9,5 @@ nocron=Setup AWStats Cron job for each virtual server?,1,0-Yes,1-No
 noedit=Server owner permissions,1,1-View report only,0-Edit report schedule
 copyto=Copy AWStats CGI program to,10,-cgi&#45;bin directory,Other directory under home
 aliases=Extra host aliases,0
+extraargs=Extra arguments for awstats.pl command line,0
+byday=Generate by day stats (not only month and year),1,1-Yes,0-No
