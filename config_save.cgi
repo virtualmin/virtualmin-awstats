@@ -53,8 +53,11 @@ foreach my $dt ("LevelForRobotsDetection", "LevelForBrowsersDetection",
 # Save plugins, if any
 my @allplugins = &list_all_plugins();
 if (@allplugins) {
-	&save_directives($conf, $in{'dom'}, "LoadPlugin",
-			 [ split(/\0/, $in{'p'}) ]);
+	my @plugins;
+	foreach my $p (split(/\0/, $in{'p'})) {
+		push(@plugins, $p.($in{"popts_$p"} ? " ".$in{"popts_$p"} : ""));
+		}
+	&save_directives($conf, $in{'dom'}, "LoadPlugin", \@plugins);
 	}
 
 &flush_file_lines($cfile);

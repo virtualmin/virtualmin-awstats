@@ -133,6 +133,7 @@ config_plugins=Enabled plugins
 config_penabled=Enabled?
 config_pname=Plugin name
 config_pdesc=Description
+config_popts=Options
 config_regen=Save and Re-Generate Report
 config_wipe=Delete all data files and re-generate from original logs?
 config_below=Listed below ..

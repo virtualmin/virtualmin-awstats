@@ -103,18 +103,30 @@ if (@allplugins) {
 				     2, "plugins", 0);
 	my @table = ( );
 	foreach my $p (@allplugins) {
+		my $checked = 0;
+		my $opts;
+		foreach my $lp (@plugins) {
+			my @lpw = split(/\s+/, $lp);
+			if ($lpw[0] eq $p) {
+				$checked = 1;
+				shift(@lpw); $opts = join(" ", @lpw);
+				}
+			}
 		push(@table, [
-			{ 'type' => 'checkbox', 'name' => 'p',
+			{ 'type' => 'checkbox',
+			  'name' => 'p',
 			  'value' => $p,
-			  'checked' => &indexof($p, @plugins) >= 0 },
+			  'checked' => $checked, },
 			$p,
 			&get_plugin_desc($p),
+			&ui_textbox("popts_".$p, $opts, 40),
 			]);
 		}
 	print &ui_table_row(undef, 
 		&ui_columns_table([ $text{'config_penabled'},
 				    $text{'config_pname'},
-                                    $text{'config_pdesc'} ],
+                                    $text{'config_pdesc'},
+                                    $text{'config_popts'} ],
 				  "100%", \@table), 2);
 	print &ui_hidden_table_end();
 	}
