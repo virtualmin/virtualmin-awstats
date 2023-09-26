@@ -186,7 +186,8 @@ if (!$config{'nocron'}) {
 &cron::create_wrapper($cron_cmd, $module_name, "awstats.pl");
 &virtual_server::release_lock_cron($d);
 
-if ($d->{'web'}) {
+my $p = &virtual_server::domain_has_website($d);
+if ($p && $p eq "web") {
 	# Add script alias to make /awstats/awstats.pl work (if running apache)
 	&virtual_server::obtain_lock_web($d);
 	my @ports = ( $d->{'web_port'},
@@ -213,16 +214,36 @@ if ($d->{'web'}) {
 		}
 	&virtual_server::release_lock_web($d);
 	}
-else {
-	# Create output dir under the web root (for nginx)
+elsif ($p && $p eq 'virtualmin-nginx') {
+	# Create output dir under the web root (for nginx), and setup redirect
+	# from /awstats/awstats.pl to /cgi-bin/awstats.pl
 	&virtual_server::make_dir_as_domain_user($d, $outdir);
+	&virtual_server::load_plugin_libraries();
+	my $server = &virtualmin_nginx::find_domain_server($d);
+	if ($server) {
+		&virtualmin_nginx::lock_all_config_files();
+		my @rewrites = &virtualmin_nginx::find("rewrite", $server);
+		my ($r) = grep { $_->{'words'}->[0] eq '/awstats/awstats.pl' }
+			       @rewrites;
+		if (!$r) {
+			push(@rewrites, { 'name' => 'rewrite',
+				 	  'words' => [ '/awstats/awstats.pl',
+						     '/cgi-bin/awstats.pl' ] });
+			&virtualmin_nginx::save_directive($server, 'rewrite',
+							  \@rewrites);
+			&virtualmin_nginx::flush_config_file_lines();
+			&virtual_server::register_post_action(
+				\&virtualmin_nginx::print_apply_nginx);
+			}
+		&virtualmin_nginx::unlock_all_config_files();
+		}
 	}
 &$virtual_server::second_print($virtual_server::text{'setup_done'});
 
 # Setup password protection for awstats.pl
 my $tmpl = &virtual_server::get_template($d->{'template'});
-my $p = $tmpl->{$module_name.'passwd'} || '';
-if ($d->{'web'} && $p ne '0') {
+my $pwd = $tmpl->{$module_name.'passwd'} || '';
+if ($d->{'web'} && $pwd ne '0') {
 	&$virtual_server::first_print($text{'feat_passwd'});
 	&virtual_server::obtain_lock_web($d);
 	my $added = 0;
@@ -454,7 +475,8 @@ foreach my $dir ("icon", "awstats-icon", "awstatsicons") {
 	}
 
 # Remove script alias for /awstats
-if ($d->{'web'}) {
+my $p = &virtual_server::domain_has_website($d);
+if ($p && $p eq "web") {
 	&virtual_server::obtain_lock_web($d);
 	my @ports = ( $d->{'web_port'},
 			 $d->{'ssl'} ? ( $d->{'web_sslport'} ) : ( ) );
@@ -523,6 +545,26 @@ if ($d->{'web'}) {
 		}
 
 	&virtual_server::release_lock_web($d);
+	}
+elsif ($p && $p eq 'virtualmin-nginx') {
+	# Remove nginx redirect for /awstats/awstats.pl
+	&virtual_server::load_plugin_libraries();
+	my $server = &virtualmin_nginx::find_domain_server($d);
+	if ($server) {
+		&virtualmin_nginx::lock_all_config_files();
+		my @rewrites = &virtualmin_nginx::find("rewrite", $server);
+		my ($r) = grep { $_->{'words'}->[0] eq '/awstats/awstats.pl' }
+			       @rewrites;
+		if ($r) {
+			@rewrites = grep { $_ ne $r } @rewrites;
+			&virtualmin_nginx::save_directive($server, 'rewrite',
+                                                          \@rewrites);
+                        &virtualmin_nginx::flush_config_file_lines();
+                        &virtual_server::register_post_action(
+                                \&virtualmin_nginx::print_apply_nginx);
+			}
+		&virtualmin_nginx::unlock_all_config_files();
+		}
 	}
 &$virtual_server::second_print(
 	$virtual_server::text{'setup_done'});
