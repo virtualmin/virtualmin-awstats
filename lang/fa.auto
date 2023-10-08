@@ -133,6 +133,7 @@ config_plugins=افزونه های فعال شده
 config_penabled=فعال شده است؟
 config_pname=نام پلاگین
 config_pdesc=شرح
+config_popts=گزینه ها
 config_regen=گزارش ذخیره و دوباره تولید کنید
 config_wipe=همه پرونده های داده را حذف کرده و از سیاهههای مربوط مجدداً تولید می کنید؟
 config_below=لیست شده در زیر ..

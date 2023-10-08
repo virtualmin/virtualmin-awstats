@@ -54,6 +54,7 @@ config_plugins=Etkin eklentiler
 config_penabled=Etkin mi?
 config_pname=Eklenti adı
 config_pdesc=Açıklama
+config_popts=Seçenekler
 config_regen=Raporu Kaydet ve Yeniden Oluştur
 config_wipe=Tüm veri dosyaları silinsin mi ve orijinal günlüklerden yeniden oluşturulsun mu?
 config_below=Aşağıda listelenmiş ..

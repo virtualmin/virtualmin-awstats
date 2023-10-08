@@ -133,6 +133,7 @@ config_plugins=Các plugin được kích hoạt
 config_penabled=Đã bật?
 config_pname=Tên plugin
 config_pdesc=Sự miêu tả
+config_popts=Tùy chọn
 config_regen=Lưu và tạo lại báo cáo
 config_wipe=Xóa tất cả các tệp dữ liệu và tạo lại từ nhật ký gốc?
 config_below=Được liệt kê dưới đây ..

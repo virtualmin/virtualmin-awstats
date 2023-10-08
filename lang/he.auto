@@ -133,6 +133,7 @@ config_plugins=יישומי פלאגין מופעלים
 config_penabled=מופעל?
 config_pname=שם התוסף
 config_pdesc=תיאור
+config_popts=אפשרויות
 config_regen=שמור וייצר דוח מחדש
 config_wipe=למחוק את כל קבצי הנתונים ולהפיק מחדש מיומנים מקוריים?
 config_below=מופיע למטה ..

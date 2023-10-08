@@ -133,6 +133,7 @@ config_plugins=有効なプラグイン
 config_penabled=有効ですか？
 config_pname=プラグイン名
 config_pdesc=説明文
+config_popts=オプション
 config_regen=レポートを保存して再生成
 config_wipe=すべてのデータファイルを削除し、元のログから再生成しますか？
 config_below=以下通り ..

@@ -133,6 +133,7 @@ config_plugins=Włączone wtyczki
 config_penabled=Włączony?
 config_pname=Nazwa wtyczki
 config_pdesc=Opis
+config_popts=Opcje
 config_regen=Zapisz i ponownie wygeneruj raport
 config_wipe=Usunąć wszystkie pliki danych i ponownie wygenerować z oryginalnych dzienników?
 config_below=Wymienione poniżej ..

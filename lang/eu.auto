@@ -133,6 +133,7 @@ config_plugins=Gaitutako pluginak
 config_penabled=Gaituta?
 config_pname=Pluginaren izena
 config_pdesc=deskribapena
+config_popts=Aukerak
 config_regen=Gorde eta berriro sortu txostena
 config_wipe=Datu fitxategi guztiak ezabatu eta berriro sortu jatorrizko erregistroetatik?
 config_below=Jarraian agertzen dira ..

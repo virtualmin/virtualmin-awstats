@@ -103,6 +103,7 @@ links_link=Zpráva AWStats
 tmpl_passwd=Webová stránka AWStats chráněná heslem?
 
 config_notpage=Přípony souborů vyloučit
+config_popts=Možnosti
 config_regen=Uložit a znovu vygenerovat přehled
 config_wipe=Smazat všechny datové soubory a znovu vygenerovat z původních protokolů?
 config_below=Vypsáno níže ..

@@ -133,6 +133,7 @@ config_plugins=Povolené doplnky
 config_penabled=Povolené?
 config_pname=Názov doplnku
 config_pdesc=popis
+config_popts=možnosti
 config_regen=Uložte a znova vygenerujte prehľad
 config_wipe=Odstrániť všetky dátové súbory a znova vygenerovať z pôvodných protokolov?
 config_below=Uvedené nižšie ..

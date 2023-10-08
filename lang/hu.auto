@@ -133,6 +133,7 @@ config_plugins=Engedélyezett bővítmények
 config_penabled=Engedélyezve van?
 config_pname=A plugin neve
 config_pdesc=Leírás
+config_popts=Lehetőségek
 config_regen=A jelentés mentése és újragenerálása
 config_wipe=Törli az összes adatfájlt, és újra előállíthatja az eredeti naplókból?
 config_below=Alább listázva ..

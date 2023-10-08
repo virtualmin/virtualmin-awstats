@@ -133,6 +133,7 @@ config_plugins=Увімкнено плагіни
 config_penabled=Увімкнено?
 config_pname=Назва плагіна
 config_pdesc=Опис
+config_popts=Опції
 config_regen=Зберегти та відновити звіт
 config_wipe=Видалити всі файли даних та повторно генерувати з оригінальних журналів?
 config_below=Перечислені нижче ..

@@ -133,6 +133,7 @@ config_plugins=الإضافات الممكنة
 config_penabled=ممكن؟
 config_pname=اسم البرنامج المساعد
 config_pdesc=وصف
+config_popts=خيارات
 config_regen=حفظ وإعادة إنشاء تقرير
 config_wipe=هل تريد حذف جميع ملفات البيانات وإعادة توليدها من السجلات الأصلية؟
 config_below=المدرجة أدناه ..

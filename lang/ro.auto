@@ -133,6 +133,7 @@ config_plugins=Pluginuri activate
 config_penabled=Activat?
 config_pname=Numele pluginului
 config_pdesc=Descriere
+config_popts=Opțiuni
 config_regen=Salvați și re-generați raportul
 config_wipe=Ștergeți toate fișierele de date și re-generați din jurnalele originale?
 config_below=Enumerate mai jos ..

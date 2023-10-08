@@ -133,6 +133,7 @@ config_plugins=啟用的插件
 config_penabled=已啟用？
 config_pname=插件名稱
 config_pdesc=描述
+config_popts=選項
 config_regen=保存並重新生成報告
 config_wipe=刪除所有數據文件並從原始日誌中重新生成？
 config_below=下面列出 ..

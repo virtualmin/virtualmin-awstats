@@ -133,6 +133,7 @@ config_plugins=فعال پلگ ان
 config_penabled=قابل کیا گیا؟
 config_pname=پلگ ان کا نام
 config_pdesc=تفصیل
+config_popts=اختیارات
 config_regen=رپورٹ کو محفوظ کریں اور دوبارہ تخلیق کریں
 config_wipe=تمام ڈیٹا فائلوں کو حذف کریں اور اصل لاگز سے دوبارہ پیدا کریں؟
 config_below=ذیل میں درج ..

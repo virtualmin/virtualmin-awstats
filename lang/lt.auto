@@ -133,6 +133,7 @@ config_plugins=Įgalinti papildiniai
 config_penabled=Įjungtas?
 config_pname=Papildinio pavadinimas
 config_pdesc=apibūdinimas
+config_popts=Galimybės
 config_regen=Išsaugokite ir generuokite ataskaitą iš naujo
 config_wipe=Ištrinti visus duomenų failus ir iš naujo sugeneruoti iš originalių žurnalų?
 config_below=Išvardytos žemiau ..

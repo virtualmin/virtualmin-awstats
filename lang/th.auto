@@ -133,6 +133,7 @@ config_plugins=เปิดใช้งานปลั๊กอิน
 config_penabled=เปิดการใช้งาน?
 config_pname=ชื่อปลั๊กอิน
 config_pdesc=ลักษณะ
+config_popts=ตัวเลือก
 config_regen=บันทึกและสร้างรายงานอีกครั้ง
 config_wipe=ลบไฟล์ข้อมูลทั้งหมดและสร้างใหม่จากบันทึกดั้งเดิมหรือไม่
 config_below=รายการด้านล่าง ..

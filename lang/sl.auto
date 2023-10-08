@@ -133,6 +133,7 @@ config_plugins=Omogočeni vtičniki
 config_penabled=Omogočeno?
 config_pname=Ime vtičnika
 config_pdesc=Opis
+config_popts=Opcije
 config_regen=Shrani in ponovno ustvari poročilo
 config_wipe=Ali želite izbrisati vse podatkovne datoteke in ponovno ustvariti iz izvirnih dnevnikov?
 config_below=Navedeno spodaj ..

@@ -133,6 +133,7 @@ config_plugins=Attivati plugins
 config_penabled=Abilitata?
 config_pname=Isem tal-Plugin
 config_pdesc=Deskrizzjoni
+config_popts=Għażliet
 config_regen=Issejvja u Ġenera Iġġenera Rapport
 config_wipe=Ħassar il-fajls tad-dejta kollha u ġġenera mill-ġdid minn zkuk oriġinali?
 config_below=Elenkat hawn taħt ..

@@ -14,6 +14,7 @@ feat_label2=Отчеты AWStats
 feat_modifylog=Обновление файла журнала в конфигурации AWStats.
 feat_module=AWStats Reporting (для просмотра отчетов)
 
+config_popts=Параметры
 config_regen=Сохранить и заново сгенерировать отчет
 config_wipe=Удалить все файлы данных и заново сгенерировать из оригинальных журналов?
 config_below=Перечислено ниже ..

@@ -133,6 +133,7 @@ config_plugins=Уключаны ўбудовы
 config_penabled=Уключаны?
 config_pname=Імя ўбудовы
 config_pdesc=Апісанне
+config_popts=Параметры
 config_regen=Захаваць і аднавіць справаздачу
 config_wipe=Выдаліць усе файлы дадзеных і паўторна генераваць з арыгінальных часопісаў?
 config_below=Ніжэй прыведзены ..

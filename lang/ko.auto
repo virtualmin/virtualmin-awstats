@@ -133,6 +133,7 @@ config_plugins=활성화 된 플러그인
 config_penabled=활성화 되었습니까?
 config_pname=플러그인 이름
 config_pdesc=기술
+config_popts=옵션
 config_regen=보고서 저장 및 재생성
 config_wipe=모든 데이터 파일을 삭제하고 원본 로그에서 다시 생성 하시겠습니까?
 config_below=아래에 ..

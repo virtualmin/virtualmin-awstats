@@ -133,6 +133,7 @@ config_plugins=Iespējotie spraudņi
 config_penabled=Iespējots?
 config_pname=Spraudņa nosaukums
 config_pdesc=Apraksts
+config_popts=Iespējas
 config_regen=Saglabājiet un atkārtoti ģenerējiet pārskatu
 config_wipe=Vai izdzēst visus datu failus un atkārtoti ģenerēt no oriģinālajiem žurnāliem?
 config_below=Sarakstā zem ..

@@ -133,6 +133,7 @@ config_plugins=Inproppe geaktiveer
 config_penabled=In staat gestel?
 config_pname=Inpropnaam
 config_pdesc=beskrywing
+config_popts=Opsies
 config_regen=Stoor en genereer verslag
 config_wipe=Vee alle datalêers uit en genereer dit weer uit oorspronklike logboeke?
 config_below=Hieronder gelys ..

@@ -133,6 +133,7 @@ config_plugins=Plugins activés
 config_penabled=Activée?
 config_pname=Nom du plugin
 config_pdesc=La description
+config_popts=Possibilités
 config_regen=Enregistrer et régénérer le rapport
 config_wipe=Supprimer tous les fichiers de données et recréer à partir des journaux d'origine?
 config_below=Énumérés ci-dessous ..
