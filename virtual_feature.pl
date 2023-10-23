@@ -704,7 +704,7 @@ return ( # Link to either view a report, or edit settings
 	 { 'mod' => $module_name,
            'desc' => $text{'links_config'},
            'page' => 'config.cgi?linked=1&dom='.&urlize($d->{'dom'}),
-	   'cat' => 'services',
+	   'cat' => 'server',
          },
        );
 }
