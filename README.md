@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/virtualmin/virtualmin-awstats.svg?branch=master)](https://travis-ci.org/virtualmin/virtualmin-awstats)
+[![Build Status](https://api.travis-ci.com/virtualmin/virtualmin-awstats.svg?branch=master)](https://app.travis-ci.com/github/virtualmin/virtualmin-awstats)
 
 # virtualmin-awstats
 Virtualmin plugin to manage AWStats analytics and provide a UI for domain owners to view their own reports
