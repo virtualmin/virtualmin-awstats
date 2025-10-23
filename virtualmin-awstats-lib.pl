@@ -65,7 +65,8 @@ return $get_config_cache{$dom};
 # Returns the AWStats config file for some domain
 sub get_config_file
 {
-return "$config{'config_dir'}/awstats.$_[0].conf";
+my ($dom) = @_;
+return "$config{'config_dir'}/awstats.$dom.conf";
 }
 
 # find_value(name, &conf)

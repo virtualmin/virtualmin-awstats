@@ -639,8 +639,7 @@ my ($d, $alias) = @_;
 
 # Remove the alias's .conf file
 &$virtual_server::first_print(&text('feat_deletealias', $d->{'dom'}));
-&unlink_logged(&get_config_file($alias->{'dom'}));
-&unlink_logged(&get_config_file("www.".$alias->{'dom'}));
+&delete_config($alias->{'dom'});
 
 # Remove alias from HostAliases
 &lock_file(&get_config_file($d->{'dom'}));
