@@ -133,6 +133,7 @@ config_plugins=Pemalam diaktifkan
 config_penabled=Diaktifkan?
 config_pname=Nama pemalam
 config_pdesc=Penerangan
+config_popts=Pilihan
 config_regen=Simpan dan Jana semula Laporan
 config_wipe=Padamkan semua fail data dan hasilkan semula dari log asal?
 config_below=Disenaraikan di bawah ..

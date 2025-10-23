@@ -6,6 +6,7 @@ feat_label2=AWStats-rapportage
 feat_modifylog=Logbestand bijwerken in AWStats-configuratie.
 feat_module=AWStats Reporting (voor het bekijken van rapporten)
 
+config_popts=Opties
 config_regen=Bewaar en genereer rapport opnieuw
 config_wipe=Alle gegevensbestanden verwijderen en opnieuw genereren uit originele logboeken?
 config_below=Hieronder opgesomd ..

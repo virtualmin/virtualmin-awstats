@@ -133,6 +133,7 @@ config_plugins=Aktivoidut laajennukset
 config_penabled=Käytössä?
 config_pname=Laajennuksen nimi
 config_pdesc=Kuvaus
+config_popts=Vaihtoehdot
 config_regen=Tallenna ja luo raportti uudelleen
 config_wipe=Poistetaanko kaikki datatiedostot ja luodaan uudelleen alkuperäisistä lokista?
 config_below=Listattu alle ..

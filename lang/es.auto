@@ -133,6 +133,7 @@ config_plugins=Complementos habilitados
 config_penabled=Habilitado?
 config_pname=Nombre del complemento
 config_pdesc=Descripción
+config_popts=Opciones
 config_regen=Guardar y volver a generar informe
 config_wipe=¿Eliminar todos los archivos de datos y volver a generar a partir de los registros originales?
 config_below=A continuación se enumeran. ..

@@ -122,6 +122,7 @@ config_plugins=Plugins aktiviert
 config_penabled=Aktiviert?
 config_pname=Name des Plugins
 config_pdesc=Beschreibung
+config_popts=Optionen
 config_regen=Bericht speichern und neu generieren
 config_wipe=Alle Datendateien löschen und aus Originalprotokollen neu generieren?
 config_below=Nachfolgend aufgeführten ..

@@ -133,6 +133,7 @@ config_plugins=Connectors habilitats
 config_penabled=Està activat?
 config_pname=Nom del complement
 config_pdesc=Descripció
+config_popts=Opcions
 config_regen=Desa i torna a generar l’informe
 config_wipe=Vols suprimir tots els fitxers de dades i tornar a generar els registres originals?
 config_below=S'enumeren a continuació ..

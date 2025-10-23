@@ -198,17 +198,29 @@ if ($p && $p eq "web") {
 						$d->{'dom'}, $port);
 		if ($virt) {
 			my $conf = &apache::get_config();
+			my $done;
 			my @sa = &apache::find_directive(
 				"ScriptAlias", $vconf);
 			my ($aw) = grep { $_ =~ /^\/awstats/ } @sa;
 			if (!$aw) {
 				# Need to add
-				push(@sa, "/awstats/ $cgidir/");
+				push(@sa, "/awstats $cgidir/awstats.pl");
 				&apache::save_directive("ScriptAlias", \@sa,
 							$vconf, $conf);
+				$done++;
+				}
+			my @rm = &apache::find_directive(
+				"RedirectMatch", $vconf);
+			my ($rm) = grep { $_ =~ /^\^\/awstats\$\s+\/awstats/ } @rm;
+			if (!$rm) {
+			&apache::save_directive("RedirectMatch",
+				['^/awstats$ /awstats/'], $vconf, $conf);
+				$done++;
+				}
+			if ($done) {
 				&flush_file_lines($virt->{'file'});
 				&virtual_server::register_post_action(
-				     \&virtual_server::restart_apache);
+						\&virtual_server::restart_apache);
 				}
 			}
 		}
@@ -485,6 +497,7 @@ if ($p && $p eq "web") {
 						$d->{'dom'}, $port);
 		if ($virt) {
 			my $conf = &apache::get_config();
+			my $done;
 			my @sa = &apache::find_directive(
 				"ScriptAlias", $vconf);
 			my ($aw) = grep { $_ =~ /^\/awstats/ } @sa;
@@ -493,9 +506,22 @@ if ($p && $p eq "web") {
 				@sa = grep { $_ ne $aw } @sa;
 				&apache::save_directive("ScriptAlias", \@sa,
 							$vconf, $conf);
+				$done++;
+				}
+			my @rm = &apache::find_directive(
+				"RedirectMatch", $vconf);
+			my ($rm) = grep { $_ =~ /^\^\/awstats\$\s+\/awstats\// } @rm;
+			if ($rm) {
+				@rm = grep { $_ ne $rm } @rm;
+				&apache::save_directive(
+					"RedirectMatch", \@rm,
+					$vconf, $conf);
+				$done++;
+				}
+			if ($done) {
 				&flush_file_lines($virt->{'file'});
 				&virtual_server::register_post_action(
-				     \&virtual_server::restart_apache);
+						\&virtual_server::restart_apache);
 				}
 			}
 		}

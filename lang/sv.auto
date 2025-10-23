@@ -133,6 +133,7 @@ config_plugins=Aktiverade plugins
 config_penabled=Aktiverad?
 config_pname=Plugin-namn
 config_pdesc=Beskrivning
+config_popts=alternativ
 config_regen=Spara och generera rapport på nytt
 config_wipe=Vill du radera alla datafiler och generera om från ursprungliga loggar?
 config_below=Anges nedan ..

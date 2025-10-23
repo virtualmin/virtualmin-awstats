@@ -133,6 +133,7 @@ config_plugins=Plugin abilitati
 config_penabled=Abilitato?
 config_pname=Nome del plugin
 config_pdesc=Descrizione
+config_popts=Opzioni
 config_regen=Salvare e rigenerare report
 config_wipe=Eliminare tutti i file di dati e rigenerarli dai registri originali?
 config_below=Elencate di seguito ..

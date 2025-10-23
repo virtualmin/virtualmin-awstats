@@ -133,6 +133,7 @@ config_plugins=Omogućeni dodaci
 config_penabled=Omogućeno?
 config_pname=Naziv dodatka
 config_pdesc=Opis
+config_popts=Mogućnosti
 config_regen=Spremi i ponovo generira izvješće
 config_wipe=Želite li izbrisati sve podatkovne datoteke i ponovno generirati iz izvornih dnevnika?
 config_below=Navedeno ispod ..

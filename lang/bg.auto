@@ -133,6 +133,7 @@ config_plugins=Активирани плъгини
 config_penabled=Enabled?
 config_pname=Име на приставката
 config_pdesc=описание
+config_popts=Настроики
 config_regen=Запазване и повторно генериране на отчет
 config_wipe=Да се изтрият ли всички файлове с данни и да се генерира отново от оригинални регистрационни файлове?
 config_below=Изброени по-долу ..

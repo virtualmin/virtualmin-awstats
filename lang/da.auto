@@ -133,6 +133,7 @@ config_plugins=Aktiverede plugins
 config_penabled=Aktiveret?
 config_pname=Plugin-navn
 config_pdesc=Beskrivelse
+config_popts=Muligheder
 config_regen=Gem og generer rapport igen
 config_wipe=Slette alle datafiler og genoprette fra originale logfiler?
 config_below=Anført nedenfor ..
