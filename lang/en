@@ -104,6 +104,7 @@ links_view=AWStats Report
 links_config=AWStats Configuration
 
 tmpl_passwd=Password-protect AWStats web page?
+tmpl_section=AWstats Reporting
 
 config_title=Configure AWStats
 config_header=AWStats configuration options
