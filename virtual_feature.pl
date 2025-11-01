@@ -102,6 +102,10 @@ sub feature_setup
 {
 my ($d) = @_;
 &$virtual_server::first_print($text{'feat_setup'});
+if ($d->{'alias'} || $d->{'subdom'}) {
+	&$virtual_server::second_print($text{'feat_esuitable'});
+	return 0;
+	}
 
 # Copy the template config file
 my $model = &awstats_model_file();

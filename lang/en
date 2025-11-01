@@ -75,6 +75,7 @@ feat_label2=AWStats reporting
 feat_edepweb=AWStats reporting cannot be enabled for a server without a website
 feat_clash=AWStats reporting is already enabled for this domain
 feat_setup=Setting up AWStats reporting ..
+feat_esuitable=.. not required for alias or sub-domains
 feat_edepunix=AWStats reporting cannot be enabled for a server without a Unix user
 feat_edepdir=AWStats reporting cannot be enabled for a server without a home directory
 feat_modify=Updating domain name in AWStats configuration ..
