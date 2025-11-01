@@ -149,13 +149,19 @@ else {
 	}
 
 # Update settings to match server
+my @aliasdoms = &virtual_server::get_domain_by("alias", $d->{'id'});
 &lock_file(&get_config_file($d->{'dom'}));
 my $conf = &get_config($d->{'dom'});
 &save_directive($conf, $d->{'dom'}, "SiteDomain", "\"$d->{'dom'}\"");
 my $qd = quotemeta($d->{'dom'});
 my $aliases = &virtual_server::substitute_template($config{'aliases'}, $d);
-&save_directive($conf, $d->{'dom'}, "HostAliases",
-		"REGEX[$qd\$]".($aliases ? " $aliases" : ""));
+my @hostaliases = ( "REGEX[$qd\$]" );
+foreach my $ad (@aliasdoms) {
+	my $qd = quotemeta($ad->{'dom'});
+	push(@hostaliases, "REGEX[$qd\$]");
+	}
+push(@hostaliases, $aliases) if ($aliases);
+&save_directive($conf, $d->{'dom'}, "HostAliases", join(" ", @hostaliases));
 &save_directive($conf, $d->{'dom'}, "LogFile",
 	&virtual_server::get_website_log($d));
 &save_directive($conf, $d->{'dom'}, "DirData", $dir);
@@ -169,6 +175,14 @@ my $aliases = &virtual_server::substitute_template($config{'aliases'}, $d);
 if ($d->{'virt'}) {
 	&symlink_logged(&get_config_file($d->{'dom'}),
 			&get_config_file($d->{'ip'}));
+	}
+
+# Create config links for any alias domains
+foreach my $ad (@aliasdoms) {
+	&symlink_logged(&get_config_file($d->{'dom'}),
+			&get_config_file($ad->{'dom'}));
+	&symlink_logged(&get_config_file($d->{'dom'}),
+			&get_config_file("www.".$ad->{'dom'}));
 	}
 
 # Set up cron job
@@ -465,6 +479,11 @@ if ($job) {
 &delete_config($d->{'dom'});
 if ($d->{'virt'}) {
 	&delete_config($d->{'ip'});
+	}
+
+# Delete config links for any alias domains
+foreach my $ad (&virtual_server::get_domain_by("alias", $d->{'id'})) {
+	&delete_config($ad->{'dom'});
 	}
 
 # Delete awstats.pl from the cgi-bin directory
