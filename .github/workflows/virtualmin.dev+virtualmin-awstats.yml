@@ -1,4 +1,4 @@
-name: "virtualmin.dev: virtualmin/virtualmin-awstats"
+name: Build
 
 on:
   push:
