@@ -1,0 +1,11 @@
+config_dir=Répertoire de configuration AWstats,0
+awstats=Chemin d'accès complet au programme AWstats,0
+icons=Chemin complet du répertoire des icônes AWstats,0
+lang=Chemin complet vers le répertoire AWstats lang,3,Identique à awstats.pl
+lib=Chemin complet du répertoire de la bibliothèque AWstats,3,Identique à awstats.pl
+plugins=Chemin complet du répertoire des plugins AWstats,3,Identique à awstats.pl
+format=Format de journal du serveur Web,1,-Automatique,1-Combiné,4-Commun
+nocron=Configurer la tâche AWstats Cron pour chaque serveur virtuel?,1,0-Oui,1-Non
+noedit=Autorisations du propriétaire du serveur,1,1-Afficher le rapport uniquement,0-Modifier la planification du rapport
+copyto=Copiez le programme AWstats CGI dans,10,-cgi&#45;bin directory,Autre répertoire sous home
+aliases=Alias d'hôte supplémentaires,0
